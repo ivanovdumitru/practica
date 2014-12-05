@@ -15,6 +15,14 @@ class DefaultController extends Controller
 {
 
     /**
+     * @Route{"/", name="home"}
+     */
+    public function indexAction()
+    {
+        return [];
+    }
+
+    /**
      * @Route("/articles/{companyId}/{limit}", defaults={"limit"=null}, name="client_articles")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response

@@ -39,7 +39,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("")
-     * @Route("/")
+     * @Route("/", name="profiles_list")
      * @param Request $request
      * @return array
      */
