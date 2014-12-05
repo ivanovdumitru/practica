@@ -1,0 +1,47 @@
+{% extends 'B2BBlogBundle:template:base.html.twig' %}
+{% block content %}
+<div class="row">
+    {{ dump(data) }}
+    {{ data|length }}
+    {% if data|length  %}
+        <div class="col-sm-4">
+            <img src="
+                {% if data.image|length %}
+                {{ data.image }}
+                {% else %}
+                {{ asset('bundles/b2bblog/images/logo-placeholder.jpg') }}
+                {% endif %}"
+                alt="{{ data.nm }}" class="profile-logo" />
+            </div>
+            <div class="col-sm-8">
+                <ul class="list-unstyled">
+                    <li><h1>{{ data.nm }}</h1><br></li>
+                    <li>
+                        <p>about our company:</p>
+                        {{ data.description }}
+                        <br>
+                    </li>
+                    <li>
+                        <p>phones:</p>
+                        <ul class="list-unstyled">
+                            {% for phone in data.phones %}
+                                <li>{{ phone }}</li>
+                            {% endfor %}
+                        </ul>
+                        <br>
+                    </li>
+                    <li>
+                        <p>emails:</p>
+                        <ul class="list-unstyled">
+                            {% for email in data.emails %}
+                                <li>{{ email }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div class="text-center"><a href="#" class="btn btn-default disabled">Visit store</a></div>
+    {% endif %}
+</div>
+{% endblock %}

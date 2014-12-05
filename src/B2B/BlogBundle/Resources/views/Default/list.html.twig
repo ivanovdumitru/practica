@@ -1,0 +1,33 @@
+{% extends 'B2BBlogBundle:template:base.html.twig' %}
+{% block content %}
+    <h2 class="text-muted">Client list</h2>
+    <hr>
+    {% if data is defined %}
+    {% for client in data %}
+    <div class="row">
+        <div class="col-sm-4">
+            {#<a href="{{ path('client_profile', {'clientId': client.id}) }}" />#}
+            {% if client.image|length %}
+                {#<img src="{{ client.image }}" alt="{{ client.nm }}" class="profile-logo" />#}
+            {% else %}
+                {#{{ client.nm }}#}
+            {% endif %}
+            </a>
+        </div>
+        <div class="col-sm-8 text-center">
+            <h2 class="text-right">{#{{ client.nm }}#}</h2>
+            <p class="text-right">
+                <br>
+                {#<a href="{{ path('client_articles', {'clientId': client.id}) }}" class="btn btn-default btn-sm">Articles</a>#}
+                {#<a href="{{ path('client_profile', {'clientId': client.id}) }}" class="btn btn-default btn-sm">Profile</a>#}
+            </p>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    {% else %}
+    <div class="row">
+        <h4></h4>
+    </div>
+    {% endif %}
+{% endblock %}
