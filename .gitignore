@@ -5,6 +5,7 @@
 /composer.lock
 /web/bundles/
 /web/app.php
+web/app.php
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
