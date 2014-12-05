@@ -1,8 +1,15 @@
 {% extends 'B2BBlogBundle:template:base.html.twig' %}
+{% block headjs %}
+    (function($){
+    $(function(){
+    $(".open-debug").on("click", function(){
+    $(this).next(".dump").toggleClass('hidden');
+    });
+    });
+    })(jQuery);
+{% endblock %}
 {% block content %}
 <div class="row">
-    {{ dump(data) }}
-    {{ data|length }}
     {% if data|length  %}
         <div class="col-sm-4">
             <img src="
@@ -17,31 +24,48 @@
                 <ul class="list-unstyled">
                     <li><h1>{{ data.nm }}</h1><br></li>
                     <li>
-                        <p>about our company:</p>
+                        <p>about company:</p>
+                        <div>
                         {{ data.description }}
+                        </div>
                         <br>
                     </li>
                     <li>
-                        <p>phones:</p>
                         <ul class="list-unstyled">
-                            {% for phone in data.phones %}
+                            <li>phones:</li>
+                            {% for phone in data.phone_number %}
                                 <li>{{ phone }}</li>
                             {% endfor %}
                         </ul>
                         <br>
                     </li>
                     <li>
-                        <p>emails:</p>
                         <ul class="list-unstyled">
-                            {% for email in data.emails %}
+                            <li>emails:</li>
+                            {% for email in data.email %}
                                 <li>{{ email }}</li>
                             {% endfor %}
                         </ul>
+                        <br>
                     </li>
+                    {% if data.fax_number is defined %}
+                    <li>
+                        <ul class="list-unstyled">
+                            <li>fax:</li>
+                            <li>{{ data.fax_number }}</li>
+                        </ul>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
             <hr>
             <div class="text-center"><a href="#" class="btn btn-default disabled">Visit store</a></div>
+            <!-- debug -->
+            <p class="open-debug" title="debug"><span class="glyphicon glyphicon-plus-sign"></span></p>
+            <div class="dump hidden">
+            {{ dump(data) }}
+            </div>
+            <!-- //debug -->
     {% endif %}
 </div>
 {% endblock %}
