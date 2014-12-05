@@ -17,12 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class ProfileController extends Controller
 {
     /**
-     * @Route("/{clientId}", requirements={"clientId" = "\d+"}, name="client_profile")
+     * @Route("/{companyId}", requirements={"companyId" = "\d+"}, name="client_profile")
      * @param Request $request
-     * @param $clientId
+     * @param $companyId
      * @return array
      */
-    public function indexAction(Request $request, $clientId)
+    public function indexAction(Request $request, $companyId)
     {
         /**
          * @var $httpRequest \Buzz\Browser
@@ -31,7 +31,7 @@ class ProfileController extends Controller
         $url = $this->container->getParameter('api')['profiles_list_url'];
         $header = [sprintf('Authorization: Token %s', $request->getSession()->get('auth')['token'])];
         $httpRequest = $this->container->get('buzz');
-        $httpResponse = $httpRequest->get(sprintf('%s/%d', $url, $clientId), $header);
+        $httpResponse = $httpRequest->get(sprintf('%s/%d', $url, $companyId), $header);
         $data = json_decode($httpResponse->getContent(), true);
 
         return compact('data');

@@ -15,11 +15,11 @@ class DefaultController extends Controller
 {
 
     /**
-     * @Route("/articles/{clientId}/{limit}", defaults={"limit"=null}, name="client_articles")
+     * @Route("/articles/{companyId}/{limit}", defaults={"limit"=null}, name="client_articles")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function articlesAction(Request $request, $clientId, $limit = null)
+    public function articlesAction(Request $request, $companyId, $limit = null)
     {
         /**
          * @var $httpRequest \Buzz\Browser
@@ -31,7 +31,7 @@ class DefaultController extends Controller
                 '%s://%s/'.$url,
                 $request->getScheme(),
                 $request->getHttpHost(),
-                (int)$clientId,
+                (int)$companyId,
                 (int)$limit
             )
         );

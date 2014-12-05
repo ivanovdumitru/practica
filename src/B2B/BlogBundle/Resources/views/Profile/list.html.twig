@@ -1,33 +1,44 @@
 {% extends 'B2BBlogBundle:template:base.html.twig' %}
+{% block headjs %}
+    (function($){
+        $(function(){
+            $(".open-debug").on("click", function(){
+                $(this).next(".dump").toggleClass('hidden');
+            });
+        });
+    })(jQuery);
+{% endblock %}
 {% block content %}
     <h2 class="text-muted">Client list</h2>
     <hr>
-    {{ dump(data) }}
-    {% if false and data is defined %}
-        {% for client in data %}
+    {% if data is defined %}
+       {% for client in data %}
             <div class="row">
                 <div class="col-sm-4">
-                    <a href="{{ path('client_profile', {'clientId': client.id}) }}" />
+                    <a href="{{ path('client_profile', {'companyId': client.id}) }}" />
                         <img src="
                             {% if client.image|length %}
                             {{ client.image }}
                             {% else %}
                             {{ asset('bundles/b2bblog/images/logo-placeholder.jpg') }}
-                            {% endif %}"
-                             alt="{{ client.nm }}" class="profile-logo"
-                    /></a>
+                            {% endif %}" alt="{{ client.nm }}" class="profile-logo"/>
+                    </a>
                 </div>
                 <div class="col-sm-8 text-center">
                     <h2 class="text-right">{{ client.nm }}</h2>
                     <p class="text-right">
                         <br>
-                        <a href="{{ path('client_articles', {'clientId': client.id}) }}" class="btn btn-default btn-sm">Articles</a>
-                        <a href="{{ path('client_profile', {'clientId': client.id}) }}" class="btn btn-default btn-sm">Profile</a>
+                        <a href="{{ path('client_articles', {'companyId': client.id}) }}" class="btn btn-default btn-sm">Articles</a>
+                        <a href="{{ path('client_profile', {'companyId': client.id}) }}" class="btn btn-default btn-sm">Profile</a>
                     </p>
                 </div>
             </div>
+            <p class="open-debug" title="debug"><span class="glyphicon glyphicon-plus-sign"></span></p>
+            <div class="dump hidden">
+            {{ dump(client) }}
+            </div>
             <hr>
-        {% endfor %}
+       {% endfor %}
     {% else %}
     <div class="row">
         <h4></h4>
