@@ -1,0 +1,18 @@
+{% extends 'B2BBlogBundle:template:base.html.twig' %}
+{% block headjs %}
+    (function($){
+    $(function(){
+    $(".open-debug").on("click", function(){
+    $(this).next(".dump").toggleClass('hidden');
+    });
+    });
+    })(jQuery);
+{% endblock %}
+{% block content %}
+    <!-- debug -->
+    <p class="open-debug" title="debug"><span class="glyphicon glyphicon-plus-sign"></span></p>
+    <div class="dump hidden">
+        {{ dump(data) }}
+    </div>
+    <!-- //debug -->
+{% endblock %}

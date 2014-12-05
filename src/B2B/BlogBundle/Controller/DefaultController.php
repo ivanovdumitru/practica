@@ -23,7 +23,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/articles/{companyId}/{limit}", defaults={"limit"=null}, name="client_articles")
+     * @Route("/testarticles/{companyId}/{limit}", defaults={"limit"=null}, name="client_articles")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -46,4 +46,5 @@ class DefaultController extends Controller
         $data = json_decode($httpResponse->getContent(), true);
         return $this->render('B2BBlogBundle:Default:articles.html.twig', compact('data'));
     }
+
 }
