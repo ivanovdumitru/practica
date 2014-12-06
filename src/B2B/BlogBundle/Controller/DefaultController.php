@@ -13,38 +13,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
-
     /**
-     * @Route{"/", name="home"}
-     */
-    public function indexAction()
-    {
-        return [];
-    }
-
-    /**
-     * @Route("/testarticles/{companyId}/{limit}", defaults={"limit"=null}, name="client_articles")
+     * @Route("", name="home")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function articlesAction(Request $request, $companyId, $limit = null)
+    public function homeAction(Request $request)
     {
-        /**
-         * @var $httpRequest \Buzz\Browser
-         * @var $httpResponse \Buzz\Message\Response
-         */
-        $url = $this->container->getParameter('api')['articles_list_url'];
-        $httpResponse = $this->container->get('buzz')->get(
-            sprintf(
-                '%s://%s/'.$url,
-                $request->getScheme(),
-                $request->getHttpHost(),
-                (int)$companyId,
-                (int)$limit
-            )
-        );
-        $data = json_decode($httpResponse->getContent(), true);
-        return $this->render('B2BBlogBundle:Default:articles.html.twig', compact('data'));
+        $data = ['title' => 'Home'];
+
+        return $this->render('B2BBlogBundle:Default:index.html.twig', compact('data'));
     }
 
 }

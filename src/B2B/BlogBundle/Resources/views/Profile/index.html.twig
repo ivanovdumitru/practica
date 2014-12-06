@@ -1,58 +1,60 @@
 {% extends 'B2BBlogBundle:template:base.html.twig' %}
-{% block headjs %}
-    (function($){
-    $(function(){
-    $(".open-debug").on("click", function(){
-    $(this).next(".dump").toggleClass('hidden');
-    });
-    });
-    })(jQuery);
+{% block title %}
+    {{ parent() }}
+    {% include 'B2BBlogBundle:partials:title.html.twig' %}
+{% endblock %}
+{% block externaljs %}
+    <script src="{{ asset('bundles/b2bblog/js/debug-dump.js') }}" type="text/javascript"></script>
 {% endblock %}
 {% block content %}
 <div class="row">
-    {% if data|length  %}
+    {% if data.profile|length  %}
         <div class="col-sm-4">
             <img src="
-                {% if data.image|length %}
-                {{ data.image }}
+                {% if data.profile.image|length %}
+                {{ data.profile.image }}
                 {% else %}
                 {{ asset('bundles/b2bblog/images/logo-placeholder.jpg') }}
                 {% endif %}"
-                alt="{{ data.nm }}" class="profile-logo" />
+                alt="{{ data.profile.nm }}" class="profile-logo" />
             </div>
             <div class="col-sm-8">
                 <ul class="list-unstyled">
-                    <li><h1>{{ data.nm }}</h1><br></li>
+                    <li><h1>{{ data.profile.nm }}</h1><br></li>
                     <li>
                         <p>about company:</p>
                         <div>
-                        {{ data.description }}
+                        {{ data.profile.description }}
                         </div>
                         <br>
                     </li>
+                    {% if data.profile.phone_number is defined %}
                     <li>
                         <ul class="list-unstyled">
                             <li>phones:</li>
-                            {% for phone in data.phone_number %}
+                            {% for phone in data.profile.phone_number %}
                                 <li>{{ phone }}</li>
                             {% endfor %}
                         </ul>
                         <br>
                     </li>
+                    {% endif %}
+                    {% if data.profile.email is defined %}
                     <li>
                         <ul class="list-unstyled">
                             <li>emails:</li>
-                            {% for email in data.email %}
+                            {% for email in data.profile.email %}
                                 <li>{{ email }}</li>
                             {% endfor %}
                         </ul>
                         <br>
                     </li>
-                    {% if data.fax_number is defined %}
+                    {% endif %}
+                    {% if data.profile.fax_number is defined %}
                     <li>
                         <ul class="list-unstyled">
                             <li>fax:</li>
-                            <li>{{ data.fax_number }}</li>
+                            <li>{{ data.profile.fax_number }}</li>
                         </ul>
                     </li>
                     {% endif %}
@@ -63,7 +65,7 @@
             <!-- debug -->
             <p class="open-debug" title="debug"><span class="glyphicon glyphicon-plus-sign"></span></p>
             <div class="dump hidden">
-            {{ dump(data) }}
+            {{ dump(data.profile) }}
             </div>
             <!-- //debug -->
     {% endif %}

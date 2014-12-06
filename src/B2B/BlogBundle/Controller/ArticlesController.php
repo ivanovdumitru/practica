@@ -16,8 +16,7 @@ class ArticlesController extends Controller
 {
 
     /**
-     * @Route("/{companyId}/{limit}", defaults={"limit"=null}, requirements={"companyId"="\d+"})
-     *
+     * @Route("/{companyId}/{limit}", defaults={"limit"=null}, requirements={"companyId"="\d+"}, name="client_articles")
      * @param Request $request
      * @param $companyId
      * @param int $limit
@@ -39,14 +38,16 @@ class ArticlesController extends Controller
                 $limit
             )
         );
-        $data = json_decode($httpResponse->getContent(), true);
+        $data = [
+            'articles' => json_decode($httpResponse->getContent(), true),
+            'title' => 'articles'
+        ];
 
         return $this->render('B2BBlogBundle:Articles:list.html.twig', compact('data'));
     }
 
     /**
      * @Route("/view/{articleId}", requirements={"articleId"="\d+"})
-     * 
      * @param Request $request
      * @param $articleId
      * @return \Symfony\Component\HttpFoundation\Response
@@ -66,7 +67,10 @@ class ArticlesController extends Controller
                 (int)$articleId
             )
         );
-        $data = json_decode($httpResponse->getContent(), true);
+        $data = [
+            'articles' => json_decode($httpResponse->getContent(), true),
+            'title' => 'articles'
+        ];
 
         return $this->render('B2BBlogBundle:Articles:list.html.twig', compact('data'));
     }

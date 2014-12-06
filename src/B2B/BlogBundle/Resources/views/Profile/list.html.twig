@@ -1,42 +1,40 @@
 {% extends 'B2BBlogBundle:template:base.html.twig' %}
-{% block headjs %}
-    (function($){
-        $(function(){
-            $(".open-debug").on("click", function(){
-                $(this).next(".dump").toggleClass('hidden');
-            });
-        });
-    })(jQuery);
+{% block title %}
+    {{ parent() }}
+    {% include 'B2BBlogBundle:partials:title.html.twig' %}
+{% endblock %}
+{% block externaljs %}
+    <script src="{{ asset('bundles/b2bblog/js/debug-dump.js') }}" type="text/javascript"></script>
 {% endblock %}
 {% block content %}
     <h2 class="text-muted">Client list</h2>
     <hr>
-    {% if data is defined %}
-       {% for client in data %}
+    {% if data.profiles is defined %}
+       {% for profile in data.profiles %}
             <div class="row">
                 <div class="col-sm-4">
-                    <a href="{{ path('client_profile', {'companyId': client.id}) }}" />
+                    <a href="{{ path('client_profile', {'companyId': profile.id}) }}" />
                         <img src="
-                            {% if client.image|length %}
-                            {{ client.image }}
+                            {% if profile.image|length %}
+                            {{ profile.image }}
                             {% else %}
                             {{ asset('bundles/b2bblog/images/logo-placeholder.jpg') }}
-                            {% endif %}" alt="{{ client.nm }}" class="profile-logo"/>
+                            {% endif %}" alt="{{ profile.nm }}" class="profile-logo"/>
                     </a>
                 </div>
                 <div class="col-sm-8 text-center">
-                    <h2 class="text-right">{{ client.nm }}</h2>
+                    <h2 class="text-right">{{ profile.nm }}</h2>
                     <p class="text-right">
                         <br>
-                        <a href="{{ path('client_articles', {'companyId': client.id}) }}" class="btn btn-default btn-sm">Articles</a>
-                        <a href="{{ path('client_profile', {'companyId': client.id}) }}" class="btn btn-default btn-sm">Profile</a>
+                        <a href="{{ path('client_articles', {'companyId': profile.id}) }}" class="btn btn-default btn-sm">Articles</a>
+                        <a href="{{ path('client_profile', {'companyId': profile.id}) }}" class="btn btn-default btn-sm">Profile</a>
                     </p>
                 </div>
             </div>
            <!-- debug -->
             <p class="open-debug" title="debug"><span class="glyphicon glyphicon-plus-sign"></span></p>
             <div class="dump hidden">
-            {{ dump(client) }}
+            {{ dump(profile) }}
             </div>
            <!-- //debug -->
             <hr>

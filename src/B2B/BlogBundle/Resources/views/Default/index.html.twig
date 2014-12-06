@@ -1,4 +1,8 @@
 {% extends 'B2BBlogBundle:template:base.html.twig' %}
+{% block title %}
+    {{ parent() }}
+    {% include 'B2BBlogBundle:partials:title.html.twig' %}
+{% endblock %}
 {% block content %}
 <div class="row"></div>
 {% endblock %}

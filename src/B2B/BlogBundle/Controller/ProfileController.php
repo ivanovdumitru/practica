@@ -8,9 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * Class ProfileController
- * @package B2B\BlogBundle\Controller
- * @Route("/profile")
+ * @Route("/profiles")
  * @Template()
  */
 
@@ -32,7 +30,10 @@ class ProfileController extends Controller
         $header = [sprintf('Authorization: Token %s', $request->getSession()->get('auth')['token'])];
         $httpRequest = $this->container->get('buzz');
         $httpResponse = $httpRequest->get(sprintf('%s/%d', $url, $companyId), $header);
-        $data = json_decode($httpResponse->getContent(), true);
+        $data = [
+            'profile' => json_decode($httpResponse->getContent(), true),
+            'title' => 'profile'
+        ];
 
         return compact('data');
     }
@@ -53,7 +54,10 @@ class ProfileController extends Controller
         $header = [sprintf('Authorization: Token %s', $request->getSession()->get('auth')['token'])];
         $httpRequest = $this->container->get('buzz');
         $httpResponse = $httpRequest->get($url, $header);
-        $data = json_decode($httpResponse->getContent(), true);
+        $data = [
+            'profiles' => json_decode($httpResponse->getContent(), true),
+            'title' => 'profile list'
+        ];
 
         return compact('data');
     }

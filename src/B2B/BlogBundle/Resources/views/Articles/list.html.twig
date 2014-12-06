@@ -1,18 +1,16 @@
 {% extends 'B2BBlogBundle:template:base.html.twig' %}
-{% block headjs %}
-    (function($){
-    $(function(){
-    $(".open-debug").on("click", function(){
-    $(this).next(".dump").toggleClass('hidden');
-    });
-    });
-    })(jQuery);
+{% block title %}
+    {{ parent() }}
+    {% include 'B2BBlogBundle:partials:title.html.twig' %}
+{% endblock %}
+{% block externaljs %}
+    <script src="{{ asset('bundles/b2bblog/js/debug-dump.js') }}" type="text/javascript"></script>
 {% endblock %}
 {% block content %}
     <!-- debug -->
     <p class="open-debug" title="debug"><span class="glyphicon glyphicon-plus-sign"></span></p>
     <div class="dump hidden">
-        {{ dump(data) }}
+        {{ dump(data.articles) }}
     </div>
     <!-- //debug -->
 {% endblock %}
