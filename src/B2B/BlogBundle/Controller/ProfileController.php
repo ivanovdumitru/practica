@@ -29,7 +29,7 @@ class ProfileController extends Controller
         $url = $this->container->getParameter('api')['profiles_list_url'];
         $header = [sprintf('Authorization: Token %s', $request->getSession()->get('auth')['token'])];
         $httpRequest = $this->container->get('buzz');
-        $httpResponse = $httpRequest->get(sprintf('%s/%d', $url, $companyId), $header);
+        $httpResponse = $httpRequest->get(sprintf('%s%d', $url, $companyId), $header);
         $data = [
             'profile' => json_decode($httpResponse->getContent(), true),
             'title' => 'profile'

@@ -29,25 +29,15 @@ class ArticlesController extends Controller
          * @var $httpResponse \Buzz\Message\Response
          */
         $url = $this->container->getParameter('api')['articles_list_url'];
-        $httpResponse = $this->container->get('buzz')->get(
-            sprintf(
-                '%s://%s/'.$url,
-                $request->getScheme(),
-                $request->getHttpHost(),
-                (int)$companyId,
-                $limit
-            )
-        );
-        $data = [
-            'articles' => json_decode($httpResponse->getContent(), true),
-            'title' => 'articles'
-        ];
+        $header = [sprintf('Authorization: Token %s', $request->getSession()->get('auth')['token'])];
+        $httpResponse = $this->container->get('buzz')->get(sprintf('%s?company=%d', $url, $companyId), $header);
+        $data = ['articles' => json_decode($httpResponse->getContent(), true), 'title' => 'articles'];
 
         return $this->render('B2BBlogBundle:Articles:list.html.twig', compact('data'));
     }
 
     /**
-     * @Route("/view/{articleId}", requirements={"articleId"="\d+"})
+     * @Route("/view/{articleId}", requirements={"articleId"="\d+"}, name="show_client_article")
      * @param Request $request
      * @param $articleId
      * @return \Symfony\Component\HttpFoundation\Response
@@ -59,19 +49,10 @@ class ArticlesController extends Controller
          * @var $httpResponse \Buzz\Message\Response
          */
         $url = $this->container->getParameter('api')['articles_list_url'];
-        $httpResponse = $this->container->get('buzz')->get(
-            sprintf(
-                '%s://%s/'.$url,
-                $request->getScheme(),
-                $request->getHttpHost(),
-                (int)$articleId
-            )
-        );
-        $data = [
-            'articles' => json_decode($httpResponse->getContent(), true),
-            'title' => 'articles'
-        ];
+        $header = [sprintf('Authorization: Token %s', $request->getSession()->get('auth')['token'])];
+        $httpResponse = $this->container->get('buzz')->get(sprintf('%s/%d', $url, $articleId), $header);
+        $data = ['article' => json_decode($httpResponse->getContent(), true), 'title' => 'articles'];
 
-        return $this->render('B2BBlogBundle:Articles:list.html.twig', compact('data'));
+        return $this->render('B2BBlogBundle:Articles:view.html.twig', compact('data'));
     }
 }

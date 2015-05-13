@@ -7,10 +7,14 @@
     <script src="{{ asset('bundles/b2bblog/js/debug-dump.js') }}" type="text/javascript"></script>
 {% endblock %}
 {% block content %}
+    <article class="company-article">
+        <header><h1>{{ data.article.title }}</h1></header>
+        {% autoescape false %}
+        {{ data.article.body }}
+        {% endautoescape %}
+    </article>
     <!-- debug -->
     <p class="open-debug" title="debug"><span class="glyphicon glyphicon-plus-sign"></span></p>
-    <div class="dump hidden">
-        {{ dump(data) }}
-    </div>
+    <div class="dump hidden"> {{ dump(data.article) }} </div>
     <!-- //debug -->
 {% endblock %}
