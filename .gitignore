@@ -4,7 +4,6 @@
 *.md
 /composer.lock
 /web/bundles/
-/web/app.php
 web/app.php
 /app/bootstrap.php.cache
 /app/cache/*
@@ -16,3 +15,4 @@ web/app.php
 /vendor/
 /bin/
 /composer.phar
+web/.htaccess
