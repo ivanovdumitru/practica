@@ -19,28 +19,26 @@ class TokenListener
     public function onKernelController()
     {
         $session = $this->request->getSession();
-        if (!$session->get('auth') || !isset($session->get('auth')['token'])) {
-            $config = $this->container->getParameter('api');
-            $params = json_encode([
-                'username' => $config['login'],
-                'password' => $config['password'],
-                'mac_addr' => $config['mac_addr']
-            ]);
-            /**
-             * @var $curl \Buzz\Browser
-             */
-            $curl = $this->container->get('buzz');
-            /**
-             * @var $response = \Buzz\Message\Response
-             */
-            $response = $curl->post($config['auth_url'], ['Content-type: application/json'], $params);
-            $headers = $response->getHeaders();
-            if (count($headers) && strpos($headers[0], '200') === false) {
-                throw new \Exception ("Authentication error");
-            }
-            $responseData = json_decode($response->getContent(), true);
-
-            $session->set('auth', ['token' => $responseData['results']['token']]);
+        $config = $this->container->getParameter('api');
+        $params = json_encode([
+            'username' => $config['login'],
+            'password' => $config['password'],
+            'mac_addr' => $config['mac_addr']
+        ]);
+        /**
+         * @var $curl \Buzz\Browser
+         */
+        $curl = $this->container->get('buzz');
+        /**
+         * @var $response = \Buzz\Message\Response
+         */
+        $response = $curl->post($config['auth_url'], ['Content-type: application/json'], $params);
+        $headers = $response->getHeaders();
+        if (count($headers) && strpos($headers[0], '200') === false) {
+            throw new \Exception ("Authentication error");
         }
+        $responseData = json_decode($response->getContent(), true);
+
+        $session->set('auth', ['token' => $responseData['results']['token']]);
     }
 }
