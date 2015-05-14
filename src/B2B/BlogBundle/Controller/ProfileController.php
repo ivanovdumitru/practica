@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Buzz\Exception\RequestException;
 
 /**
  * @Route("/profiles")
@@ -29,7 +30,12 @@ class ProfileController extends Controller
         $url = $this->container->getParameter('api')['profiles_list_url'];
         $header = [sprintf('Authorization: Token %s', $request->getSession()->get('auth')['token'])];
         $httpRequest = $this->container->get('buzz');
-        $httpResponse = $httpRequest->get(sprintf('%s%d', $url, $companyId), $header);
+        try {
+            $httpResponse = $httpRequest->get(sprintf('%s%d', $url, $companyId), $header);
+        } catch (RequestException $e) {
+            sleep(2);
+            $httpResponse = $httpRequest->get(sprintf('%s%d', $url, $companyId), $header);
+        }
         $data = [
             'profile' => json_decode($httpResponse->getContent(), true),
             'title' => 'profile'
@@ -53,7 +59,12 @@ class ProfileController extends Controller
         $url = $this->container->getParameter('api')['profiles_list_url'];
         $header = [sprintf('Authorization: Token %s', $request->getSession()->get('auth')['token'])];
         $httpRequest = $this->container->get('buzz');
-        $httpResponse = $httpRequest->get($url, $header);
+        try {
+            $httpResponse = $httpRequest->get($url, $header);
+        } catch (RequestException $e) {
+            sleep(2);
+            $httpResponse = $httpRequest->get($url, $header);
+        }
         $data = [
             'profiles' => json_decode($httpResponse->getContent(), true),
             'title' => 'profile list'

@@ -1,6 +1,7 @@
 <?php
 namespace B2B\BlogBundle\EventListener;
 
+use Buzz\Exception\RequestException;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -32,7 +33,12 @@ class TokenListener
         /**
          * @var $response = \Buzz\Message\Response
          */
-        $response = $curl->post($config['auth_url'], ['Content-type: application/json'], $params);
+        try {
+            $response = $curl->post($config['auth_url'], ['Content-type: application/json'], $params);
+        } catch (RequestException $e) {
+            sleep(2);
+            $response = $curl->post($config['auth_url'], ['Content-type: application/json'], $params);
+        }
         $headers = $response->getHeaders();
         if (count($headers) && strpos($headers[0], '200') === false) {
             throw new \Exception ("Authentication error");

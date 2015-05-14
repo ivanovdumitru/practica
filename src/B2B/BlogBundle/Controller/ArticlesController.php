@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Buzz\Exception\RequestException;
 
 /**
  * @Route("/articles")
@@ -30,7 +31,13 @@ class ArticlesController extends Controller
          */
         $url = $this->container->getParameter('api')['articles_list_url'];
         $header = [sprintf('Authorization: Token %s', $request->getSession()->get('auth')['token'])];
-        $httpResponse = $this->container->get('buzz')->get(sprintf('%s?company=%d', $url, $companyId), $header);
+        try {
+            $httpResponse = $this->container->get('buzz')->get(sprintf('%s?company=%d', $url, $companyId), $header);
+        } catch (RequestException $e) {
+            sleep(2);
+            $httpResponse = $this->container->get('buzz')->get(sprintf('%s?company=%d', $url, $companyId), $header);
+        }
+
         $data = ['articles' => json_decode($httpResponse->getContent(), true), 'title' => 'articles'];
 
         return $this->render('B2BBlogBundle:Articles:list.html.twig', compact('data'));
@@ -50,7 +57,13 @@ class ArticlesController extends Controller
          */
         $url = $this->container->getParameter('api')['articles_list_url'];
         $header = [sprintf('Authorization: Token %s', $request->getSession()->get('auth')['token'])];
-        $httpResponse = $this->container->get('buzz')->get(sprintf('%s/%d', $url, $articleId), $header);
+        try {
+            $httpResponse = $this->container->get('buzz')->get(sprintf('%s/%d', $url, $articleId), $header);
+        } catch (RequestException $e) {
+            sleep(2);
+            $httpResponse = $this->container->get('buzz')->get(sprintf('%s/%d', $url, $articleId), $header);
+        }
+
         $data = ['article' => json_decode($httpResponse->getContent(), true), 'title' => 'articles'];
 
         return $this->render('B2BBlogBundle:Articles:view.html.twig', compact('data'));
