@@ -25,7 +25,7 @@ framework:
     http_method_override: true
     session:
         default_locale: %locale%
-        cookie_lifetime: 0
+        cookie_lifetime: 86399
         auto_start: true
 
 # Twig Configuration
