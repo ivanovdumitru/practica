@@ -27,13 +27,13 @@ class TokenListener
                 'mac_addr' => $config['mac_addr']
             ]);
             /**
-             * @var $request \Buzz\Browser
+             * @var $curl \Buzz\Browser
              */
-            $request = $this->container->get('buzz');
+            $curl = $this->container->get('buzz');
             /**
              * @var $response = \Buzz\Message\Response
              */
-            $response = $request->post($config['auth_url'], ['Content-type: application/json'], $params);
+            $response = $curl->post($config['auth_url'], ['Content-type: application/json'], $params);
             $headers = $response->getHeaders();
             if (count($headers) && strpos($headers[0], '200') === false) {
                 throw new \Exception ("Authentication error");

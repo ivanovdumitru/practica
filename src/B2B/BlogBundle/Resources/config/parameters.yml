@@ -1,9 +1,9 @@
 parameters:
   api:
-    auth_url: "http://pythontest.binasmartshop.com/b2b-api/api-token-auth/"
+    auth_url: "http://pythontest.binasmartbusiness.com/b2b-api/api-token-auth/"
     login: "gleb.tocarenco@gmail.com"
     password: "1234"
     mac_addr: "5464654"
     profile_url: "data/profile/%d"
-    profiles_list_url: "http://pythontest.binasmartshop.com/b2b-api/companies/"
-    articles_list_url: "http://pythontest.binasmartshop.com/b2b-api/articles"
+    profiles_list_url: "http://pythontest.binasmartbusiness.com/b2b-api/companies/"
+    articles_list_url: "http://pythontest.binasmartbusiness.com/b2b-api/articles"
