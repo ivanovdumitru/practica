@@ -5,5 +5,5 @@ parameters:
     password: "1234"
     mac_addr: "5464654"
     profile_url: "data/profile/%d"
-    profiles_list_url: "http://pythontest.binasmartbusiness.com/b2b-api/companies/"
-    articles_list_url: "http://pythontest.binasmartbusiness.com/b2b-api/articles"
+    profiles_list_url: "pythontest.binasmartbusiness.com/b2b-api/companies/"
+    articles_list_url: "pythontest.binasmartbusiness.com/b2b-api/articles"
