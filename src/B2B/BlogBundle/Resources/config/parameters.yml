@@ -1,6 +1,6 @@
 parameters:
   api:
-    auth_url: "http://pythontest.binasmartbusiness.com/b2b-api/api-token-auth/"
+    auth_url: "pythontest.binasmartbusiness.com/b2b-api/api-token-auth/"
     login: "gleb.tocarenco@gmail.com"
     password: "1234"
     mac_addr: "5464654"

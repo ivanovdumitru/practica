@@ -19,7 +19,7 @@ class TokenListener
     public function onKernelController()
     {
         $session = $this->request->getSession();
-        if (!$session->get('auth') || !isset($session->get('auth')['token'])) {
+//        if (!$session->get('auth') || !isset($session->get('auth')['token'])) {
             $config = $this->container->getParameter('api');
             $params = json_encode([
                 'username' => $config['login'],
@@ -41,6 +41,6 @@ class TokenListener
             $responseData = json_decode($response->getContent(), true);
 
             $session->set('auth', ['token' => $responseData['results']['token']]);
-        }
+//        }
     }
 }
