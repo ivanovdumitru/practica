@@ -6,13 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Buzz\Exception\RequestException;
 
 /**
  * @Route("/profiles")
  * @Template()
  */
-
 class ProfileController extends Controller
 {
     /**
@@ -24,18 +22,14 @@ class ProfileController extends Controller
     public function indexAction(Request $request, $companyId)
     {
         /**
-         * @var $httpRequest \Buzz\Browser
          * @var $httpResponse \Buzz\Message\Response
          */
-        $url = $this->container->getParameter('api')['profiles_list_url'];
-        $header = [sprintf('Authorization: Token %s', $request->getSession()->get('auth')['token'])];
-        $httpRequest = $this->container->get('buzz');
-        try {
-            $httpResponse = $httpRequest->get(sprintf('%s%d', $url, $companyId), $header);
-        } catch (RequestException $e) {
-            sleep(2);
-            $httpResponse = $httpRequest->get(sprintf('%s%d', $url, $companyId), $header);
-        }
+        $url = sprintf(
+            '%s%d',
+            $this->container->getParameter('api')['profiles_list_url'],
+            $companyId
+        );
+        $httpResponse = $this->get('buzz.curl')->request($url);
         $data = [
             'profile' => json_decode($httpResponse->getContent(), true),
             'title' => 'profile'
@@ -53,18 +47,11 @@ class ProfileController extends Controller
     public function listAction(Request $request)
     {
         /**
-         * @var $httpRequest \Buzz\Browser
          * @var $httpResponse \Buzz\Message\Response
          */
         $url = $this->container->getParameter('api')['profiles_list_url'];
-        $header = [sprintf('Authorization: Token %s', $request->getSession()->get('auth')['token'])];
-        $httpRequest = $this->container->get('buzz');
-        try {
-            $httpResponse = $httpRequest->get($url, $header);
-        } catch (RequestException $e) {
-            sleep(2);
-            $httpResponse = $httpRequest->get($url, $header);
-        }
+        $httpResponse = $this->get('buzz.curl')->request($url);
+
         $data = [
             'profiles' => json_decode($httpResponse->getContent(), true),
             'title' => 'profile list'
