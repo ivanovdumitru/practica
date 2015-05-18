@@ -15,12 +15,15 @@ class DefaultController extends Controller
 {
     /**
      * @Route("", name="home")
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function homeAction(Request $request)
+    public function homeAction()
     {
-        $data = ['title' => 'Home'];
+        $httpResponse = $this->get('buzz.curl')->request($this->container->getParameter('api')['articles_list_url']);
+        $data = [
+            'articles' => json_decode($httpResponse->getContent(), true),
+            'title' => 'Home'
+        ];
 
         return $this->render('B2BBlogBundle:Default:index.html.twig', compact('data'));
     }
