@@ -13,8 +13,5 @@
         {{ data.article.body }}
         {% endautoescape %}
     </article>
-    <!-- debug -->
-    <p class="open-debug" title="debug"><span class="glyphicon glyphicon-plus-sign"></span></p>
-    <div class="dump hidden"> {{ dump(data.article) }} </div>
-    <!-- //debug -->
+    {% include 'B2BBlogBundle:partials:debug.html.twig' with { 'data': data.article } %}
 {% endblock %}

@@ -17,57 +17,52 @@
                 {{ asset('bundles/b2bblog/images/logo-placeholder.jpg') }}
                 {% endif %}"
                 alt="{{ data.profile.nm }}" class="profile-logo" />
-            </div>
-            <div class="col-sm-8">
-                <ul class="list-unstyled">
-                    <li><h1>{{ data.profile.nm }}</h1><br></li>
-                    <li>
-                        <p>about company:</p>
-                        <div>
-                        {{ data.profile.description }}
-                        </div>
-                        <br>
-                    </li>
-                    {% if data.profile.phone_number is defined %}
-                    <li>
-                        <ul class="list-unstyled">
-                            <li>phones:</li>
-                            {% for phone in data.profile.phone_number %}
-                                <li>{{ phone }}</li>
-                            {% endfor %}
-                        </ul>
-                        <br>
-                    </li>
-                    {% endif %}
-                    {% if data.profile.email is defined %}
-                    <li>
-                        <ul class="list-unstyled">
-                            <li>emails:</li>
-                            {% for email in data.profile.email %}
-                                <li>{{ email }}</li>
-                            {% endfor %}
-                        </ul>
-                        <br>
-                    </li>
-                    {% endif %}
-                    {% if data.profile.fax_number is defined %}
-                    <li>
-                        <ul class="list-unstyled">
-                            <li>fax:</li>
-                            <li>{{ data.profile.fax_number }}</li>
-                        </ul>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-            <hr>
-            <div class="text-center"><a href="#" class="btn btn-default disabled">Visit store</a></div>
-            <!-- debug -->
-            <p class="open-debug" title="debug"><span class="glyphicon glyphicon-plus-sign"></span></p>
-            <div class="dump hidden">
-            {{ dump(data.profile) }}
-            </div>
-            <!-- //debug -->
+        </div>
+        <div class="col-sm-8">
+            <ul class="list-unstyled">
+                <li><h1>{{ data.profile.nm }}</h1><br></li>
+                <li>
+                    <p>about company:</p>
+                    <div>
+                    {{ data.profile.description }}
+                    </div>
+                    <br>
+                </li>
+                {% if data.profile.phone_number is defined %}
+                <li>
+                    <ul class="list-unstyled">
+                        <li>phones:</li>
+                        {% for phone in data.profile.phone_number %}
+                            <li>{{ phone }}</li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                </li>
+                {% endif %}
+                {% if data.profile.email is defined %}
+                <li>
+                    <ul class="list-unstyled">
+                        <li>emails:</li>
+                        {% for email in data.profile.email %}
+                            <li>{{ email }}</li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                </li>
+                {% endif %}
+                {% if data.profile.fax_number is defined %}
+                <li>
+                    <ul class="list-unstyled">
+                        <li>fax:</li>
+                        <li>{{ data.profile.fax_number }}</li>
+                    </ul>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <hr>
+        <div class="text-center"><a href="#" class="btn btn-default disabled">Visit store</a></div>
+        {% include 'B2BBlogBundle:partials:debug.html.twig' with { 'data': data.profile } %}
     {% endif %}
 </div>
 {% endblock %}

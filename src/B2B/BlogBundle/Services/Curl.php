@@ -25,7 +25,8 @@ class Curl {
      * @param array $url
      * @return array $httpResponse
      */
-    public function request($url){
+    public function request($url)
+    {
         $header = [
             sprintf(
                 'Authorization: Token %s',

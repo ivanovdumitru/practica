@@ -31,12 +31,7 @@
                     </p>
                 </div>
             </div>
-           <!-- debug -->
-            <p class="open-debug" title="debug"><span class="glyphicon glyphicon-plus-sign"></span></p>
-            <div class="dump hidden">
-            {{ dump(profile) }}
-            </div>
-           <!-- //debug -->
+           {% include 'B2BBlogBundle:partials:debug.html.twig' with { 'data': profile } %}
             <hr>
        {% endfor %}
     {% else %}
