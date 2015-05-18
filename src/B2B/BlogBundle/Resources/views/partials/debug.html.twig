@@ -1,4 +1,4 @@
-{% if not app.debug %}
+{% if app.environment == 'dev' %}
     <!-- debug -->
     <p class="open-debug" title="debug"><span class="glyphicon glyphicon-plus-sign"></span></p>
     <div class="dump hidden">{{ dump(data) }}</div>
