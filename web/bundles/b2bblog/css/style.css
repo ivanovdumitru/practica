@@ -1,0 +1,40 @@
+.profile-logo {max-width: 90%}
+.open-debug {cursor: pointer;}
+.index-page .container {
+    max-width: 920px;
+}
+.post-description {
+    min-height: 65px;
+    max-height: 65px;
+    margin-top: 5px;
+}
+.post-list .post-title {
+    font-size: 16px;
+}
+nav {
+    padding: 5px 0;
+    background-color: aliceblue;
+    margin-bottom: 10px;
+}
+nav ul {
+    margin: 0;
+    padding: 0 10px;
+}
+.header-line {
+    margin-bottom: 0;
+}
+header .search-form {
+    float: left;
+}
+.footer {
+    overflow: hidden;
+}
+footer .post-title-list li {
+    line-height: 30px;
+}
+footer .subscription-form {
+    padding: 10px 0;
+}
+footer .subscription-form input {
+    width: 100%;
+}
