@@ -3,7 +3,7 @@
 /src/Acme/
 *.md
 /composer.lock
-/web/bundles/
+/web/bundles/acmedemo
 web/app.php
 /app/bootstrap.php.cache
 /app/cache/*

@@ -25,14 +25,19 @@
         {% block headjs %}{% endblock %}
     </script>
 </head>
-<body>
+<body {% block bodyattributes %}{% endblock %}>
     <!-- Begin page content -->
     <div class="container">
         <header>
+            <div class="search-form">
+                <form>
+                    <input type="text" name="search" placeholder="Search" /><button><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </form>
+            </div>
             <h3 class="text-muted text-right"><a href="{{ path("home") }}" class="">Bina Business</a></h3>
         </header>
-        <hr>
-        <nav class="text-center">
+        <hr class="header-line">
+        <nav class="text-right">
             <ul class="list-unstyled list-inline">
                 <li><a href="{{ path("home") }}">Home</a></li>
                 <li><a href="{{ path("profiles_list") }}">Profiles</a></li>
@@ -42,7 +47,37 @@
     </div>
     <footer class="footer">
         <div class="container">
-            <p class="text-muted">Bina Smart Business.</p>
+            <div class="row">
+                <div class="col-xs-3">
+                    <form class="subscription-form form">
+                    <ul class="list-unstyled">
+                        <li><input type="text" name="subscribe" /></li>
+                        <li><input type="submit" value="Subscribe" /></li>
+                    </ul>
+                    </form>
+                </div>
+                <div class="col-xs-3 col-xs-offset-3">
+                    <ul class="list-unstyled post-title-list">
+                        <li><strong>Recent posts:</strong></li>
+                        <li>Post title 1 <img src="http://placehold.it/25&text=-" class="img-rounded" /></li>
+                        <li>Post title 2 <img src="http://placehold.it/25&text=-" class="img-rounded" /></li>
+                        <li>Post title 3 <img src="http://placehold.it/25&text=-" class="img-rounded" /></li>
+                        <li>Post title 4 <img src="http://placehold.it/25&text=-" class="img-rounded" /></li>
+                    </ul>
+                </div>
+                <div class="col-xs-3">
+                    <ul class="list-unstyled post-title-list">
+                        <li><strong>Popular posts:</strong></li>
+                        <li>Post title 1 <img src="http://placehold.it/25&text=-" class="img-rounded" /></li>
+                        <li>Post title 2 <img src="http://placehold.it/25&text=-" class="img-rounded" /></li>
+                        <li>Post title 3 <img src="http://placehold.it/25&text=-" class="img-rounded" /></li>
+                        <li>Post title 4 <img src="http://placehold.it/25&text=-" class="img-rounded" /></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <p class="text-muted text-left">Bina Smart Business.</p>
+            </div>
         </div>
     </footer>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
