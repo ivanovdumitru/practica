@@ -39,12 +39,3 @@ services:
     debug.twig.extension:
         class: Twig_Extension_Debug
         tags: [{ name: 'twig.extension' }]
-
-doctrine:
-    dbal:
-        driver:   pdo_mysql
-        host:     127.0.0.1
-        port:     3306
-        dbname:   b2b-store
-        user:     mysqladmin
-        password: mysqladminpass
