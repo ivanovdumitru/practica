@@ -5,5 +5,8 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
     buzz.curl:
-        class: B2B\BlogBundle\Services\Curl
+        class: B2B\BlogBundle\Services\BuzzCurl
         arguments: [@service_container, @request_stack]
+    post.utility:
+        class: B2B\BlogBundle\Services\PostService
+        arguments: [@doctrine.orm.entity_manager]

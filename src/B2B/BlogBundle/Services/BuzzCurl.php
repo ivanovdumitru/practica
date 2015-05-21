@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Buzz\Exception\RequestException;
 
-class Curl {
+class BuzzCurl {
 
     private $container;
 
@@ -23,7 +23,7 @@ class Curl {
 
     /**
      * @param array $url
-     * @return array $httpResponse
+     * @return array
      */
     public function request($url)
     {

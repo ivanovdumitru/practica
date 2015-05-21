@@ -14,13 +14,16 @@
         <div class="col-xs-4">
             <ul class="list-unstyled">
                 <li>
-                    <h3 class="post-title"><a href="{{ path('show_client_article', { 'articleId': article.id }) }}">
-                        {{ article.title|length > 36 ? article.title|slice(0, 36) ~ '...' : article.title  }}</a></h3>
+                    <img src=" {{ article.image ? article.image : 'http://placehold.it/250x250&text=post+image' }}" class="img-rounded img-responsive" />
                 </li>
-                <li><img src="http://placehold.it/270x270&text=post+image" class="img-rounded" /></li>
+                <li>
+                    <h3 class="post-title"><a href="{{ path('show_client_article', { 'articleId': article.id }) }}">
+                            {{ article.title|length > 36 ? article.title|slice(0, 36) ~ '...' : article.title  }}</a></h3>
+                </li>
                 <li>
                     <p class="post-description">{{ article.description|length > 125 ? article.description|trim()|slice(0, 125) ~ '...' : article.description }}</p>
-                    <p class="text-right">
+                    <p class="text-right"><span class="glyphicon glyphicon-eye-open text-muted" aria-hidden="true"><span class="small watch-count">{{ article.id in data.count|keys ? data.count[article.id] : 0 }}</span>
+                        </span>
                         <a href="{{ path("show_client_article", {"articleId": article.id }) }}">more...</a>
                     </p>
                     <p class="text-muted small" style="float: left">

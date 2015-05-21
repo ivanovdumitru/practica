@@ -23,6 +23,9 @@ nav ul {
 .header-line {
     margin-bottom: 0;
 }
+.header-line, nav {
+    display: none;
+}
 header .search-form {
     float: left;
 }
@@ -37,4 +40,7 @@ footer .subscription-form {
 }
 footer .subscription-form input {
     width: 100%;
+}
+.watch-count {
+    padding: 0 10px 0 5px;
 }
