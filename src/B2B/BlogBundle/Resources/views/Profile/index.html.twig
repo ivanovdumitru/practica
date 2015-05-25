@@ -7,62 +7,65 @@
     <script src="{{ asset('bundles/b2bblog/js/debug-dump.js') }}" type="text/javascript"></script>
 {% endblock %}
 {% block content %}
-<div class="row">
-    {% if data.profile|length  %}
-        <div class="col-sm-4">
-            <img src="
+<div class="singe-page company-profile square-block col-xs-12">
+    <div class="inner">
+        <div class="pull-left left-col">
+            <div class="image-placeholder">
+                <img src="
                 {% if data.profile.image|length %}
                 {{ data.profile.image }}
                 {% else %}
                 {{ asset('bundles/b2bblog/images/logo-placeholder.jpg') }}
                 {% endif %}"
-                alt="{{ data.profile.nm }}" class="profile-logo" />
+                 alt="{{ data.profile.nm }}" class="profile-logo" />
+            </div>
+            <div class="profile-buttons">
+                <a href="#" class="btn btn-default disabled blue text-uppercase">Visit store</a>
+                <a href="#" class="btn btn-default disabled green text-uppercase">View articles</a>
+            </div>
         </div>
-        <div class="col-sm-8">
+        <div class="content">
             <ul class="list-unstyled">
-                <li><h1>{{ data.profile.nm }}</h1><br></li>
+                <li class="company-name"><h1>{{ data.profile.nm }}</h1></li>
+                {% if data.profile.phone_number is defined %}
+                    <li>
+                        <ul class="list-unstyled">
+                            <li>phones:</li>
+                            {% for phone in data.profile.phone_number %}
+                                <li>{{ phone }}</li>
+                            {% endfor %}
+                        </ul>
+                        <br>
+                    </li>
+                {% endif %}
+                {% if data.profile.email is defined %}
+                    <li>
+                        <ul class="list-unstyled">
+                            <li>emails:</li>
+                            {% for email in data.profile.email %}
+                                <li>{{ email }}</li>
+                            {% endfor %}
+                        </ul>
+                        <br>
+                    </li>
+                {% endif %}
+                {% if data.profile.fax_number is defined %}
+                    <li>
+                        <ul class="list-unstyled">
+                            <li>fax:</li>
+                            <li>{{ data.profile.fax_number }}</li>
+                        </ul>
+                    </li>
+                {% endif %}
                 <li>
                     <p>about company:</p>
                     <div>
-                    {{ data.profile.description }}
+                        {{ data.profile.description }}
                     </div>
                     <br>
                 </li>
-                {% if data.profile.phone_number is defined %}
-                <li>
-                    <ul class="list-unstyled">
-                        <li>phones:</li>
-                        {% for phone in data.profile.phone_number %}
-                            <li>{{ phone }}</li>
-                        {% endfor %}
-                    </ul>
-                    <br>
-                </li>
-                {% endif %}
-                {% if data.profile.email is defined %}
-                <li>
-                    <ul class="list-unstyled">
-                        <li>emails:</li>
-                        {% for email in data.profile.email %}
-                            <li>{{ email }}</li>
-                        {% endfor %}
-                    </ul>
-                    <br>
-                </li>
-                {% endif %}
-                {% if data.profile.fax_number is defined %}
-                <li>
-                    <ul class="list-unstyled">
-                        <li>fax:</li>
-                        <li>{{ data.profile.fax_number }}</li>
-                    </ul>
-                </li>
-                {% endif %}
             </ul>
         </div>
-        <hr>
-        <div class="text-center"><a href="#" class="btn btn-default disabled">Visit store</a></div>
-        {% include 'B2BBlogBundle:partials:debug.html.twig' with { 'data': data.profile } %}
-    {% endif %}
+    </div>
 </div>
 {% endblock %}

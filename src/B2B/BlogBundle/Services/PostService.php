@@ -85,4 +85,23 @@ class PostService {
         return json_decode($httpResponse->getContent(), true);
     }
 
+    /**
+     * subject list
+     * @param null|integer $limit
+     * @return array
+     */
+    public function subjects($limit=null)
+    {
+        /**
+         * @var $httpResponse \Buzz\Message\Response
+         */
+        $httpResponse = $this->container
+            ->get('buzz.curl')
+            ->request(
+                $this->container->getParameter('api')['articles_subjects_list_url'] . ($limit ? sprintf('?limit=%d', $limit) : '')
+            );
+
+        return json_decode($httpResponse->getContent(), true);
+    }
+
 }

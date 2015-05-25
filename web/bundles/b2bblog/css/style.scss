@@ -123,6 +123,78 @@ aside {
   }
 }
 
+.singe-page {
+  header {
+    h1 {
+      margin: 0;
+    }
+  }
+  .post-image {
+    max-width: 50%;
+  }
+  .content {
+    padding: 16px 0;
+    overflow: hidden;
+    color: #757575;
+    font-size: 14px;
+  }
+  footer {
+    padding-top: 16px;
+    font-size: 16px;
+    p{
+      margin: 0;
+    }
+    a {
+      color: #424242;
+    }
+  }
+}
+
+.company-profile {
+  .content {
+    margin-left: 336px;
+    padding: 0 0 16px 0;
+  }
+  .company-name {
+    h1,h2,h3,h4,h5,h6 {
+      margin-top: 0;
+    }
+  }
+  .inner {
+    overflow: hidden;
+  }
+  .image-placeholder {
+    border: solid 1px #e0e0e0;
+    border-radius: 4px;
+    height: 318px;
+    width: 318px;
+    text-align: center;
+    img {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+  .profile-buttons {
+    padding-top: 16px;
+    a {
+      display: inline-block; margin-right: 16px
+    }
+  }
+}
+
+.btn.blue {
+  border-color: #44a6e4;
+  color: #44a6e4;
+}
+
+.btn.green {
+  border-color: #15c25a;
+  color: #15c25a;
+}
+
 .post-image {
   height: 132px;
   display: block;

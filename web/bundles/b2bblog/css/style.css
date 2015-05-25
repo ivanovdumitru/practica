@@ -103,6 +103,56 @@ aside li a.active {
     position: relative;
     top: 4px; }
 
+.singe-page header h1 {
+  margin: 0; }
+.singe-page .post-image {
+  max-width: 50%; }
+.singe-page .content {
+  padding: 16px 0;
+  overflow: hidden;
+  color: #757575;
+  font-size: 14px; }
+.singe-page footer {
+  padding-top: 16px;
+  font-size: 16px; }
+  .singe-page footer p {
+    margin: 0; }
+  .singe-page footer a {
+    color: #424242; }
+
+.company-profile .content {
+  margin-left: 336px;
+  padding: 0 0 16px 0; }
+.company-profile .company-name h1, .company-profile .company-name h2, .company-profile .company-name h3, .company-profile .company-name h4, .company-profile .company-name h5, .company-profile .company-name h6 {
+  margin-top: 0; }
+.company-profile .inner {
+  overflow: hidden; }
+.company-profile .image-placeholder {
+  border: solid 1px #e0e0e0;
+  border-radius: 4px;
+  height: 318px;
+  width: 318px;
+  text-align: center; }
+  .company-profile .image-placeholder img {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 100%;
+    max-height: 100%; }
+.company-profile .profile-buttons {
+  padding-top: 16px; }
+  .company-profile .profile-buttons a {
+    display: inline-block;
+    margin-right: 16px; }
+
+.btn.blue {
+  border-color: #44a6e4;
+  color: #44a6e4; }
+
+.btn.green {
+  border-color: #15c25a;
+  color: #15c25a; }
+
 .post-image {
   height: 132px;
   display: block;

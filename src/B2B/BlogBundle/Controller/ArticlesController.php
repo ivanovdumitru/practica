@@ -35,7 +35,7 @@ class ArticlesController extends Controller
         $data = [
             'articles' => json_decode($httpResponse->getContent(), true),
             'title'    => 'articles',
-            'subjects' => [],
+            'subjects' => $this->get('post.utility')->subjects(),
             'popular' => $this->get('post.utility')->popular(5)
         ];
 
@@ -65,9 +65,9 @@ class ArticlesController extends Controller
         $data = [
             'article' => $article,
             'title'   => 'articles',
-            'recent'  => $this->listAction($article['company'], 4)['data']['articles'],
-            'subjects' => [],
-            'popular' => $post = $this->get('post.utility')->popular(5)
+            'recent'  => $this->listAction($article['company'], 6)['data']['articles'],
+            'subjects' => $this->get('post.utility')->subjects(),
+//            'popular' => $post = $this->get('post.utility')->popular(5)
         ];
 
         return compact('data');

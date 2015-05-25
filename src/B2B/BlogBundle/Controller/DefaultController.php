@@ -41,14 +41,11 @@ class DefaultController extends Controller
         foreach ($repo->getCount($ids) as $postData) {
             $count[$postData['postId']] = $postData['value'];
         }
-        // subject list
-        $httpResponse = $this->get('buzz.curl')->request($this->container->getParameter('api')['articles_subjects_list_url']);
-        $subjects = json_decode($httpResponse->getContent(), true);
         // assemble final data
         $data = [
             'articles' => $articles,
             'count' =>  $count,
-            'subjects' => $subjects,
+            'subjects' => $this->get('post.utility')->subjects(),
             'title' => 'ome',
             'popular' => $post = $this->get('post.utility')->popular(5)
         ];

@@ -6,50 +6,30 @@
 {% block externaljs %}
     <script src="{{ asset('bundles/b2bblog/js/debug-dump.js') }}" type="text/javascript"></script>
 {% endblock %}
+{% block sidebar_posts %}
+    {% include 'B2BBlogBundle:partials:sidebar.posts.html.twig' with {'posts': data.recent} %}
+{% endblock %}
 {% block bodyattributes %}class="article-page"{% endblock %}
 {% block content %}
-    <article class="company-article">
-        <header><h1>{{ data.article.title }}</h1></header>
-        {% autoescape false %}
-        {{ data.article.body }}
-        {% endautoescape %}
-    </article>
-    <p class="text-muted text-right">
-        <a href="{{ path('client_profile', { 'companyId': data.article.company }) }}">{{ data.article.company__nm }}</a>
-    </p>
-    {% if data.recent|length > 0 %}
-    <div class="row recent-articles">
-        {% for recent_article in data.recent %}
-        <div class="col-xs-3">
-            <ul class="list-unstyled">
-                <!-- featured image -->
-                <li>
-                    <img class="img-rounded img-responsive" src="{{
-                        recent_article.image
-                            ? recent_article.image
-                            : 'http://placehold.it/140x140&text=post+image'
-                    }}" />
-                </li>
-                <!-- title -->
-                <li>
-                    <h3 class="post-title"><a href="{{ path('show_client_article', { 'articleId': recent_article.id }) }}">
-                            {{ recent_article.title|length > 36 ? recent_article.title|slice(0, 36) ~ '...' : recent_article.title  }}</a></h3>
-                </li>
-                <li>
-                    <!-- short description -->
-                    <div class="post-description">
-                        {{ recent_article.description|length > 125 ? recent_article.description|trim()|slice(0, 125) ~ '...' : recent_article.description }}
-                        <br />
-                        <a href="{{ path("show_client_article", {"articleId": recent_article.id }) }}">more...</a>
-                    </div>
-                    <p class="text-right">
-
-                    </p>
-                </li>
-            </ul>
+    <article class="singe-page company-article square-block col-xs-12">
+        <div class="inner">
+        <header><h1 class="middle-header blue-text">{{ data.article.title }}</h1></header>
+        <div class="content">
+            {% if data.article.image is not null %}
+            <img src="{{ data.article.image }}" class="post-image pull-right" alt="{{ data.article.title }}" />
+            {% endif %}
+            {% autoescape false %}
+            {{ data.article.body|replace({"\n":' ', "\r":' '})|trim }}
+            {% endautoescape %}
         </div>
-        {% endfor %}
-    </div>
-    {% endif %}
-    {% include 'B2BBlogBundle:partials:debug.html.twig' with { 'data': data } %}
+        <footer>
+            <p>
+                <a href="{{ path('client_profile', { 'companyId': data.article.company }) }}">{{ data.article.company__nm }}</a>
+                {% if data.article.subject is not null %}
+                | <a href="{{ path('home', { subjectId: data.article.subject }) }}">{{ data.article.subject__description }}</a>
+                {% endif %}
+            </p>
+        </footer>
+        </div>
+    </article>
 {% endblock %}
