@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}BinaSmartShopOnline{% endblock %}</title>
-
     <!-- Bootstrap -->
     <link href="{{ asset('bundles/b2bblog/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/b2bblog/css/style.css') }}" rel="stylesheet">
@@ -48,20 +47,9 @@
             </div>
             <div class="square-block" id="most-popular">
                 <div class="inner">
-                    <h4>Most Popular</h4>
-                    <ul class="list-unstyled">
-                        {% for post in data.popular %}
-                        <li><div class="pull-right img-placeholder">{% if post.image %}
-                                <a href="{{ path('show_client_article', {'articleId': post.id}) }}">
-                                    <img src="{{ post.image }}" class="img-responsive" alt="{{ post.title }}" />
-                                </a>{% endif %}
-                            </div>
-                            <a href="{{ path('show_client_article', {'articleId': post.id}) }}">{{
-                                post.title|length > 65 ? "post.title|slice(0, 65)..." : post.title
-                            }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
+                    {% block sidebar_posts %}
+                    {% include 'B2BBlogBundle:partials:sidebar.posts.html.twig' with {'posts': data.popular} %}
+                    {% endblock %}
                 </div>
             </div>
         </aside>
