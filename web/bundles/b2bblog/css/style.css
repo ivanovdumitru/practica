@@ -21,13 +21,19 @@ header.header {
 
 .square-block {
   margin-bottom: 16px; }
+  .square-block .content {
+    padding: 16px 0;
+    overflow: hidden;
+    color: #757575;
+    font-size: 14px; }
   .square-block .inner {
     background: white;
     border-radius: 5px;
     box-shadow: #ccc 0 0 3px;
     padding: 16px;
     font-size: 14px;
-    height: 100%; }
+    height: 100%;
+    overflow: hidden; }
     .square-block .inner h4 {
       color: #424242;
       font-size: 16px;
@@ -107,11 +113,6 @@ aside li a.active {
   margin: 0; }
 .singe-page .post-image {
   max-width: 50%; }
-.singe-page .content {
-  padding: 16px 0;
-  overflow: hidden;
-  color: #757575;
-  font-size: 14px; }
 .singe-page footer {
   padding-top: 16px;
   font-size: 16px; }
@@ -125,8 +126,6 @@ aside li a.active {
   padding: 0 0 16px 0; }
 .company-profile .company-name h1, .company-profile .company-name h2, .company-profile .company-name h3, .company-profile .company-name h4, .company-profile .company-name h5, .company-profile .company-name h6 {
   margin-top: 0; }
-.company-profile .inner {
-  overflow: hidden; }
 .company-profile .image-placeholder {
   border: solid 1px #e0e0e0;
   border-radius: 4px;
@@ -145,13 +144,42 @@ aside li a.active {
     display: inline-block;
     margin-right: 16px; }
 
-.btn.blue {
+.company-articles .article-description {
+  color: #424242; }
+.company-articles .img-placeholder {
+  display: block;
+  height: 110px;
+  width: 110px;
+  border: solid 1px #e0e0e0;
+  margin-right: 16px; }
+  .company-articles .img-placeholder img {
+    max-height: 100%;
+    max-width: 100%; }
+.company-articles .article-item {
+  padding-bottom: 5px;
+  overflow: hidden;
+  margin-bottom: 16px; }
+  .company-articles .article-item .count {
+    color: #757575; }
+
+.btn-default.btn-blue-solid {
+  border-color: #44a6e4;
+  color: #fff;
+  background-color: #44a6e4; }
+  .btn-default.btn-blue-solid:hover {
+    background-color: #44a6e4; }
+
+.btn-default.blue {
   border-color: #44a6e4;
   color: #44a6e4; }
+  .btn-default.blue:hover, .btn-default.blue:focus, .btn-default.blue:active {
+    background-color: white; }
 
-.btn.green {
+.btn-default.green {
   border-color: #15c25a;
   color: #15c25a; }
+  .btn-default.green:hover, .btn-default.green:focus, .btn-default.green:active {
+    background-color: white; }
 
 .post-image {
   height: 132px;

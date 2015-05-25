@@ -7,19 +7,27 @@
     <script src="{{ asset('bundles/b2bblog/js/debug-dump.js') }}" type="text/javascript"></script>
 {% endblock %}
 {% block content %}
-    {% if data.articles is defined %}
-    <dl>
-    {% for article in data.articles %}
-        <dt>{{ article.title }}</dt>
-        <dd>
-            {{ article.description }}
-            <p class="text-right">
-                <a href="{{ path("show_client_article", {"articleId": article.id }) }}">full article</a>
-            </p>
-            <hr />
-        </dd>
-    {% endfor %}
-    {% endif %}
-    </dl>
-    {% include 'B2BBlogBundle:partials:debug.html.twig' with { 'data': data.articles } %}
+    <div class="singe-page company-articles square-block col-xs-12">
+        <div class="inner">
+            {% if data.articles is defined %}
+                <header><h1 class="middle-header blue-text">{{ data.articles[0].company__nm }}</h1></header>
+                <div class="content">
+                    {% for article in data.articles %}
+                        <div class="article-item">
+                            <div class="img-placeholder pull-left">
+                                {% if article.image is not null %}
+                                    <img src="{{ article.image }}" class="post-image pull-right" alt="{{ article.title }}" />
+                                {% endif %}
+                            </div>
+                            <h3 class="post-title"><a href="{{ path('show_client_article', { 'articleId': article.id }) }}">
+                                    {{ article.title|length > 100 ? article.title|slice(0, 100) ~ '...' : article.title  }}</a></h3>
+                            <p class="article-description">{{ article.description|length > 200 ? article.description|slice(0, 200) ~ '...' : article.description  }}</p>
+                            <p class="pull-left count">Views&nbsp;{% if article.id in data.count|keys  %}{{ data.count[article.id] }}{% else %}0{% endif %}</p>
+                            <a class="btn btn-default btn-blue-solid text-uppercase pull-right" href="{{ path("show_client_article", {"articleId": article.id }) }}">full article</a></p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

@@ -32,8 +32,19 @@ class ArticlesController extends Controller
             $limit
         );
         $httpResponse = $this->get('buzz.curl')->request($url);
+        $articles = json_decode($httpResponse->getContent(), true);
+        // views counter
+        $repo = $this->getDoctrine()->getRepository('B2BBlogBundle:PostMeta');
+        $ids = $count = [];
+        foreach ($articles as $article) {
+            $ids[] = $article['id'];
+        }
+        foreach ($repo->getCount($ids) as $postData) {
+            $count[$postData['postId']] = $postData['value'];
+        }
         $data = [
-            'articles' => json_decode($httpResponse->getContent(), true),
+            'articles' => $articles,
+            'count' =>  $count,
             'title'    => 'articles',
             'subjects' => $this->get('post.utility')->subjects(),
             'popular' => $this->get('post.utility')->popular(5)
@@ -67,7 +78,6 @@ class ArticlesController extends Controller
             'title'   => 'articles',
             'recent'  => $this->listAction($article['company'], 6)['data']['articles'],
             'subjects' => $this->get('post.utility')->subjects(),
-//            'popular' => $post = $this->get('post.utility')->popular(5)
         ];
 
         return compact('data');

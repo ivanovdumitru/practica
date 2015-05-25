@@ -22,6 +22,12 @@ header.header {
 }
 .square-block{
   margin-bottom: 16px;
+  .content {
+    padding: 16px 0;
+    overflow: hidden;
+    color: #757575;
+    font-size: 14px;
+  }
   .inner {
     background: white;
     border-radius: 5px;
@@ -29,6 +35,7 @@ header.header {
     padding: 16px;
     font-size: 14px;
     height: 100%;
+    overflow: hidden;
     h4 {
       color: #424242;
       font-size: 16px;
@@ -132,12 +139,6 @@ aside {
   .post-image {
     max-width: 50%;
   }
-  .content {
-    padding: 16px 0;
-    overflow: hidden;
-    color: #757575;
-    font-size: 14px;
-  }
   footer {
     padding-top: 16px;
     font-size: 16px;
@@ -159,9 +160,6 @@ aside {
     h1,h2,h3,h4,h5,h6 {
       margin-top: 0;
     }
-  }
-  .inner {
-    overflow: hidden;
   }
   .image-placeholder {
     border: solid 1px #e0e0e0;
@@ -185,14 +183,54 @@ aside {
   }
 }
 
-.btn.blue {
-  border-color: #44a6e4;
-  color: #44a6e4;
+.company-articles {
+  .article-description {
+    color: #424242;
+  }
+  .img-placeholder {
+    display: block;
+    height: 110px;
+    width: 110px;
+    border: solid 1px #e0e0e0;
+    margin-right: 16px;
+    img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+  .article-item {
+    padding-bottom: 5px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    .count {
+      color: #757575
+    }
+  }
 }
 
-.btn.green {
+.btn-default.btn-blue-solid {
+  border-color: #44a6e4;
+  color: #fff;
+  background-color: #44a6e4;
+  &:hover {
+    background-color: #44a6e4;
+  }
+}
+
+.btn-default.blue {
+  border-color: #44a6e4;
+  color: #44a6e4;
+  &:hover, &:focus, &:active {
+    background-color: white;
+  }
+}
+
+.btn-default.green {
   border-color: #15c25a;
   color: #15c25a;
+  &:hover, &:focus, &:active {
+    background-color: white;
+  }
 }
 
 .post-image {

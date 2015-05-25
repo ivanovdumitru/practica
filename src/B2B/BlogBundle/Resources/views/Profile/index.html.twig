@@ -21,7 +21,7 @@
             </div>
             <div class="profile-buttons">
                 <a href="#" class="btn btn-default disabled blue text-uppercase">Visit store</a>
-                <a href="#" class="btn btn-default disabled green text-uppercase">View articles</a>
+                <a href="{{ path('client_articles', {'companyId':data.profile.id }) }}" class="btn btn-default green text-uppercase">View articles</a>
             </div>
         </div>
         <div class="content">
