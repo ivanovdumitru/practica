@@ -16,3 +16,4 @@ web/app.php
 /bin/
 /composer.phar
 web/.htaccess
+/template

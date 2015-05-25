@@ -9,4 +9,4 @@ services:
         arguments: [@service_container, @request_stack]
     post.utility:
         class: B2B\BlogBundle\Services\PostService
-        arguments: [@doctrine.orm.entity_manager]
+        arguments: [@service_container, @doctrine.orm.entity_manager]

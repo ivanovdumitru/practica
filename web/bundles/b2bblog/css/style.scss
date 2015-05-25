@@ -1,0 +1,135 @@
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+header.header {
+  height: 72px;
+  line-height: 72px;
+  background-color: #364d5f;
+  box-shadow: #ccc 0 2px 1px;
+  margin-bottom: 32px;
+  .header-logo {
+    width: 225px;
+  }
+}
+.content {
+  padding-left: 0;
+}
+.square-block{
+  margin-bottom: 16px;
+  .inner {
+    background: white;
+    border-radius: 5px;
+    box-shadow: #ccc 0 0 3px;
+    padding: 16px;
+    font-size: 14px;
+    height: 100%;
+    h4 {
+      color: #424242;
+      font-size: 16px;
+      margin: 16px 0 16px;
+    }
+    li {
+      color: #757575;
+      font-size: inherit;
+    }
+  }
+}
+aside {
+  li a, li a:hover, li a:active, li a:focus {
+    color: #757575;
+  }
+  li a.active {
+    text-decoration: underline;
+  }
+}
+.post-block {
+  height: 352px;
+  .inner {
+    position: relative;
+  }
+  footer {
+    position: absolute;
+    bottom: 0;
+    padding-right: 32px;
+    width: 100%;
+    font-size: 12px;
+    color: #757575;
+  }
+}
+.post-title {
+  font-size: 16px;
+  max-height: 35px;
+  overflow: hidden;
+  margin-top: 16px;
+  a {
+    color: #44a6e4;
+  }
+}
+#most-popular {
+  li {
+    min-height: 65px;
+    overflow: hidden;
+    clear: both;
+    a {
+      display: block;
+      margin-right: 70px;
+    }
+  }
+  .img-placeholder {
+    width: 65px;
+    height: 65px;
+    overflow: hidden;
+    img {
+      height: 100%;
+    }
+  }
+}
+.search-form {
+  width: 100%;
+  display: block;
+  input, button {
+    height: 46px;
+    line-height: 46px;
+    border: #e0e0e0 solid 1px;
+  }
+  input[type=text] {
+    padding: 0 67px 0 10px;
+    border-radius: 5px;
+    width: 100%;
+  }
+  button {
+    margin-left: -46px;
+    padding: 0;
+    width: 46px;
+    background: transparent;
+    border: none;
+    font-size: 17px;
+    color: #757575;
+    height: 46px;
+    position: relative;
+    top: 4px;
+  }
+}
+
+.post-image {
+  height: 132px;
+  display: block;
+  overflow: hidden;
+  img {width: 100%}
+}
+
+.footer {
+  background: #424242;
+  height: 50px;
+  line-height: 50px;
+  margin-top: 32px;
+  p {
+    color: #44a6e4;
+  }
+}
+
+@media (min-width: 1040px) {
+  .container {
+    width: 1040px;
+  }
+}

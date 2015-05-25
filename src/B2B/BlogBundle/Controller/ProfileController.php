@@ -32,7 +32,9 @@ class ProfileController extends Controller
         $httpResponse = $this->get('buzz.curl')->request($url);
         $data = [
             'profile' => json_decode($httpResponse->getContent(), true),
-            'title' => 'profile'
+            'subjects' => [],
+            'title' => 'profile',
+            'popular' => $post = $this->get('post.utility')->popular(5)
         ];
 
         return compact('data');
@@ -54,7 +56,9 @@ class ProfileController extends Controller
 
         $data = [
             'profiles' => json_decode($httpResponse->getContent(), true),
-            'title' => 'profile list'
+            'subjects' => [],
+            'title' => 'profile list',
+            'popular' => $post = $this->get('post.utility')->popular(5)
         ];
 
         return compact('data');

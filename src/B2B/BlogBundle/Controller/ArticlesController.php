@@ -34,7 +34,9 @@ class ArticlesController extends Controller
         $httpResponse = $this->get('buzz.curl')->request($url);
         $data = [
             'articles' => json_decode($httpResponse->getContent(), true),
-            'title'    => 'articles'
+            'title'    => 'articles',
+            'subjects' => [],
+            'popular' => $this->get('post.utility')->popular(5)
         ];
 
         return compact('data');
@@ -60,11 +62,12 @@ class ArticlesController extends Controller
         );
         $httpResponse = $this->get('buzz.curl')->request($url);
         $article = json_decode($httpResponse->getContent(), true);
-
         $data = [
             'article' => $article,
             'title'   => 'articles',
-            'recent'  => $this->listAction($article['company'], 4)['data']['articles']
+            'recent'  => $this->listAction($article['company'], 4)['data']['articles'],
+            'subjects' => [],
+            'popular' => $post = $this->get('post.utility')->popular(5)
         ];
 
         return compact('data');

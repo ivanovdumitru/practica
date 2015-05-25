@@ -8,34 +8,30 @@
 {% endblock %}
 {% block bodyattributes %}class="index-page post-list"{% endblock %}
 {% block content %}
-<div class="row">
     {% if data.articles is defined %}
     {% for article in data.articles %}
-        <div class="col-xs-4">
-            <ul class="list-unstyled">
-                <li>
-                    <img src=" {{ article.image ? article.image : 'http://placehold.it/250x250&text=post+image' }}" class="img-rounded img-responsive" />
-                </li>
-                <li>
-                    <h3 class="post-title"><a href="{{ path('show_client_article', { 'articleId': article.id }) }}">
-                            {{ article.title|length > 36 ? article.title|slice(0, 36) ~ '...' : article.title  }}</a></h3>
-                </li>
-                <li>
-                    <p class="post-description">{{ article.description|length > 125 ? article.description|trim()|slice(0, 125) ~ '...' : article.description }}</p>
-                    <p class="text-right"><span class="glyphicon glyphicon-eye-open text-muted" aria-hidden="true"><span class="small watch-count">{{ article.id in data.count|keys ? data.count[article.id] : 0 }}</span>
-                        </span>
-                        <a href="{{ path("show_client_article", {"articleId": article.id }) }}">more...</a>
-                    </p>
-                    <p class="text-muted small" style="float: left">
-                        <a href="{{ path('client_articles', { 'companyId': article.company }) }}">{{ article.company__nm|length > 26 ? article.company__nm|slice(0, 26) ~ '...' : article.company__nm }}</a>
-                    </p>
-                    <p class="text-muted small"  style="float: right">{{ article.created|date("d/m/Y \\a\\t G:i") }}</p>
-                    <hr style="clear: both" />
-                </li>
-            </ul>
+        <div class="col-xs-4 square-block post-block">
+            <div class="inner">
+                <ul class="list-unstyled">
+                    <li class="post-image">
+                        <img src="{{ article.image ? article.image : 'http://placehold.it/250x250&text=post+image' }}" alt="post" />
+                    </li>
+                    <li>
+                        <h3 class="post-title"><a href="{{ path('show_client_article', { 'articleId': article.id }) }}">
+                                {{ article.title|length > 36 ? article.title|slice(0, 36) ~ '...' : article.title  }}</a></h3>
+                    </li>
+                    <li>
+                        <p class="post-description">{{ article.description|length > 125 ? article.description|trim()|slice(0, 125) ~ '...' : article.description }}</p>
+                    </li>
+                </ul>
+                <footer>
+                    <a href="{{ path("show_client_article", {"articleId": article.id }) }}">more...</a>
+                    <p class="pull-right">Views {{ article.id in data.count|keys ? data.count[article.id] : 0 }}</p>
+                </footer>
+            </div>
+            {##}
         </div>
-        {% if loop.index % 3 == 0 %}</div><div class="row">{% endif %}
     {% endfor %}
     {% endif %}
-</div>
+
 {% endblock %}

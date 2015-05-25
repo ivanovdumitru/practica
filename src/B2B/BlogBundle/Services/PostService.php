@@ -8,13 +8,15 @@
 
 namespace B2B\BlogBundle\Services;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use B2B\BlogBundle\Entity\PostMeta;
 use Doctrine\ORM\EntityManager;
 
 class PostService {
 
-    public function __construct(EntityManager $em) {
+    public function __construct(ContainerInterface $container, EntityManager $em) {
         $this->em = $em;
+        $this->container = $container;
     }
 
     /**
@@ -26,12 +28,12 @@ class PostService {
         /**
          * @var $postMeta PostMeta
          */
-        $attributeId = $repository = $this->em
+        $attributeId = $this->em
             ->getRepository('B2BBlogBundle:PostAttribute')
             ->findOneBy(['name' => 'views_count'])->getId();
         $postMeta = $this->em
             ->getRepository('B2BBlogBundle:PostMeta')
-            ->findOneBy(['postId' => $postId, 'attributeId' => 1]);
+            ->findOneBy(['postId' => $postId, 'attributeId' => $attributeId]);
         if ($postMeta) {
             $postMeta->setValue((int)$postMeta->getValue() + 1);
         } else {
@@ -40,18 +42,47 @@ class PostService {
                 ->setPostId($postId)
                 ->setValue(1);
         }
-        $this->persistPostCounter($postMeta);
+        $this->em->persist($postMeta);
+        $this->em->flush();
 
         return $postMeta;
     }
 
     /**
-     * @param PostMeta $postMeta
+     * list of recent post
+     * @param integer $limit
+     * @return array
      */
-    private function persistPostCounter(PostMeta $postMeta)
+    public function popular($limit)
     {
-        $this->em->persist($postMeta);
-        $this->em->flush();
+        /**
+         * @var $httpResponse \Buzz\Message\Response
+         */
+        $attributeId = $this->em->getRepository('B2BBlogBundle:PostAttribute')
+            ->findOneBy(['name' => 'views_count'])->getId();
+        $posts = $this->em->createQueryBuilder()
+            ->from('B2BBlogBundle:PostMeta', 'meta')
+            ->select('meta.postId')
+            ->where('meta.attributeId = :attributeId')
+            ->andWhere('meta.value > 0')
+            ->orderBy('meta.value', 'DESC')
+            ->setMaxResults($limit)
+            ->setParameter(':attributeId', $attributeId)
+            ->getQuery()
+        ;
+        $ids = [];
+        foreach ($posts->getArrayResult() as $post) {
+            $ids[] = sprintf('%s=%d', urlencode('in_ids[]'), $post['postId']);
+        }
+        $url = sprintf(
+            '%s/?%s&limit=%d',
+            $this->container->getParameter('api')['articles_list_url'],
+            join('', $ids),
+            $limit
+        );
+        $httpResponse = $this->container->get('buzz.curl')->request($url);
+
+        return json_decode($httpResponse->getContent(), true);
     }
 
 }
