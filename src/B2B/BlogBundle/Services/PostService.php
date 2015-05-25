@@ -77,7 +77,7 @@ class PostService {
         $url = sprintf(
             '%s/?%s&limit=%d',
             $this->container->getParameter('api')['articles_list_url'],
-            join('', $ids),
+            join('&', $ids),
             $limit
         );
         $httpResponse = $this->container->get('buzz.curl')->request($url);
