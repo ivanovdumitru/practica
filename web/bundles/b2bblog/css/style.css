@@ -57,6 +57,7 @@ aside li a.active {
 
 #most-popular li {
   min-height: 65px;
+  padding-bottom: 5px;
   overflow: hidden;
   clear: both; }
   #most-popular li a {
@@ -66,8 +67,12 @@ aside li a.active {
   width: 65px;
   height: 65px;
   overflow: hidden; }
-  #most-popular .img-placeholder img {
-    height: 100%; }
+  #most-popular .img-placeholder a {
+    display: block;
+    height: 100%;
+    width: 100%; }
+    #most-popular .img-placeholder a img {
+      width: 100%; }
 
 .search-form {
   width: 100%;

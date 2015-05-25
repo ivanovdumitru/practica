@@ -68,6 +68,7 @@ aside {
 #most-popular {
   li {
     min-height: 65px;
+    padding-bottom: 5px;
     overflow: hidden;
     clear: both;
     a {
@@ -79,8 +80,13 @@ aside {
     width: 65px;
     height: 65px;
     overflow: hidden;
-    img {
+    a {
+      display: block;
       height: 100%;
+      width: 100%;
+      img {
+        width: 100%;
+      }
     }
   }
 }

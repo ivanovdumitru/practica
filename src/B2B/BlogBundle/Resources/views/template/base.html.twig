@@ -51,8 +51,10 @@
                     <h4>Most Popular</h4>
                     <ul class="list-unstyled">
                         {% for post in data.popular %}
-                        <li> <div class="pull-right img-placeholder">{% if post.image %}
-                                    <img src="{{ post.image }}" class="img-responsive" alt="{{ post.title }}" />{% endif %}
+                        <li><div class="pull-right img-placeholder">{% if post.image %}
+                                <a href="{{ path('show_client_article', {'articleId': post.id}) }}">
+                                    <img src="{{ post.image }}" class="img-responsive" alt="{{ post.title }}" />
+                                </a>{% endif %}
                             </div>
                             <a href="{{ path('show_client_article', {'articleId': post.id}) }}">{{
                                 post.title|length > 65 ? "post.title|slice(0, 65)..." : post.title
