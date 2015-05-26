@@ -11,6 +11,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="{{ asset('bundles/b2bblog/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/b2bblog/js/jquery.sticky.js') }}"></script>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
     {% block externaljs %}{% endblock %}
     <script>
@@ -29,30 +30,32 @@
             </a>
         </div>
     </header>
-    <div class="container">
-        <aside class="col-xs-3">
-            <div class="square-block">
-                <div class="inner">
-                    <form class="search-form"><input
-                            type="text" name="search" placeholder="Search" /><button><span
-                                    class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                    </form>
-                    <h4>Categories</h4>
-                    <ul class="list-unstyled">
-                        {% for subject in data.subjects %}
-                        <li><a href="{{ path('home', { subjectId: subject.id }) }}">{{ subject.description }}</a></li>
-                        {% endfor %}
-                    </ul>
+    <div class="container main">
+        <div class="col-xs-3 left-col">
+            <aside class="left-block">
+                <div class="square-block">
+                    <div class="inner">
+                        <form class="search-form"><input
+                                type="text" name="search" placeholder="Search" /><button><span
+                                        class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </form>
+                        <h4>Categories</h4>
+                        <ul class="list-unstyled">
+                            {% for subject in data.subjects %}
+                            <li><a href="{{ path('home', { subjectId: subject.id }) }}">{{ subject.description }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="square-block" id="most-popular">
-                <div class="inner">
-                    {% block sidebar_posts %}
-                    {% include 'B2BBlogBundle:partials:sidebar.posts.html.twig' with {'posts': data.popular} %}
-                    {% endblock %}
+                <div class="square-block" id="most-popular">
+                    <div class="inner">
+                        {% block sidebar_posts %}
+                        {% include 'B2BBlogBundle:partials:sidebar.posts.html.twig' with {'posts': data.popular} %}
+                        {% endblock %}
+                    </div>
                 </div>
-            </div>
-        </aside>
+            </aside>
+        </div>
         <div class="col-xs-9 content">
             {% block content %}{% endblock %}
         </div>
@@ -64,10 +67,13 @@
             </div>
         </div>
     </footer>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
 <script>
+    // active menu item
     $('a[href="'+ window.location.pathname +'"]').addClass('active');
+    // fixed menu
+    $(document).ready(function(){
+        $(".left-block").sticky({topSpacing:0});
+    });
 </script>
 </body>
 </html>
