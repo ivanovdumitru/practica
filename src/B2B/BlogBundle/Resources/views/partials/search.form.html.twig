@@ -1,0 +1,20 @@
+<form class="search-form"><input
+        type="text" name="search" placeholder="Search" id="search" /><span
+        class="glyphicon glyphicon-search" aria-hidden="true"></span>
+    <div class="preloader hidden"></div>
+    <div class="search-result-list hidden">
+        <header>
+            <ul class="list-unstyled list-inline">
+                <li><div class="checkbox">
+                        <label><input type="checkbox" name="filter-company" checked="checked" data-type="company" />Companies</label>
+                    </div></li>
+                <li><div class="checkbox">
+                        <label><input type="checkbox" id="filter-article" checked="checked" data-type="article" />Articles</label>
+                    </div></li>
+            </ul>
+        </header>
+        <section class="result-list-container">
+            <ul class="list-unstyled" id="search-result"></ul>
+        </section>
+    </div>
+</form>
