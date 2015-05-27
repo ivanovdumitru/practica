@@ -23,20 +23,14 @@ $(function(){
                     $resultList.empty();
                     $.each(data, function(ind, el){
                         var href = "",
-                            linkText = "",
                             itemClass = "item-type-",
                             $foundItem = $('<li><a href="#">#</a></li>')
                         ;
-                        if (el.select_type == "company") {
-                            linkText = el.nm;
-                        } else if(el.select_type == "article") {
-                            linkText = el.title;
-                        }
                         $foundItem.find("a")
                             .attr({
                                 "href": urls[el.select_type] + el.id,
                                 "class": itemClass + el.select_type
-                            }).text(linkText);
+                            }).text(el.search_word);
                         $resultList.append($foundItem);
                     });
                     toggleResultList(true);
