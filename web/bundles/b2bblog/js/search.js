@@ -8,32 +8,45 @@ $(function(){
      */
     var searchSubjects = {"company": [], "article": []},
         ajaxRequests = [],
+        $form = $(".search-form"),
         $resultList = $("#search-result"),
         $searchContainer = $(".search-result-list"),
-        $preloader = $(".preloader")
+        $preloader = $(".preloader"),
+        $scrollContainer = $(".result-list-container")
     ;
     // search request
-    $(".search-form").on
+    $form.on
         ("keyup", function()
         {
             resetRequests();
+            $scrollContainer.mCustomScrollbar("destroy");
             var request = $.get(
                 "/search?search=" + $("#search").val(),
                 function(data){
                     $resultList.empty();
-                    $.each(data, function(ind, el){
-                        var href = "",
-                            itemClass = "item-type-",
-                            $foundItem = $('<li><a href="#">#</a></li>')
-                        ;
-                        $foundItem.find("a")
-                            .attr({
-                                "href": urls[el.select_type] + el.id,
-                                "class": itemClass + el.select_type
-                            }).text(el.search_word);
-                        $resultList.append($foundItem);
-                    });
-                    toggleResultList(true);
+                    if ($(data).length > 0) {
+                        $.each(data, function(ind, el){
+                            var href = "",
+                                itemClass = "item-type-",
+                                $foundItem = $('<p class="truncate"><a href="#">#</a></p>')
+                            ;
+                            $foundItem.find("a")
+                                .attr({
+                                    "href":  urls[el.select_type] + el.id,
+                                    "class": itemClass + el.select_type
+                                }).text(el.search_word);
+                            $resultList.append($foundItem);
+                            toggleResultList(true);
+                        });
+                        $scrollContainer.mCustomScrollbar({
+                            axis: "y",
+                            theme: "dark-thin",
+                            mouseWheel: { preventDefault: true }
+                        });
+                    } else {
+                        toggleResultList(false);
+                        toggleProgressBar(false);
+                    }
                 }, "json"
             );
             ajaxRequests.push(request);
@@ -57,10 +70,21 @@ $(function(){
         if (flag) {
             $searchContainer.removeClass('hidden');
             toggleProgressBar(!flag);
+            $searchContainer.find(":checkbox").each(function(){
+                $(this).prop("checked",true)
+            });
         } else {
+            $form.find(':input').val('');
             $searchContainer.addClass('hidden');
             toggleProgressBar(!flag);
         }
+
+        $scrollContainer.mCustomScrollbar("destroy");
+        $scrollContainer.mCustomScrollbar({
+            axis: "y",
+            theme: "dark-thin",
+            mouseWheel: { preventDefault: true }
+        });
     }
     // toggle progress bar
     function toggleProgressBar(state)
@@ -80,4 +104,12 @@ $(function(){
         ajaxRequests.forEach(function(el){ el.abort() });
         ajaxRequests = [];
     }
+    // hide list when click outside
+    $form.click( function(event){
+        event.stopPropagation();
+    });
+    $(document).click( function(){
+        toggleResultList(false);
+        toggleProgressBar(false);
+    });
 });

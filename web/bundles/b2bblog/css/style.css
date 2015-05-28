@@ -92,6 +92,12 @@ aside li a.active {
     #most-popular .img-placeholder a img {
       width: 100%; }
 
+.truncate {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
 .search-form {
   width: 100%;
   display: block; }
@@ -118,10 +124,30 @@ aside li a.active {
     width: 100%;
     height: 10px;
     display: block;
+    margin-top: 2px;
     background: url("/images/search-progress.gif") no-repeat center center;
     opacity: 0.7; }
-  .search-form .search-result-list input {
-    height: auto; }
+  .search-form .search-result-list {
+    position: absolute;
+    background-color: white;
+    padding: 10px 0 0 10px;
+    margin-top: -3px;
+    width: 208px;
+    border: #e0e0e0 solid 1px; }
+    .search-form .search-result-list .result-list-container {
+      overflow: hidden;
+      max-height: 250px; }
+    .search-form .search-result-list input {
+      height: auto; }
+    .search-form .search-result-list h3 {
+      width: 100%;
+      border-bottom: #e0e0e0 solid 1px;
+      color: #44a6e4;
+      font-size: 16px;
+      margin: 10px 0 5px; }
+    .search-form .search-result-list p.truncate {
+      width: 170px;
+      margin: 0; }
 
 .singe-page header h1 {
   margin: 0; }
@@ -141,7 +167,7 @@ aside li a.active {
 .company-profile .company-name h1, .company-profile .company-name h2, .company-profile .company-name h3, .company-profile .company-name h4, .company-profile .company-name h5, .company-profile .company-name h6 {
   margin-top: 0; }
 .company-profile .image-placeholder {
-  border: solid 1px #e0e0e0;
+  border: #e0e0e0 solid 1px;
   border-radius: 4px;
   height: 318px;
   width: 318px;
@@ -164,7 +190,7 @@ aside li a.active {
   display: block;
   height: 110px;
   width: 110px;
-  border: solid 1px #e0e0e0;
+  border: #e0e0e0 solid 1px;
   margin-right: 16px; }
   .company-articles .img-placeholder img {
     max-height: 100%;

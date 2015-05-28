@@ -16,9 +16,12 @@
                                     <img src="{{ article.image }}" class="post-image pull-right" alt="{{ article.title }}" />
                                 {% endif %}
                             </div>
-                            <h3 class="post-title"><a href="{{ path('show_client_article', { 'articleId': article.id }) }}">
-                                    {{ article.title|length > 100 ? article.title|slice(0, 100) ~ '...' : article.title  }}</a></h3>
-                            <p class="article-description">{{ article.description|length > 200 ? article.description|slice(0, 200) ~ '...' : article.description  }}</p>
+                            <h3 class="post-title">
+                                <a href="{{ path('show_client_article', { 'articleId': article.id }) }}">
+                                    {{ strings.limitTo(article.title, 100) }}
+                                </a>
+                            </h3>
+                            <p class="article-description">{{ strings.limitTo(article.description, 200) }}</p>
                             <p class="pull-left count">Views&nbsp;{% if article.id in data.count|keys  %}{{ data.count[article.id] }}{% else %}0{% endif %}</p>
                             <a class="btn btn-default btn-blue-solid text-uppercase pull-right" href="{{ path("show_client_article", {"articleId": article.id }) }}">full article</a></p>
                         </div>
