@@ -130,13 +130,22 @@ aside li a.active {
   .search-form .search-result-list {
     position: absolute;
     background-color: white;
-    padding: 10px 0 0 10px;
+    padding: 10px 2px 0 10px;
     margin-top: -3px;
     width: 208px;
-    border: #e0e0e0 solid 1px; }
+    border: #e0e0e0 solid 1px;
+    box-shadow: #e2e2e2 0 3px 3px; }
+    .search-form .search-result-list .nano {
+      max-height: 200px; }
+      .search-form .search-result-list .nano .nano-pane {
+        width: 3px;
+        opacity: 0.5; }
+      .search-form .search-result-list .nano .nano-pane {
+        background: #888; }
+      .search-form .search-result-list .nano .nano-slider {
+        background: #111; }
     .search-form .search-result-list .result-list-container {
-      overflow: hidden;
-      max-height: 250px; }
+      overflow: hidden; }
     .search-form .search-result-list input {
       height: auto; }
     .search-form .search-result-list h3 {
@@ -148,6 +157,11 @@ aside li a.active {
     .search-form .search-result-list p.truncate {
       width: 170px;
       margin: 0; }
+    .search-form .search-result-list footer ul {
+      margin: 0; }
+    .search-form .search-result-list footer label {
+      font-size: 12px;
+      line-height: 20px; }
 
 .singe-page header h1 {
   margin: 0; }
