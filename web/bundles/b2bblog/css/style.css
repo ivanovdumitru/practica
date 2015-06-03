@@ -57,7 +57,8 @@ aside li a.active {
   height: 377px; }
   .post-block .post-meta p {
     margin: 0;
-    font-size: 12px; }
+    font-size: 12px;
+    padding-top: 8px; }
   .post-block .inner {
     position: relative; }
   .post-block footer {
