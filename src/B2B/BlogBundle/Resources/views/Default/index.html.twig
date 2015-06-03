@@ -7,11 +7,19 @@
 {% block content %}
     {% if data.articles is defined %}
     {% for article in data.articles %}
-        <div class="col-xs-4 square-block post-block post-block">
+        <div class="col-xs-4 square-block post-block">
             <div class="inner">
                 <ul class="list-unstyled">
                     <li class="post-image">
                         <img src="{{ article.image ? article.image : 'http://placehold.it/250x250&text=post+image' }}" alt="post" />
+                    </li>
+                    <li class="post-meta">
+                        <p><span class="company-name">{{ strings.limitTo(article.company__nm, 25) }}</span>
+                            {% if article.subject is not null %}
+                                &nbsp;|&nbsp;<span class="category">{{ strings.limitTo(article.subject__description, 25) }}</span>
+                            {% endif %}
+                        </p>
+                        <p><span class="date">{{ article.created|date("d/m/Y G:i") }}</span></p>
                     </li>
                     <li>
                         <h3 class="post-title"><a href="{{ path('show_client_article', { 'articleId': article.id }) }}">
