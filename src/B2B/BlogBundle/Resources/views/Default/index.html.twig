@@ -14,10 +14,8 @@
                         <img src="{{ article.image ? article.image : 'http://placehold.it/250x250&text=post+image' }}" alt="post" />
                     </li>
                     <li class="post-meta">
-                        <p><span class="company-name">{{ strings.limitTo(article.company__nm, 25) }}</span>
-                            {% if article.subject is not null %}
-                                &nbsp;|&nbsp;<span class="category">{{ strings.limitTo(article.subject__description, 25) }}</span>
-                            {% endif %}
+                        <p>
+                            <span class="company-name">{{ strings.limitTo(article.company__nm, 25) }}</span>{% if article.subject is not null %}&nbsp;|&nbsp;<span class="category">{{ strings.limitTo(article.subject__description, 25) }}</span>{% endif %}
                         </p>
                         <p><span class="date">{{ article.created|date("d/m/Y G:i") }}</span></p>
                     </li>
