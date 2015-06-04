@@ -7,15 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}BinaSmartShopOnline{% endblock %}</title>
     <!-- Bootstrap -->
-    <link href="{{ asset('bundles/b2bblog/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/b2bblog/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/b2bblog/css/nanoscroller.css') }}" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/nanoscroller.css" rel="stylesheet">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="{{ asset('bundles/b2bblog/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bundles/b2bblog/js/jquery.sticky.js') }}"></script>
-    <script src="{{ asset('bundles/b2bblog/js/jquery.nanoscroller.min.js') }}"></script>
-    <script src="{{ asset('bundles/b2bblog/js/search.js') }}"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/jquery.nanoscroller.min.js"></script>
+    <script src="/js/search.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
     {% block externaljs %}{% endblock %}
     <script>
@@ -36,7 +36,7 @@
     <header class="header">
         <div class="container">
             <a href="{{ path("home") }}" class="">
-                <img src="{{ asset('bundles/b2bblog/images/logo.svg') }}" alt="logo" class="header-logo" />
+                <img src="/images/logo.svg" alt="logo" class="header-logo" />
             </a>
         </div>
     </header>
