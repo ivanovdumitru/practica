@@ -36,14 +36,14 @@ class ArticlesController extends Controller
         // views counter
         $repo = $this->getDoctrine()->getRepository('B2BBlogBundle:PostMeta');
         $ids = $count = [];
-        foreach ($articles as $article) {
+        foreach ($articles['results'] as $article) {
             $ids[] = $article['id'];
         }
         foreach ($repo->getCount($ids) as $postData) {
             $count[$postData['postId']] = $postData['value'];
         }
         $data = [
-            'articles' => $articles,
+            'articles' => $articles['results'],
             'count' =>  $count,
             'title'    => 'articles',
             'subjects' => $this->get('post.utility')->subjects(),
@@ -76,7 +76,7 @@ class ArticlesController extends Controller
         $data = [
             'article' => $article,
             'title'   => 'articles',
-            'recent'  => $this->listAction($article['company'], 6)['data']['articles'],
+                'recent'  => $this->listAction($article['company'], 6)['data']['articles'],
             'subjects' => $this->get('post.utility')->subjects(),
         ];
 

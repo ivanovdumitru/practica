@@ -223,6 +223,9 @@ aside li a.active {
 
 .company-article header h1, .company-article header h2, .company-article header h3, .company-article header h4, .company-article header h5, .company-article header h6 {
   margin: 0; }
+.company-article .post-image {
+  max-width: 300px;
+  margin: 0 0 10px 10px; }
 
 .btn-default.btn-blue-solid {
   border-color: #44a6e4;

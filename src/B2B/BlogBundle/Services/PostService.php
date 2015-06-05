@@ -82,7 +82,7 @@ class PostService {
         );
         $httpResponse = $this->container->get('buzz.curl')->request($url);
 
-        return json_decode($httpResponse->getContent(), true);
+        return json_decode($httpResponse->getContent(), true)['results'];
     }
 
     /**
@@ -101,7 +101,7 @@ class PostService {
                 $this->container->getParameter('api')['articles_subjects_list_url'] . ($limit ? sprintf('?limit=%d', $limit) : '')
             );
 
-        return json_decode($httpResponse->getContent(), true);
+        return json_decode($httpResponse->getContent(), true)['results'];
     }
 
 }

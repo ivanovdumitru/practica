@@ -35,7 +35,7 @@ class DefaultController extends Controller
         // views counter
         $repo = $this->getDoctrine()->getRepository('B2BBlogBundle:PostMeta');
         $ids = $count = [];
-        foreach ($articles as $article) {
+        foreach ($articles['results'] as $article) {
             $ids[] = $article['id'];
         }
         foreach ($repo->getCount($ids) as $postData) {
@@ -43,11 +43,11 @@ class DefaultController extends Controller
         }
         // assemble final data
         $data = [
-            'articles' => $articles,
+            'articles' => $articles['results'],
             'count' =>  $count,
             'subjects' => $this->get('post.utility')->subjects(),
             'title' => 'ome',
-            'popular' => $post = $this->get('post.utility')->popular(5)
+            'popular' => $this->get('post.utility')->popular(5)
         ];
 
         return $this->render('B2BBlogBundle:Default:index.html.twig', compact('data'));
