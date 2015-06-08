@@ -1,3 +1,3 @@
 {% macro limitTo(string, size) %}
-{{ string|length > size ? string|slice(0, size) ~ '&hellip;' : string  }}
+{{ string|raw|length > size ? string|slice(0, size) ~ '...' : string  }}
 {% endmacro %}
