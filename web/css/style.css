@@ -105,26 +105,29 @@ aside li a.active {
 
 .search-form {
   width: 100%;
-  display: block; }
-  .search-form input, .search-form .glyphicon-search {
-    height: 46px;
-    line-height: 46px;
+  display: block;
+  position: relative;
+  margin: 0; }
+  .search-form input {
+    height: 42px;
+    line-height: 42px;
     border: #e0e0e0 solid 1px; }
   .search-form input[type=text] {
     padding: 0 67px 0 10px;
     border-radius: 5px;
     width: 100%; }
   .search-form .glyphicon-search {
+    height: 42px;
+    line-height: 42px;
+    border: #e0e0e0 solid 1px;
     margin-left: -30px;
     padding: 0;
+    margin-top: -4px;
+    border: none;
     width: 25px;
     background: transparent;
-    border: none;
     font-size: 17px;
-    color: #757575;
-    height: 46px;
-    position: relative;
-    top: 4px; }
+    color: #757575; }
   .search-form .preloader {
     width: 100%;
     height: 10px;

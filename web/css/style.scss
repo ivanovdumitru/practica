@@ -138,9 +138,11 @@ aside {
 .search-form {
   width: 100%;
   display: block;
-  input, .glyphicon-search {
-    height: 46px;
-    line-height: 46px;
+  position: relative;
+  margin: 0;
+  input {
+    height: 42px;
+    line-height: 42px;
     border: $border-light-gray;
   }
   input[type=text] {
@@ -149,16 +151,17 @@ aside {
     width: 100%;
   }
   .glyphicon-search {
+    height: 42px;
+    line-height: 42px;
+    border: $border-light-gray;
     margin-left: -30px;
     padding: 0;
+    margin-top: -4px;
+    border: none;
     width: 25px;
     background: transparent;
-    border: none;
     font-size: 17px;
     color: #757575;
-    height: 46px;
-    position: relative;
-    top: 4px;
   }
   .preloader {
     width: 100%;
