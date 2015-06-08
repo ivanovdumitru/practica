@@ -25,7 +25,7 @@ $(function(){
                 "/search?search=" + $("#search").val(),
                 function(data){
                     if ($(data).length > 0) {
-                        $.each(data, function(ind, el){
+                        $.each(data.results, function(ind, el){
                             var href = "",
                                 itemClass = "item-type-",
                                 $foundItem = $('<p class="truncate"><a href="#">#</a></p>')
