@@ -76,7 +76,7 @@ class ArticlesController extends Controller
         $data = [
             'article' => $article,
             'title'   => 'articles',
-                'recent'  => $this->listAction($article['company'], 6)['data']['articles'],
+            'recent'  => $this->get('post.utility')->recent($article['company'], 6)['results'],
             'subjects' => $this->get('post.utility')->subjects(),
         ];
 

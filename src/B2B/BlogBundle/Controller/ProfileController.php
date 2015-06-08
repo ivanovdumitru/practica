@@ -53,9 +53,8 @@ class ProfileController extends Controller
          */
         $url = $this->container->getParameter('api')['profiles_list_url'];
         $httpResponse = $this->get('buzz.curl')->request($url);
-
         $data = [
-            'profiles' => json_decode($httpResponse->getContent(), true),
+            'profiles' => json_decode($httpResponse->getContent(), true)['results'],
             'subjects' => $this->get('post.utility')->subjects(),
             'title' => 'profile list',
             'popular' => $post = $this->get('post.utility')->popular(5)

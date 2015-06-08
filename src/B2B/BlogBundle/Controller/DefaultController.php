@@ -15,20 +15,25 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
+     * @param Request $request
+     * @param int $page
      * @param null $subjectId
-     * @Route("/{subjectId}", requirements={"subjectId": "\d+"}, defaults={"subjectId": null}, name="home")
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/{page}/{subjectId}", requirements={"page": "\d+", "subjectId": "\d+"}, defaults={"page": 1, "subjectId": null}, name="home")
      */
-    public function homeAction($subjectId = null)
+    public function homeAction(Request $request, $page=1, $subjectId = null)
     {
         /**
          * @var $repo PostMetaRepository
          */
         // article list
-        if ($subjectId === null) {
-            $url = sprintf('%s?limit=%d', $this->container->getParameter('api')['articles_list_url'], 12);
-        } else {
-            $url = sprintf('%s?subject_id=%d&limit=%d', $this->container->getParameter('api')['articles_list_url'], 12, $subjectId);
+        $articlesPerPage = $this->container->getParameter('page')['front_page_articles_per_page'];
+        $apiUrl = $this->container->getParameter('api')['articles_list_url'];
+        // pagination
+        $offset = $page * $articlesPerPage - $articlesPerPage; // since previous page
+        $url = sprintf('%s?limit=%d&offset=%d', $apiUrl, $articlesPerPage, $offset);
+        if ($subjectId !== null) {
+            $url .= sprintf('&subject_id=%d', $subjectId);
         }
         $httpResponse = $this->get('buzz.curl')->request($url);
         $articles = json_decode($httpResponse->getContent(), true);
@@ -47,7 +52,8 @@ class DefaultController extends Controller
             'count' =>  $count,
             'subjects' => $this->get('post.utility')->subjects(),
             'title' => 'ome',
-            'popular' => $this->get('post.utility')->popular(5)
+            'popular' => $this->get('post.utility')->popular(5),
+            'pagination' => ceil($articles['count'] / $this->container->getParameter('page')['front_page_articles_per_page'])
         ];
 
         return $this->render('B2BBlogBundle:Default:index.html.twig', compact('data'));

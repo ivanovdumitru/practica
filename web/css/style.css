@@ -261,6 +261,23 @@ aside li a.active {
   .footer p {
     color: #44a6e4; }
 
+.pagination {
+  height: 48px; }
+  .pagination li {
+    padding: 0;
+    overflow: hidden; }
+    .pagination li a {
+      display: inline-block;
+      line-height: 46px;
+      width: 48px;
+      text-align: center;
+      padding: 0; }
+  .pagination li.active a {
+    background-color: #44a6e4;
+    border-color: #44a6e4; }
+  .pagination li.arrow a {
+    color: #bdbdbd; }
+
 @media (min-width: 1040px) {
   .container {
     width: 1040px; } }

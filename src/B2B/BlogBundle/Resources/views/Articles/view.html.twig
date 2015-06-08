@@ -4,7 +4,7 @@
     {% include 'B2BBlogBundle:partials:title.html.twig' %}
 {% endblock %}
 {% block sidebar_posts %}
-    {% include 'B2BBlogBundle:partials:sidebar.posts.html.twig' with {'posts': data.recent} %}
+    {% include 'B2BBlogBundle:partials:sidebar.posts.html.twig' with {'posts': data.recent, 'header': 'Recent Posts' } %}
 {% endblock %}
 {% block bodyattributes %}class="article-page"{% endblock %}
 {% block content %}

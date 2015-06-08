@@ -104,4 +104,33 @@ class PostService {
         return json_decode($httpResponse->getContent(), true)['results'];
     }
 
+    /**
+     * @param $companyId
+     * @param $limit
+     * @return mixed
+     */
+    public function recent($companyId, $limit=null)
+    {
+        /**
+         * @var $httpResponse \Buzz\Message\Response
+         */
+        if ($limit) {
+            $url = sprintf(
+                '%s?company=%d&limit=%d',
+                $this->container->getParameter('api')['articles_list_url'],
+                $companyId,
+                $limit
+            );
+        } else {
+            $url = sprintf(
+                '%s?company=%d',
+                $this->container->getParameter('api')['articles_list_url'],
+                $companyId
+            );
+        }
+        $httpResponse = $this->container->get('buzz.curl')->request($url);
+
+        return json_decode($httpResponse->getContent(), true);
+    }
+
 }

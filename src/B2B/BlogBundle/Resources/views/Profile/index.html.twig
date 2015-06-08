@@ -9,10 +9,10 @@
         <div class="pull-left left-col">
             <div class="image-placeholder">
                 <img src="
-                {% if data.profile.image|length %}
+                {% if data.profile.image is not null %}
                 {{ data.profile.image }}
                 {% else %}
-                {{ asset('bundles/b2bblog/images/logo-placeholder.jpg') }}
+                {{ asset('/images/logo-placeholder.jpg') }}
                 {% endif %}"
                  alt="{{ data.profile.nm }}" class="profile-logo" />
             </div>

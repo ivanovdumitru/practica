@@ -1,0 +1,17 @@
+{% if last_page is not null %}
+{% set current = app.request.attributes.get('page') %}
+<ul class="list-unstyled list-inline pagination">
+    {# back #}
+    {% if current != 1 %}
+    <li class="back arrow"><a href="{{ path('home', {'page': current - 1}) }}">&lt;</a></li>
+    {% endif %}
+    {# pages #}
+    {% for i in 1..last_page %}
+    <li class="{{ i == current ? 'active' : '' }}"><a href="{{ path('home', {'page': i}) }}">{{ i }}</a></li>
+    {% endfor %}
+    {# next #}
+    {% if current != last_page %}
+    <li class="back arrow"><a href="{{ path('home', {'page': current + 1}) }}">&gt;</a></li>
+    {% endif %}
+</ul>
+{% endif %}

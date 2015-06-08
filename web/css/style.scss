@@ -338,6 +338,28 @@ aside {
   }
 }
 
+.pagination {
+  height: 48px;
+  li {
+    padding: 0;
+    overflow: hidden;
+    a {
+      display: inline-block;
+      line-height: 46px;
+      width: 48px;
+      text-align: center;
+      padding: 0;
+    }
+  }
+  li.active a {
+    background-color: $light-blue;
+    border-color: $light-blue;
+  }
+  li.arrow a {
+    color: #bdbdbd;
+  }
+}
+
 @media (min-width: 1040px) {
   .container {
     width: 1040px;
