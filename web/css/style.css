@@ -1,3 +1,21 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%; }
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px; }
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5; }
+
 body {
   font-family: 'Roboto Condensed', sans-serif; }
 
@@ -262,7 +280,8 @@ aside li a.active {
   line-height: 50px;
   margin-top: 32px; }
   .footer p {
-    color: #44a6e4; }
+    color: #44a6e4;
+    margin: 0; }
 
 .pagination {
   height: 48px; }
