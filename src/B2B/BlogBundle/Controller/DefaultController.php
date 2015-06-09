@@ -33,7 +33,7 @@ class DefaultController extends Controller
         $offset = $page * $articlesPerPage - $articlesPerPage; // since previous page
         $url = sprintf('%s?limit=%d&offset=%d', $apiUrl, $articlesPerPage, $offset);
         if ($subjectId !== null) {
-            $url .= sprintf('&subject_id=%d', $subjectId);
+            $url .= sprintf('&subject=%d', $subjectId);
         }
         $httpResponse = $this->get('buzz.curl')->request($url);
         $articles = json_decode($httpResponse->getContent(), true);
