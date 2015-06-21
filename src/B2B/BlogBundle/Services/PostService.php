@@ -60,29 +60,38 @@ class PostService {
          */
         $attributeId = $this->em->getRepository('B2BBlogBundle:PostAttribute')
             ->findOneBy(['name' => 'views_count'])->getId();
-        $posts = $this->em->createQueryBuilder()
-            ->from('B2BBlogBundle:PostMeta', 'meta')
-            ->select('meta.postId')
-            ->where('meta.attributeId = :attributeId')
-            ->andWhere('meta.value > 0')
-            ->orderBy('meta.value', 'DESC')
-            ->setMaxResults($limit)
-            ->setParameter(':attributeId', $attributeId)
-            ->getQuery()
-        ;
+        $stmt = $this->em->getConnection()->prepare(
+            'SELECT *
+              FROM post_meta meta
+              WHERE meta.value > 0
+              AND meta.attributeId = :attributeId
+              ORDER BY CONVERT(value, decimal) DESC
+              LIMIT 5'
+        );
+        $stmt->execute(['attributeId' => $attributeId]);
+        $posts = $stmt->fetchAll();
         $ids = [];
-        foreach ($posts->getArrayResult() as $post) {
-            $ids[] = sprintf('%s=%d', urlencode('in_ids[]'), $post['postId']);
+        $str = [];
+        foreach ($posts as $post) {
+            $ids[] = (int)$post['postId'];
+            $str[] = sprintf('%s=%d', urlencode('in_ids[]'), $post['postId']);
         }
         $url = sprintf(
             '%s/?%s&limit=%d',
             $this->container->getParameter('api')['articles_list_url'],
-            join('&', $ids),
+            join('&', $str),
             $limit
         );
-        $httpResponse = $this->container->get('buzz.curl')->request($url);
+        $httpResponse = $this->container->get('buzz.curl')->request($url)->getContent();
+        $data = json_decode($httpResponse, true)['results'];
 
-        return json_decode($httpResponse->getContent(), true)['results'];
+        foreach ($data as $post) {
+            if (false !== $index = array_search($post['id'], $ids)) {
+                $ids[$index] = $post;
+            }
+        }
+
+        return $ids;
     }
 
     /**

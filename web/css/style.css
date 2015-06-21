@@ -19,15 +19,33 @@ body {
 body {
   font-family: 'Roboto Condensed', sans-serif; }
 
-header.header {
+header.header, nav.header {
   height: 72px;
   line-height: 72px;
   background-color: #364d5f;
   box-shadow: #ccc 0 2px 1px;
   margin-bottom: 16px; }
-  header.header .header-logo {
-    width: 225px;
-    margin-left: 8px; }
+
+.navbar-default {
+  line-height: 72px;
+  background-color: #364d5f;
+  box-shadow: #ccc 0 2px 1px;
+  margin-bottom: 16px;
+  border: none; }
+  .navbar-default .navbar-toggle,
+  .navbar-default .navbar-toggle:hover,
+  .navbar-default .navbar-toggle:focus {
+    background-color: transparent;
+    border: none;
+    margin: 20px 20px 0 15px; }
+    .navbar-default .navbar-toggle .icon-bar,
+    .navbar-default .navbar-toggle:hover .icon-bar,
+    .navbar-default .navbar-toggle:focus .icon-bar {
+      background-color: white; }
+
+.header-logo {
+  width: 225px;
+  margin-left: 8px; }
 
 .left-col {
   position: relative; }
