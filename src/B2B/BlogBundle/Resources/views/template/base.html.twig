@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}BinaSmartShopOnline{% endblock %}</title>
     <!-- Bootstrap -->
+    {%  block stylesheets %}
+     <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet">
+     <link href="{{ asset('css/style.css')}}" rel="stylesheet">
+     <link href="{{ asset('css/nanoscroller.css')}}" rel="stylesheet">
+     <link href="{{ asset('css/mainstyle.css')}}" rel="stylesheet"> 
+    {% endblock stylesheets %} 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/nanoscroller.css" rel="stylesheet">
