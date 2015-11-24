@@ -1,0 +1,21 @@
+menu{
+    position: absolute;
+    z-index:2;
+    width:500px;
+    margin-left:500px;
+}
+menu ul li{
+    display: inline-block;
+    margin-left:10px;
+    padding: 5px;
+}
+menu ul li a{
+    line-height: 50px;
+    color:#fff;
+    text-decoration:none;
+}
+ menu ul li a:visited, menu ul li a:hover{
+    color: #fff;
+    text-decoration: underline;
+    text-transform: uppercase;
+}

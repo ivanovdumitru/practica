@@ -1,0 +1,8 @@
+b2b_blog:
+    resource: "@B2BBlogBundle/Controller/"
+    type:     annotation
+    prefix:   /
+B2BBlogBundle:
+    resource: "@B2BBlogBundle/Resources/config/routing.yml"
+    prefix:   /
+
