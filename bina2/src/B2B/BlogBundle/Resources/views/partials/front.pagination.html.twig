@@ -1,0 +1,36 @@
+{% if last_page is not null %}
+{% set current = app.request.attributes.get('page') %}
+{% set category = app.request.attributes.get('subjectId') %}
+<ul class="list-unstyled list-inline pagination">
+    {# back #}
+    {% if current != 1 %}
+    <li class="back arrow">
+        {% if category is null %}
+        <a href="{{ path('home', {'page': current - 1}) }}">&lt;</a>
+        {% else %}
+        <a href="{{ path('home', {'page': current - 1, 'subjectId': category}) }}">&lt;</a>
+        {% endif %}
+    </li>
+    {% endif %}
+    {# pages #}
+    {% for i in 1..last_page %}
+    <li class="{{ i == current ? 'active' : '' }}">
+        {% if category is null %}
+            <a href="{{ path('home', {'page': i}) }}">{{ i }}</a>
+        {% else %}
+            <a href="{{ path('home', {'page': i, 'subjectId': category}) }}">{{ i }}</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+    {# next #}
+    {% if current != last_page %}
+    <li class="back arrow">
+        {% if category is null %}
+            <a href="{{ path('home', {'page': current + 1}) }}">&gt;</a>
+        {% else %}
+            <a href="{{ path('home', {'page': current + 1, 'subjectId': category}) }}">&gt;</a>
+        {% endif %}
+    </li>
+    {% endif %}
+</ul>
+{% endif %}

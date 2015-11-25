@@ -1,0 +1,13 @@
+parameters:
+  api:
+    auth_url: "app.binasmartshop.com/b2b-api/api-token-auth/"
+    login: "gleb.tocarenco@gmail.com"
+    password: "1234"
+    mac_addr: "5464654"
+    profile_url: "data/profile/%d"
+    search_url: "app.binasmartshop.com/b2b-api/search/?q="
+    profiles_list_url: "app.binasmartshop.com/b2b-api/companies/"
+    articles_list_url: "app.binasmartshop.com/b2b-api/articles"
+    articles_subjects_list_url: "app.binasmartshop.com/b2b-api/articles-subjects"
+  page:
+    front_page_articles_per_page: 12

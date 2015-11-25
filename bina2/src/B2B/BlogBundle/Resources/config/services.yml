@@ -1,0 +1,12 @@
+services:
+    blog.tokens.action_listener:
+        class: B2B\BlogBundle\EventListener\TokenListener
+        arguments: [@service_container, @request_stack]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+    buzz.curl:
+        class: B2B\BlogBundle\Services\BuzzCurl
+        arguments: [@service_container, @request_stack]
+    post.utility:
+        class: B2B\BlogBundle\Services\PostService
+        arguments: [@service_container, @doctrine.orm.entity_manager]

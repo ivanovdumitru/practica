@@ -1,0 +1,33 @@
+{% extends 'B2BBlogBundle:template:base.html.twig' %}
+{% block title %}
+    {{ parent() }}
+    {% include 'B2BBlogBundle:partials:title.html.twig' %}
+{% endblock %}
+{% block content %}
+    <div class="singe-page company-articles square-block col-xs-12">
+        <div class="inner">
+            {% if data.articles is defined %}
+                <header><h1 class="middle-header blue-text">{{ data.articles[0].company__nm }}</h1></header>
+                <div class="content">
+                    {% for article in data.articles %}
+                        <div class="article-item">
+                            <div class="img-placeholder pull-left">
+                                {% if article.image is not null %}
+                                    <img src="{{ article.image }}" class="post-image pull-right" alt="{{ article.title }}" />
+                                {% endif %}
+                            </div>
+                            <h3 class="post-title">
+                                <a href="{{ path('show_client_article', { 'articleId': article.id }) }}">
+                                    {{ strings.limitTo(article.title, 100) }}
+                                </a>
+                            </h3>
+                            <p class="article-description">{{ strings.limitTo(article.description, 200) }}</p>
+                            <p class="pull-left count">Views&nbsp;{% if article.id in data.count|keys  %}{{ data.count[article.id] }}{% else %}0{% endif %}</p>
+                            <a class="btn btn-default btn-blue-solid text-uppercase pull-right" href="{{ path("show_client_article", {"articleId": article.id }) }}">full article</a></p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

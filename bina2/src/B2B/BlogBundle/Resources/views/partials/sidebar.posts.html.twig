@@ -1,0 +1,12 @@
+<h5 class="middle-header blue-text">{% if header is defined %}{{ header }}{% else %}Most Popular{% endif %}</h5>
+<ul class="list-unstyled">
+    {% for post in posts %}
+        <li><div class="pull-right img-placeholder">{% if post.image %}
+                <a href="{{ path('show_client_article', {'articleId': post.id}) }}">
+                    <img src="{{ post.image }}" class="img-responsive" alt="{{ post.title }}" />
+                    </a>{% endif %}
+            </div>
+            <a href="{{ path('show_client_article', {'articleId': post.id}) }}">{{ strings.limitTo(post.title, 65) }}</a>
+        </li>
+    {% endfor %}
+</ul>
