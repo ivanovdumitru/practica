@@ -7,10 +7,15 @@
          colors="true"
          bootstrap="bootstrap.php.cache"
 >
+    <php>
+        <ini name="error_reporting" value="-1" />
+    </php>
+
     <testsuites>
         <testsuite name="Project Test Suite">
             <directory>../src/*/*Bundle/Tests</directory>
             <directory>../src/*/Bundle/*Bundle/Tests</directory>
+            <directory>../src/*Bundle/Tests</directory>
         </testsuite>
     </testsuites>
 
@@ -24,6 +29,8 @@
         <whitelist>
             <directory>../src</directory>
             <exclude>
+                <directory>../src/*Bundle/Resources</directory>
+                <directory>../src/*Bundle/Tests</directory>
                 <directory>../src/*/*Bundle/Resources</directory>
                 <directory>../src/*/*Bundle/Tests</directory>
                 <directory>../src/*/Bundle/*Bundle/Resources</directory>

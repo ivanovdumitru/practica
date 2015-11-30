@@ -3,7 +3,9 @@ imports:
 
 #framework:
 #    validation:
-#        cache: apc
+#        cache: validator.mapping.cache.apc
+#    serializer:
+#        cache: serializer.mapping.cache.apc
 
 #doctrine:
 #    orm:
@@ -23,12 +25,3 @@ monolog:
             level: debug
         console:
             type:  console
-
-doctrine:
-    dbal:
-        driver:   pdo_mysql
-        host:     192.168.230.10
-        port:     3306
-        dbname:   b2b-store
-        user:     mysqladmin
-        password: mysqladminpass

@@ -1,0 +1,24 @@
+<?php
+
+namespace AppBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\QueryBuilder;
+
+/**
+ *@ORM\Entity(repositoryClass="AppBunddle\Entity\CompaniesRepository")
+ */
+class CompaniesRepository extends \Doctrine\ORM\EntityRepository
+{
+   public function showAction()
+    {
+        /* $db = $this->createQueryBuilder('Companies');
+         $query = $db->getQuery();
+         return $query->execute();   
+        $qb="Select * From AppBundle:Companies";
+        $query= $this->getEntityManager()->createQuery($qb);
+        return $query->execute();*/
+        $connect = $this->get('database_connection');
+        $query= $connect->fetchAll("select * From companies");
+        return $query;
+    }
+}

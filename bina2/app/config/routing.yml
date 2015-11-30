@@ -1,5 +1,0 @@
-b2b_blog:
-    resource: "@B2BBlogBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
