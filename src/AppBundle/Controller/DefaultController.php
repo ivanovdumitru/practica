@@ -82,7 +82,7 @@ class DefaultController extends Controller
         
         $connect = $this->get('database_connection');
         $companys['result'] = $connect->fetchAll("select * From companies limit 12");
-        $rezult = $connect->fetchAll("select * From Companies ");
+        $rezult = $connect->fetchAll("select * From companies ");
         $count = 0;
         foreach($rezult as $item){
             $count++;
