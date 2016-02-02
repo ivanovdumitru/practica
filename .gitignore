@@ -9,4 +9,7 @@
 /build/
 /vendor/
 /bin/
-/composer.phar
+composer.phar
+composer.lock
+.idea
+nbproject

@@ -42,15 +42,9 @@ foreach ($symfonyRequirements->getRecommendations() as $req) {
 }
 
 if ($checkPassed) {
-<<<<<<< Upstream, based on origin/master
-    echo_block('success', 'OK', 'Your system is ready to run Symfony2 projects', true);
-} else {
-    echo_block('error', 'ERROR', 'Your system is not ready to run Symfony2 projects', true);
-=======
     echo_block('success', 'OK', 'Your system is ready to run Symfony2 projects');
 } else {
     echo_block('error', 'ERROR', 'Your system is not ready to run Symfony2 projects');
->>>>>>> c23d499 base.html
 
     echo_title('Fix the following mandatory requirements', 'red');
 
