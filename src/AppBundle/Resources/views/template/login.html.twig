@@ -1,0 +1,45 @@
+{% extends "MoodCountQuestionnaireBundle::Layout/base.html.twig" %}
+{% block title %}HealthyOps BM{% endblock %}
+{% block head_content %}
+    <nav class="navbar navbar-default">
+        <div class="containber-fluid text-center">
+            <strong class="navbar-brand"><img src="/images/logo.png" alt="MoodCount"/></strong>
+        </div>
+    </nav>
+{% endblock %}
+{% block body %}
+    <div class="form-container margin-top-40">
+            <div class="block auth-block backround-blue">
+                    <h2 class="entry-title text-center">Welcome back!</h2>
+                    <form action="{{ path('backoffice_login_check') }}" method="post" class="auth-form moodcount-form" data-redirect="{{ path('backoffice_dashboard') }}">
+                        <input type="text" style="display:none">
+                        <input type="password" style="display:none">
+                        <div class="form-group">
+                            {% set save_email = app.request.cookies.has('_email') %}
+                            <input type="text" id="username" class="form-control text-field" name="_email"  data-field="email" value="{% if save_email %}{{  app.request.cookies.get('_email') }}{% endif %}" placeholder="Email" />
+                            <span class="helper"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" class="form-control text-field" id="password" name="_password" data-field="text" placeholder="Password" />
+                            <span class="helper"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <input type="checkbox" name="remember_email" id="remember_email" {% if save_email %}checked="checked"{% endif %} />
+                                    <label for="remember_email">Remember email</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-submit-group">
+                            <button type="submit" class="btn btn-block btn-info">Login</button>
+                        </div>
+                    </form>
+            </div>
+
+            <div class="block text-center forgot" ><span class="btn forgot-btn back-btn">Back</span></div>
+    </div>
+{% endblock %}
+{% block footer %}{% endblock %}

@@ -1,0 +1,3 @@
+[submodule "web/table"]
+	path = web/table
+	url = https://github.com/Binasystems/Table_JS.git
