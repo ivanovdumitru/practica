@@ -22,7 +22,7 @@ $(function(){
             $resultList.empty();
             $form.find(":checkbox").attr("disabled", false);
             var request = $.get(
-                "/search?search=" + $("#search").val(),
+                "search/=" + $("#search").val(),
                 function(data){
                     if ($(data).length > 0) {
                         $.each(data.results, function(ind, el){

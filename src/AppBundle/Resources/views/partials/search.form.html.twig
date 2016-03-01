@@ -1,5 +1,5 @@
-<form class="search-form" action="search" method="GET"><input
-        type="text" name="search" placeholder="Search" id="search" /><span
+<form class="search-form" action="{{path('search')}}" method="POST"><input
+        name="search" class="tags" placeholder="Search" id="search" /><span
         class="glyphicon glyphicon-search" aria-hidden="true"></span>
     <div class="preloader hidden"></div>
     <div class="search-result-list hidden">

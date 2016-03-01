@@ -33,7 +33,11 @@ class DefaultController extends Controller
                 ->getManager()
                 ->getRepository('AppBundle:Companies');*/
         $menu['result'] = $menuRepository->showAction();
-        
+        $connect = $this->get('database_connection');
+        $search1['result'] = $connect->fetchAll("select DISTINCT Nm From companies");
+        $popular['result'] = $connect->fetchAll('select * from companies order by `views` DESC limit 5');
+        $popular['items'] = $connect->fetchAll('select * from items order by `views` DESC limit 5');
+        $popular['results'] = $connect->fetchAll('select * from articles order by `views` DESC limit 5');
         if($subjectId == 'items'){
          /* $itemsRepository = $this->getDoctrine()
                     ->getManager()
@@ -52,13 +56,16 @@ class DefaultController extends Controller
               'ts'=>null,
               'a' =>1,
               'b'=>1,
+              'popularitem' =>$popular['items'],
               'name'=>'items',
               'count'=>ceil($rez),
+              'search1'=>$search1['result'],
               'menu'=>$menu['result'],
               'items'=>$items['result'],
          ];
         }else if($subjectId =='articles'){
             $connect = $this->get('database_connection');
+            $search1['result'] = $connect->fetchAll("select DISTINCT Nm From companies");
             $articles['result'] = $connect->fetchAll('select * from articles limit 12');
             $rezult = $connect->fetchAll("select * From articles ");
                  $count = 0;
@@ -71,8 +78,10 @@ class DefaultController extends Controller
               'ts'=>null,
               'a' =>1,
               'b'=>1,
+              'populararticle' => $popular['results'],
               'name'=>'articles',
               'count'=>ceil($rez),
+              'search1'=>$search1['result'],
               'menu'=>$menu['result'],
               'articles'=>$articles['result'],
          ];
@@ -82,6 +91,7 @@ class DefaultController extends Controller
         
         $connect = $this->get('database_connection');
         $companys['result'] = $connect->fetchAll("select * From companies limit 12");
+        $search1['result'] = $connect->fetchAll("select DISTINCT Nm From companies");
         $rezult = $connect->fetchAll("select * From companies ");
         $count = 0;
         foreach($rezult as $item){
@@ -93,9 +103,11 @@ class DefaultController extends Controller
               'ts'=>null,
               'a' =>1,
               'b'=>1,
+              'popular' =>$popular['result'],
               'name'=>'companies',
               'count'=>ceil($rez),
               'menu'=>$menu['result'],
+              'search1'=>$search1['result'],
               'companies'=>$companys['result'],
          ];
         }

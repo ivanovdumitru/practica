@@ -21,7 +21,9 @@ class PaginationController extends Controller{
         $menu['result'] = $menuRepository->showAction();
         
         $connect = $this->get('database_connection');
-        
+        $search1['result'] = $connect->fetchAll("select DISTINCT Nm From companies");
+        $popular['result'] = $connect->fetchAll('select * from companies order by `views` DESC limit 5');
+        $popular['items'] = $connect->fetchAll('select * from items order by `views` DESC limit 5');
          $nn = $i;
          $nn--;
          $rezult = $connect->fetchAll('select * from '.$name);
@@ -34,11 +36,12 @@ class PaginationController extends Controller{
                $m=$m*12;if($m>0){
                $m--;}
         if($tip == 'names'){
-            if($ts == null){
+           
+             if($name == 'companies'){
+                  if($ts == null){
                  $company['rezult']= $connect->fetchAll('select * from '.$name.'  LIMIT 12 OFFSET '.$m);
             }else{
             $company['rezult']= $connect->fetchAll('select * from '.$name.' Order By `Nm` '.$ts.'  LIMIT 12 OFFSET '.$m);}
-             if($name == 'companies'){
                 $data = [
                    'name'=>$name,
                    'menu'=>$menu['result'],
@@ -46,10 +49,17 @@ class PaginationController extends Controller{
                    'ts'=>$ts,
                    'a'=>++$i,
                    'b'=>$nn,
+                    'search1'=>$search1['result'],
+                    'popular'=>$popular['result'],
                    'companies' => $company['rezult'],
                    'count' =>  ceil($rez),
                  ];
-             }else if($name == 'items'){
+             } 
+               if($name == 'items'){
+                          if($ts == null){
+                   $company['rezult']= $connect->fetchAll('select * from '.$name.'  LIMIT 12 OFFSET '.$m);
+                  }else{
+                   $company['rezult']= $connect->fetchAll('select * from '.$name.' Order By `Nm` '.$ts.'  LIMIT 12 OFFSET '.$m);}
                 $data = [
                    'name'=>$name,
                    'menu'=>$menu['result'],
@@ -57,10 +67,16 @@ class PaginationController extends Controller{
                    'ts'=>$ts,
                    'a'=>++$i,
                    'b'=>$nn,
+                    'search1'=>$search1['result'],
+                    'popularitem'=>$popular['items'],
                    'items' => $company['rezult'],
                    'count' =>  ceil($rez),
                  ]; 
-             }else{
+             }if($name == 'articles'){
+                if($ts == null){
+                   $company['rezult']= $connect->fetchAll('select * from '.$name.'  LIMIT 12 OFFSET '.$m);
+                  }else{
+                   $company['rezult']= $connect->fetchAll('select * from '.$name.' Order By `title` '.$ts.'  LIMIT 12 OFFSET '.$m);}
                $data = [
                    'name'=>$name,
                    'menu'=>$menu['result'],
@@ -68,6 +84,8 @@ class PaginationController extends Controller{
                    'ts'=>$ts,
                    'a'=>++$i,
                    'b'=>$nn,
+                   'search1'=>$search1['result'],
+                   'popular'=>$popular['result'],
                    'articles' => $company['rezult'],
                    'count' =>  ceil($rez), 
                ];
@@ -86,6 +104,8 @@ class PaginationController extends Controller{
                    'ts'=>$ts,
                    'a'=>++$i,
                    'b'=>$nn,
+                    'search1'=>$search1['result'],
+                    'popularitem'=>$popular['items'],
                    'items' => $company['rezult'],
                    'count' =>  ceil($rez),
                  ]; 
