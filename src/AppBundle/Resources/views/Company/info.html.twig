@@ -47,173 +47,164 @@
     </script>-->
  
 </head>
-<body>     {% if data.search1 is defined %}
-              {% include 'AppBundle:partials:scriptsearch.html.twig' with [{'search1': data.search1}] %}
-           {% endif %}
+<body>
+    {% if data.search1 is defined %}
+        {% include 'AppBundle:partials:scriptsearch.html.twig' with [{'search1': data.search1}] %}
+    {% endif %}
     <div class="container">
-    <nav class="navbar navbar-default  hidden-lg">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="{{ path('home') }}" class="">
-                    <img src="{{ asset('images/logo.png')}}" alt="logo" class="header-logo" />
-                </a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-              <li style="margin-left: 10px">
-                  {% include 'AppBundle:partials:search.form.html.twig' %}
-              </li>
-          {% for Menu in data.menu %}    
-            <li><a href="{{path('home',{subjectId:Menu.denMenu}) }}" style="color:#fff;">{{Menu.denMenu}}</a></li>
-          {% endfor %}
-          </ul>
-                
-                
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-                      
-    </div>                 
+        <nav class="navbar navbar-default  hidden-lg">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="{{ path('home') }}" class="">
+                        <img src="{{ asset('images/logo.png')}}" alt="logo" class="header-logo" />
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                      <li style="margin-left: 10px">
+                          {% include 'AppBundle:partials:search.form.html.twig' %}
+                      </li>
+                  {% for Menu in data.menu %}
+                      <li><a href="{{path('home',{subjectId:Menu.denMenu}) }}" style="color:#fff;">{{Menu.denMenu}}</a></li>
+                  {% endfor %}
+                  </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+
     <header class="header hidden-xs hidden-md hidden-sm">
         <div class="container">
-             <a href="{{ path('home') }}" class="">
+            <a href="{{ path('home') }}" class="">
                 <img src="{{ asset('images/logo.png')}}" alt="logo" class="header-logo" />
-             </a>    
-        <div class="meniu">
-          <ul class="searrch">
-                <li>
-                  {% include 'AppBundle:partials:search.form.html.twig' %}
-              </li>
-            </ul>
-          <ul class="mmmenu">
-          {% for Menu in data.menu %}    
-            <li><a href="{{path('home',{subjectId:Menu.denMenu}) }}">{{Menu.denMenu}}</a></li>
-          {% endfor %}
-          </ul>      </div>
+            </a>
+            <div class="meniu">
+                <ul class="searrch">
+                    <li>
+                        {% include 'AppBundle:partials:search.form.html.twig' %}
+                    </li>
+                </ul>
+                <ul class="mmmenu">
+                    {% for Menu in data.menu %}
+                        <li><a href="{{path('home',{subjectId:Menu.denMenu}) }}">{{Menu.denMenu}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </header>
+
     <div class="container main">
         <div class="col-md-3 left-col hidden-xs hidden-sm">
             <aside class="left-block">
                 <div class="square-block">
                     <div class="inner">
-
-                        <h4>Categories</h4>
+                    <h4>Categories</h4>
                         <ul class="list-unstyled leftmenu">
                             <li><a href="{{ path('home') }}">All</a></li>
-                          
-          {% for Menu in data.menu %}    
-            <li><a href="{{path('home',{subjectId:Menu.denMenu}) }}">{{Menu.denMenu|upper}}</a></li>
-          {% endfor %}
-          </ul>
-                    
+                            {% for Menu in data.menu %}
+                                <li><a href="{{path('home',{subjectId:Menu.denMenu}) }}">{{Menu.denMenu|upper}}</a></li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
-                                <div class="square-block" id="most-popular">
-                  <div class="square-block" id="most-popular">
-                     <div class="inner">
-                      <h5 class="middle-header blue-text">Most Popular</h5>
-                     <ul class="list-unstyled">
-                          
-                          {% if data.popularitem is defined %}
-                            {% for popular in data.popularitem %}
-                               <li>
-                                 <div class="pull-right img-placeholder">
-                                <a href="{{path('infopage',{id:popular.C}) }}">    
-                                 {%if popular.Picture is  empty %}
-                 <img src="{{ asset('images/logo-placeholder.jpg')}}" alt="post" /> 
-               {% else %}
-                 <img src="{{ asset('images/')}}{{popular.Picture}}" class="img-responsive" alt="popular"> 
-              {%endif%} 
-                                </a>
-                                </div>
-                                <a href="{{path('infopage',{id:popular.C}) }}">{{popular.Nm}}</a>
-                              </li>
-                            {% endfor %} 
-                            {%endif%}
-                            
-                            {% if data.populararticle is defined %}
-                            {% for popular in data.populararticle %}
-                               <li>
-                                 <div class="pull-right img-placeholder">
-                                <a href="{{path('infoarticles',{i:popular.id}) }}"> 
-               {%if popular.image is  empty %}
-                 <img src="{{ asset('images/logo-placeholder.jpg')}}" alt="post" /> 
-               {% else %}
-                 <img src="{{ asset('images/')}}{{popular.image}}" class="img-responsive" alt="popular"> 
-              {%endif%} 
-                                </a>
-                                </div>
-                                <a href="{{path('infoarticles',{i:popular.id}) }}">{{popular.title}}</a>
-                              </li>
-                            {% endfor %} 
-                            {%endif%}
-                          </ul>
+                <div class="square-block" id="most-popular">
+                    <div class="square-block" id="most-popular">
+                        <div class="inner">
+                            <h5 class="middle-header blue-text">Most Popular</h5>
+                            <ul class="list-unstyled">
+                                {% if data.popularitem is defined %}
+                                {% for popular in data.popularitem %}
+                                    <li>
+                                        <div class="pull-right img-placeholder">
+                                            <a href="{{path('infopage',{id:popular.C}) }}">
+                                                {%if popular.Picture is  empty %}
+                                                    <img src="{{ asset('images/logo-placeholder.jpg')}}" alt="post" />
+                                                {% else %}
+                                                    <img src="{{ asset('images/')}}{{popular.Picture}}" class="img-responsive" alt="popular">
+                                                {%endif%}
+                                            </a>
+                                        </div>
+                                        <a href="{{path('infopage',{id:popular.C}) }}">{{popular.Nm}}</a>
+                                    </li>
+                                {% endfor %}
+                                {%endif%}
+
+                                {% if data.populararticle is defined %}
+                                {% for popular in data.populararticle %}
+                                    <li>
+                                        <div class="pull-right img-placeholder">
+                                            <a href="{{path('infoarticles',{i:popular.id}) }}">
+                                            {%if popular.image is  empty %}
+                                                <img src="{{ asset('images/logo-placeholder.jpg')}}" alt="post" />
+                                            {% else %}
+                                                <img src="{{ asset('images/')}}{{popular.image}}" class="img-responsive" alt="popular">
+                                            {%endif%}
+                                            </a>
+                                        </div>
+                                        <a href="{{path('infoarticles',{i:popular.id}) }}">{{popular.title}}</a>
+                                    </li>
+                                {% endfor %}
+                                {%endif%}
+                            </ul>
+                        </div>
                     </div>
-                </div>
                 </div>
             </aside>
         </div>
- <div class="col-md-9 content">
-    {% if data.info is defined %}
-        {% for info in data.info %}
-     <article class="company-article square-block col-xs-12">
-        <div class="inner">
-        <header><h1 class="middle-header blue-text">{{info.Nm}}</h1></header>
-        <div class="content">
-                                   <span style="font-weight: bold;"><span style="text-decoration: underline;">{{info.Nm}}</span> </span>
-                                   <p>                                  
-                    {%if info.Picture is  empty %}
-                                        
-                  <img src="{{ asset('images/logo-placeholder.jpg')}}" alt="post" align="right" vspace="5" hspace="5" width="100"/> 
-               {% else %}
-                 <img src="{{ asset('images/')}}{{info.Picture}}" class="img-responsive" align="right" width="100" vspace="5" hspace="5" alt="popular"> 
-              {%endif%} 
-              Pret:{{info.SalePrice}}</p>
-                    </div>
-        <footer>
-            <p>
-                <a href="{{path('infoarticle',{i:info.C}) }}">{% endfor %}
-                  
+
+        <div class="col-md-9 content">
+            {% if data.info is defined %}
+            {% for info in data.info %}
+                <article class="company-article square-block col-xs-12">
+                <div class="inner">
+                    <header><h1 class="middle-header blue-text">{{info.Nm}}</h1></header>
+                        <div class="content">
+                            <span style="font-weight: bold;"><span style="text-decoration: underline;">{{info.Nm}}</span> </span>
+                            <p>
+                                {%if info.Picture is  empty %}
+                                    <img src="{{ asset('images/logo-placeholder.jpg')}}" alt="post" align="right" vspace="5" hspace="5" width="100"/>
+                                {% else %}
+                                    <img src="{{ asset('images/')}}{{info.Picture}}" class="img-responsive" align="right" width="100" vspace="5" hspace="5" alt="popular">
+                                {%endif%}
+                                Pret:{{info.SalePrice}}
                             </p>
-        </footer>
-        </div>
-    </article>                 
-     {% endif %}
-         
+                        </div>
+                    <footer>
+                        <p>
+                            <a href="{{path('infoarticle',{i:info.C}) }}">{% endfor %}</a>
+                        </p>
+                    </footer>
+                </div>
+                </article>
+            {% endif %}
+
             {% if data.infoarticle is defined %}
-        {% for info in data.infoarticle %}
-     <article class="company-article square-block col-xs-12">
-        <div class="inner">
-        <header><h1 class="middle-header blue-text">{{info.title}}</h1></header>
-        <div class="content">
-                                    <span style="font-weight: bold;"><span style="text-decoration: underline;">{{info.title}}</span> </span>
-                 
-                                    <p>{%if info.image is  empty %}
-                                        
-                  <img src="{{ asset('images/logo-placeholder.jpg')}}" alt="post" align="right" vspace="5" hspace="5" width="100"/> 
-               {% else %}
-                 <img src="{{ asset('images/')}}{{info.image}}" class="img-responsive" align="right" width="100" vspace="5" hspace="5" alt="popular"> 
-              {%endif%} 
-                                        {{info.body|raw}}                   
-                 </p>
+            {% for info in data.infoarticle %}
+                <article class="company-article square-block col-xs-12">
+                    <div class="inner">
+                        <header><h1 class="middle-header blue-text">{{info.title}}</h1></header>
+                        <div class="content">
+                            <span style="font-weight: bold;"><span style="text-decoration: underline;">{{info.title}}</span> </span>
+                            <p>{%if info.image is  empty %}
+                                <img src="{{ asset('images/logo-placeholder.jpg')}}" alt="post" align="right" vspace="5" hspace="5" width="100"/>
+                            {% else %}
+                                <img src="{{ asset('images/')}}{{info.image}}" class="img-responsive" align="right" width="100" vspace="5" hspace="5" alt="popular">
+                            {%endif%}
+                                {{info.body|raw}}
+                            </p>
+                        </div>
+                        <footer>
+                            {% endfor %}
+                        </footer>
                     </div>
-        <footer>
-          
-                {% endfor %}
-                  
-          
-        </footer>
+                </article>
+
+            {% endif %}
         </div>
-    </article>
-                            
-     {% endif %}
- </div>
+    </div>
