@@ -42,32 +42,33 @@ class SearchController extends Controller
             }
 
             $query = $this->getDoctrine()->getManager()->getConnection()->prepare("SELECT * FROM companies WHERE ".$searchCondition );
-
             foreach($Search_terms as $i=>$term){
                 $query->bindValue(':term'.$i, $term);
             }
-            //$query->bindValue(':title', $title);
+            $search['result'] = $query->fetchAll();
+            $query->execute();
+
             $query1 = $this->getDoctrine()->getManager()->getConnection()->prepare("SELECT * FROM items WHERE Nm LIKE :title");
             $query1->bindValue(':title', $title);
 
-            $query->execute();
-            $query1->execute();
 
-            $search['result'] = $query->fetchAll();
+            $query1->execute();
             $search1['result'] = $query1->fetchAll();
-            //$search['result'] = $connect->fetchAll($query1);
-         
+
+
     
-    $menuRepository = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('AppBundle:Menu');
-        $menu['result'] = $menuRepository->showAction();
-    $data =[
-        'search1'=>$search1['result'],
-        'menu'=>$menu['result'],
-        'shearch' => $search['result'],
-        'search' => $search1['result'],
-    ];
- return $this->render('AppBundle:Default:index2.html.twig',compact('data'));
-}}
+            $menuRepository = $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('AppBundle:Menu');
+            $menu['result'] = $menuRepository->showAction();
+
+            $data =[
+                'search1'=>$search1['result'],
+                'menu'=>$menu['result'],
+                'shearch' => $search['result'],
+                'search' => $search1['result'],
+            ];
+             return $this->render('AppBundle:Default:index2.html.twig',compact('data'));
+        }
+    }
 }
