@@ -15,18 +15,18 @@ class Menu
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_menu", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idMenu;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="den_menu", type="string", length=50, nullable=false)
+     * @ORM\Column(name="name", type="string", length=50, nullable=false)
      */
-    private $denMenu;
+    private $name;
 
 
 
@@ -35,32 +35,32 @@ class Menu
      *
      * @return integer
      */
-    public function getIdMenu()
+    public function getId()
     {
-        return $this->idMenu;
+        return $this->id;
     }
 
     /**
-     * Set denMenu
+     * Set name
      *
-     * @param string $denMenu
+     * @param string $name
      *
      * @return Menu
      */
-    public function setDenMenu($denMenu)
+    public function setName($name)
     {
-        $this->denMenu = $denMenu;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get denMenu
+     * Get name
      *
      * @return string
      */
-    public function getDenMenu()
+    public function getName()
     {
-        return $this->denMenu;
+        return $this->name;
     }
 }
