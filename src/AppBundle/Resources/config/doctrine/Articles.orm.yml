@@ -1,7 +1,7 @@
 AppBundle\Entity\Articles:
+    repositoryClass: AppBundle\Entity\ArticlesRepository
     type: entity
     table: articles
-    repositoryClass: AppBundle\Entity\ArticlesRepository
     indexes:
         Articles_0316dde1:
             columns:
@@ -25,6 +25,12 @@ AppBundle\Entity\Articles:
             generator:
                 strategy: IDENTITY
     fields:
+        companyId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: company_id
         title:
             type: string
             nullable: false
@@ -55,6 +61,12 @@ AppBundle\Entity\Articles:
         published:
             type: boolean
             nullable: false
+        lastModifiedUserId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: last_modified_user_id
         image:
             type: string
             nullable: true
@@ -67,45 +79,22 @@ AppBundle\Entity\Articles:
         stampdate:
             type: datetime
             nullable: false
-    manyToOne:
-        subject:
-            targetEntity: OnlineArticlessubject
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                subject_id:
-                    referencedColumnName: id
-            orphanRemoval: false
-        company:
-            targetEntity: Companies
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                company_id:
-                    referencedColumnName: C
-            orphanRemoval: false
-        lastModifiedUser:
-            targetEntity: Users
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                last_modified_user_id:
-                    referencedColumnName: C
-            orphanRemoval: false
-        stampdevice:
-            targetEntity: Devices
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                stampdevice_id:
-                    referencedColumnName: C
-            orphanRemoval: false
+        stampdeviceId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: stampdevice_id
+        subjectId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: subject_id
+        views:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
     lifecycleCallbacks: {  }

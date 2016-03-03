@@ -1,7 +1,7 @@
 AppBundle\Entity\PostMeta:
+    repositoryClass: AppBundle\Entity\PostMetaRepository
     type: entity
     table: post_meta
-    repositoryClass: AppBundle\Entity\PostMetaRepository
     id:
         id:
             type: integer

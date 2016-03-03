@@ -2,30 +2,46 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * PostMeta
+ *
+ * @ORM\Table(name="post_meta")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\PostMetaRepository")
  */
 class PostMeta
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="attributeId", type="smallint", nullable=false)
      */
     private $attributeid;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="postId", type="integer", nullable=false)
      */
     private $postid;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="value", type="string", length=255, nullable=false)
      */
     private $value;
+
 
 
     /**
@@ -110,4 +126,3 @@ class PostMeta
         return $this->value;
     }
 }
-

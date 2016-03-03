@@ -2,22 +2,32 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Menu
- *@ORM\Entity
- *@ORM\Entity(repositoryClass="AppBundle\Entity\MenuRepository")
+ *
+ * @ORM\Table(name="menu")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\MenuRepository")
  */
 class Menu
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id_menu", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idMenu;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="den_menu", type="string", length=50, nullable=false)
      */
     private $denMenu;
+
 
 
     /**
@@ -54,4 +64,3 @@ class Menu
         return $this->denMenu;
     }
 }
-

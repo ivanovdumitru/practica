@@ -1,23 +1,27 @@
-AppBundle\Entity\Menu:
-    repositoryClass: AppBundle\Entity\MenuRepository
+AppBundle\Entity\Admin:
+    repositoryClass: AppBundle\Entity\AdminRepository
     type: entity
-    table: menu
+    table: admin
     id:
-        idMenu:
+        id:
             type: integer
             nullable: false
             options:
                 unsigned: false
             id: true
-            column: id_menu
             generator:
                 strategy: IDENTITY
     fields:
-        denMenu:
+        username:
             type: string
             nullable: false
             length: 50
             options:
                 fixed: false
-            column: den_menu
+        password:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
     lifecycleCallbacks: {  }

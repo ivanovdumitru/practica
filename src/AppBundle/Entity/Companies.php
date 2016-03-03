@@ -1,237 +1,341 @@
 <?php
+
 namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- *Companies
- *@ORM\Entity
- *@ORM\Entity(repositoryClass="AppBundle\Entity\CompaniesRepository")
+ * Companies
+ *
+ * @ORM\Table(name="companies", indexes={@ORM\Index(name="Companies_d860be3c", columns={"CountryC"}), @ORM\Index(name="Companies_b376980e", columns={"CityC"}), @ORM\Index(name="Companies_a3c9d75e", columns={"CompanyType"}), @ORM\Index(name="Companies_494063b5", columns={"DefaultCustomer"}), @ORM\Index(name="Companies_5da967c3", columns={"DefaultCashier"}), @ORM\Index(name="Companies_4d5ba1a7", columns={"DefaultIncomeVAT"}), @ORM\Index(name="Companies_406ec824", columns={"StampDevice"}), @ORM\Index(name="Companies_4c1c18be", columns={"DefaultItem"}), @ORM\Index(name="Companies_75a9a664", columns={"DefaultImporter"}), @ORM\Index(name="Companies_85ab9a21", columns={"DefaultManufacturer"})})
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\CompaniesRepository")
  */
 class Companies
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="C", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $c;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="Email", type="string", length=50, nullable=false)
      */
     private $email;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="Password", type="string", length=20, nullable=false)
      */
     private $password;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="Nm", type="string", length=50, nullable=false)
      */
     private $nm;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="DateClose", type="datetime", nullable=true)
      */
     private $dateclose;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="CountryC", type="integer", nullable=false)
+     */
+    private $countryc;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CityC", type="integer", nullable=true)
+     */
+    private $cityc;
+
+    /**
      * @var string
+     *
+     * @ORM\Column(name="Address", type="string", length=50, nullable=false)
      */
     private $address;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="PhoneAreaCode", type="string", length=3, nullable=false)
      */
     private $phoneareacode;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="PhoneNumber", type="string", length=12, nullable=false)
      */
     private $phonenumber;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="MobileAreaCode", type="string", length=3, nullable=false)
      */
     private $mobileareacode;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="MobileNumber", type="string", length=12, nullable=false)
      */
     private $mobilenumber;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="FaxAreaCode", type="string", length=3, nullable=false)
      */
     private $faxareacode;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="FaxNumber", type="string", length=12, nullable=false)
      */
     private $faxnumber;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="CompanyType", type="integer", nullable=true)
+     */
+    private $companytype;
+
+    /**
      * @var string
+     *
+     * @ORM\Column(name="CompanyID", type="string", length=20, nullable=false)
      */
     private $companyid;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="DefaultCustomer", type="integer", nullable=true)
+     */
+    private $defaultcustomer;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="DefaultCashier", type="integer", nullable=true)
+     */
+    private $defaultcashier;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="DefaultIncomeVAT", type="integer", nullable=true)
+     */
+    private $defaultincomevat;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="DefaultIncome", type="integer", nullable=true)
      */
     private $defaultincome;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="LogoImage", type="string", length=100, nullable=false)
      */
     private $logoimage;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="date_created", type="datetime", nullable=false)
      */
     private $dateCreated;
 
     /**
      * @var boolean
+     *
+     * @ORM\Column(name="show_company_online", type="boolean", nullable=false)
      */
     private $showCompanyOnline;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="StamdDate", type="datetime", nullable=true)
      */
     private $stamddate;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="StampDevice", type="integer", nullable=true)
+     */
+    private $stampdevice;
+
+    /**
      * @var boolean
+     *
+     * @ORM\Column(name="SwDelete", type="boolean", nullable=false)
      */
     private $swdelete;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="sftp_password", type="string", length=255, nullable=true)
      */
     private $sftpPassword;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="sftp_url", type="string", length=255, nullable=true)
      */
     private $sftpUrl;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="sftp_username", type="string", length=255, nullable=true)
      */
     private $sftpUsername;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="amo_crm_domain", type="string", length=255, nullable=true)
      */
     private $amoCrmDomain;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="amo_crm_key", type="string", length=255, nullable=true)
      */
     private $amoCrmKey;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="amo_crm_login", type="string", length=255, nullable=true)
      */
     private $amoCrmLogin;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="DefaultItem", type="integer", nullable=true)
+     */
+    private $defaultitem;
+
+    /**
      * @var string
+     *
+     * @ORM\Column(name="BankAccount", type="string", length=20, nullable=true)
      */
     private $bankaccount;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CompanyRegister", type="string", length=20, nullable=true)
      */
     private $companyregister;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="RegisterCode", type="string", length=20, nullable=true)
      */
     private $registercode;
 
     /**
      * @var float
+     *
+     * @ORM\Column(name="ShareCapital", type="float", precision=10, scale=0, nullable=true)
      */
     private $sharecapital;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="DefaultUnit", type="integer", nullable=true)
      */
     private $defaultunit;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="DefaultImporter", type="integer", nullable=true)
+     */
+    private $defaultimporter;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="DefaultManufacturer", type="integer", nullable=true)
+     */
+    private $defaultmanufacturer;
+
+    /**
      * @var boolean
+     *
+     * @ORM\Column(name="include_vat", type="boolean", nullable=false)
      */
     private $includeVat;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="barcode_type", type="integer", nullable=false)
      */
     private $barcodeType;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="payment_type", type="integer", nullable=false)
      */
     private $paymentType;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="WebSite", type="string", length=150, nullable=false)
      */
     private $website;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="views", type="integer", nullable=false)
      */
     private $views = '0';
 
-
-    /**
-     * @var \AppBundle\Entity\Companies
-     */
-    private $defaultimporter;
-
-    /**
-     * @var \AppBundle\Entity\Companies
-     */
-    private $defaultitem;
-
-    /**
-     * @var \AppBundle\Entity\Companies
-     */
-    private $companytype;
-
-    /**
-     * @var \AppBundle\Entity\Companies
-     */
-    private $countryc;
-
-    /**
-     * @var \AppBundle\Entity\Companies
-     */
-    private $defaultcashier;
-
-    /**
-     * @var \AppBundle\Entity\Companies
-     */
-    private $defaultcustomer;
-
-    /**
-     * @var \AppBundle\Entity\Companies
-     */
-    private $defaultincomevat;
-
-    /**
-     * @var \AppBundle\Entity\Companies
-     */
-    private $defaultmanufacturer;
-
-    /**
-     * @var \AppBundle\Entity\Companies
-     */
-    private $stampdevice;
 
 
     /**
@@ -249,7 +353,7 @@ class Companies
      *
      * @param string $email
      *
-     * @return string
+     * @return Companies
      */
     public function setEmail($email)
     {
@@ -273,7 +377,7 @@ class Companies
      *
      * @param string $password
      *
-     * @return string
+     * @return Companies
      */
     public function setPassword($password)
     {
@@ -297,7 +401,7 @@ class Companies
      *
      * @param string $nm
      *
-     * @return string
+     * @return Companies
      */
     public function setNm($nm)
     {
@@ -321,7 +425,7 @@ class Companies
      *
      * @param \DateTime $dateclose
      *
-     * @return datetime
+     * @return Companies
      */
     public function setDateclose($dateclose)
     {
@@ -333,7 +437,7 @@ class Companies
     /**
      * Get dateclose
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getDateclose()
     {
@@ -341,11 +445,59 @@ class Companies
     }
 
     /**
+     * Set countryc
+     *
+     * @param integer $countryc
+     *
+     * @return Companies
+     */
+    public function setCountryc($countryc)
+    {
+        $this->countryc = $countryc;
+
+        return $this;
+    }
+
+    /**
+     * Get countryc
+     *
+     * @return integer
+     */
+    public function getCountryc()
+    {
+        return $this->countryc;
+    }
+
+    /**
+     * Set cityc
+     *
+     * @param integer $cityc
+     *
+     * @return Companies
+     */
+    public function setCityc($cityc)
+    {
+        $this->cityc = $cityc;
+
+        return $this;
+    }
+
+    /**
+     * Get cityc
+     *
+     * @return integer
+     */
+    public function getCityc()
+    {
+        return $this->cityc;
+    }
+
+    /**
      * Set address
      *
      * @param string $address
      *
-     * @return string
+     * @return Companies
      */
     public function setAddress($address)
     {
@@ -369,7 +521,7 @@ class Companies
      *
      * @param string $phoneareacode
      *
-     * @return string
+     * @return Companies
      */
     public function setPhoneareacode($phoneareacode)
     {
@@ -393,7 +545,7 @@ class Companies
      *
      * @param string $phonenumber
      *
-     * @return string
+     * @return Companies
      */
     public function setPhonenumber($phonenumber)
     {
@@ -417,7 +569,7 @@ class Companies
      *
      * @param string $mobileareacode
      *
-     * @return string
+     * @return Companies
      */
     public function setMobileareacode($mobileareacode)
     {
@@ -441,7 +593,7 @@ class Companies
      *
      * @param string $mobilenumber
      *
-     * @return string
+     * @return Companies
      */
     public function setMobilenumber($mobilenumber)
     {
@@ -465,7 +617,7 @@ class Companies
      *
      * @param string $faxareacode
      *
-     * @return string
+     * @return Companies
      */
     public function setFaxareacode($faxareacode)
     {
@@ -489,7 +641,7 @@ class Companies
      *
      * @param string $faxnumber
      *
-     * @return string
+     * @return Companies
      */
     public function setFaxnumber($faxnumber)
     {
@@ -509,11 +661,35 @@ class Companies
     }
 
     /**
+     * Set companytype
+     *
+     * @param integer $companytype
+     *
+     * @return Companies
+     */
+    public function setCompanytype($companytype)
+    {
+        $this->companytype = $companytype;
+
+        return $this;
+    }
+
+    /**
+     * Get companytype
+     *
+     * @return integer
+     */
+    public function getCompanytype()
+    {
+        return $this->companytype;
+    }
+
+    /**
      * Set companyid
      *
      * @param string $companyid
      *
-     * @return string
+     * @return Companies
      */
     public function setCompanyid($companyid)
     {
@@ -533,11 +709,83 @@ class Companies
     }
 
     /**
+     * Set defaultcustomer
+     *
+     * @param integer $defaultcustomer
+     *
+     * @return Companies
+     */
+    public function setDefaultcustomer($defaultcustomer)
+    {
+        $this->defaultcustomer = $defaultcustomer;
+
+        return $this;
+    }
+
+    /**
+     * Get defaultcustomer
+     *
+     * @return integer
+     */
+    public function getDefaultcustomer()
+    {
+        return $this->defaultcustomer;
+    }
+
+    /**
+     * Set defaultcashier
+     *
+     * @param integer $defaultcashier
+     *
+     * @return Companies
+     */
+    public function setDefaultcashier($defaultcashier)
+    {
+        $this->defaultcashier = $defaultcashier;
+
+        return $this;
+    }
+
+    /**
+     * Get defaultcashier
+     *
+     * @return integer
+     */
+    public function getDefaultcashier()
+    {
+        return $this->defaultcashier;
+    }
+
+    /**
+     * Set defaultincomevat
+     *
+     * @param integer $defaultincomevat
+     *
+     * @return Companies
+     */
+    public function setDefaultincomevat($defaultincomevat)
+    {
+        $this->defaultincomevat = $defaultincomevat;
+
+        return $this;
+    }
+
+    /**
+     * Get defaultincomevat
+     *
+     * @return integer
+     */
+    public function getDefaultincomevat()
+    {
+        return $this->defaultincomevat;
+    }
+
+    /**
      * Set defaultincome
      *
      * @param integer $defaultincome
      *
-     * @return integer
+     * @return Companies
      */
     public function setDefaultincome($defaultincome)
     {
@@ -561,7 +809,7 @@ class Companies
      *
      * @param string $logoimage
      *
-     * @return string
+     * @return Companies
      */
     public function setLogoimage($logoimage)
     {
@@ -585,7 +833,7 @@ class Companies
      *
      * @param \DateTime $dateCreated
      *
-     * @return datetime
+     * @return Companies
      */
     public function setDateCreated($dateCreated)
     {
@@ -609,7 +857,7 @@ class Companies
      *
      * @param boolean $showCompanyOnline
      *
-     * @return boolean
+     * @return Companies
      */
     public function setShowCompanyOnline($showCompanyOnline)
     {
@@ -633,7 +881,7 @@ class Companies
      *
      * @param string $description
      *
-     * @return string
+     * @return Companies
      */
     public function setDescription($description)
     {
@@ -674,6 +922,30 @@ class Companies
     public function getStamddate()
     {
         return $this->stamddate;
+    }
+
+    /**
+     * Set stampdevice
+     *
+     * @param integer $stampdevice
+     *
+     * @return Companies
+     */
+    public function setStampdevice($stampdevice)
+    {
+        $this->stampdevice = $stampdevice;
+
+        return $this;
+    }
+
+    /**
+     * Get stampdevice
+     *
+     * @return integer
+     */
+    public function getStampdevice()
+    {
+        return $this->stampdevice;
     }
 
     /**
@@ -845,6 +1117,30 @@ class Companies
     }
 
     /**
+     * Set defaultitem
+     *
+     * @param integer $defaultitem
+     *
+     * @return Companies
+     */
+    public function setDefaultitem($defaultitem)
+    {
+        $this->defaultitem = $defaultitem;
+
+        return $this;
+    }
+
+    /**
+     * Get defaultitem
+     *
+     * @return integer
+     */
+    public function getDefaultitem()
+    {
+        return $this->defaultitem;
+    }
+
+    /**
      * Set bankaccount
      *
      * @param string $bankaccount
@@ -962,6 +1258,54 @@ class Companies
     public function getDefaultunit()
     {
         return $this->defaultunit;
+    }
+
+    /**
+     * Set defaultimporter
+     *
+     * @param integer $defaultimporter
+     *
+     * @return Companies
+     */
+    public function setDefaultimporter($defaultimporter)
+    {
+        $this->defaultimporter = $defaultimporter;
+
+        return $this;
+    }
+
+    /**
+     * Get defaultimporter
+     *
+     * @return integer
+     */
+    public function getDefaultimporter()
+    {
+        return $this->defaultimporter;
+    }
+
+    /**
+     * Set defaultmanufacturer
+     *
+     * @param integer $defaultmanufacturer
+     *
+     * @return Companies
+     */
+    public function setDefaultmanufacturer($defaultmanufacturer)
+    {
+        $this->defaultmanufacturer = $defaultmanufacturer;
+
+        return $this;
+    }
+
+    /**
+     * Get defaultmanufacturer
+     *
+     * @return integer
+     */
+    public function getDefaultmanufacturer()
+    {
+        return $this->defaultmanufacturer;
     }
 
     /**
@@ -1083,222 +1427,4 @@ class Companies
     {
         return $this->views;
     }
-
-
-    /**
-     * Set defaultimporter
-     *
-     * @param \AppBundle\Entity\CatalogImporter $defaultimporter
-     *
-     * @return Companies
-     */
-    public function setDefaultimporter(\AppBundle\Entity\CatalogImporter $defaultimporter = null)
-    {
-        $this->defaultimporter = $defaultimporter;
-
-        return $this;
-    }
-
-    /**
-     * Get defaultimporter
-     *
-     * @return \AppBundle\Entity\CatalogImporter
-     */
-    public function getDefaultimporter()
-    {
-        return $this->defaultimporter;
-    }
-
-    /**
-     * Set defaultitem
-     *
-     * @param \AppBundle\Entity\Items $defaultitem
-     *
-     * @return Companies
-     */
-    public function setDefaultitem(\AppBundle\Entity\Items $defaultitem = null)
-    {
-        $this->defaultitem = $defaultitem;
-
-        return $this;
-    }
-
-    /**
-     * Get defaultitem
-     *
-     * @return \AppBundle\Entity\Items
-     */
-    public function getDefaultitem()
-    {
-        return $this->defaultitem;
-    }
-
-    /**
-     * Set companytype
-     *
-     * @param \AppBundle\Entity\Countriescompanytypes $companytype
-     *
-     * @return Companies
-     */
-    public function setCompanytype(\AppBundle\Entity\Countriescompanytypes $companytype = null)
-    {
-        $this->companytype = $companytype;
-
-        return $this;
-    }
-
-    /**
-     * Get companytype
-     *
-     * @return \AppBundle\Entity\Countriescompanytypes
-     */
-    public function getCompanytype()
-    {
-        return $this->companytype;
-    }
-
-    /**
-     * Set countryc
-     *
-     * @param \AppBundle\Entity\Countries $countryc
-     *
-     * @return Companies
-     */
-    public function setCountryc(\AppBundle\Entity\Countries $countryc = null)
-    {
-        $this->countryc = $countryc;
-
-        return $this;
-    }
-
-    /**
-     * Get countryc
-     *
-     * @return \AppBundle\Entity\Countries
-     */
-    public function getCountryc()
-    {
-        return $this->countryc;
-    }
-
-    /**
-     * Set defaultcashier
-     *
-     * @param \AppBundle\Entity\Users $defaultcashier
-     *
-     * @return Companies
-     */
-    public function setDefaultcashier(\AppBundle\Entity\Users $defaultcashier = null)
-    {
-        $this->defaultcashier = $defaultcashier;
-
-        return $this;
-    }
-
-    /**
-     * Get defaultcashier
-     *
-     * @return \AppBundle\Entity\Users
-     */
-    public function getDefaultcashier()
-    {
-        return $this->defaultcashier;
-    }
-
-    /**
-     * Set defaultcustomer
-     *
-     * @param \AppBundle\Entity\Accounts $defaultcustomer
-     *
-     * @return Companies
-     */
-    public function setDefaultcustomer(\AppBundle\Entity\Accounts $defaultcustomer = null)
-    {
-        $this->defaultcustomer = $defaultcustomer;
-
-        return $this;
-    }
-
-    /**
-     * Get defaultcustomer
-     *
-     * @return \AppBundle\Entity\Accounts
-     */
-    public function getDefaultcustomer()
-    {
-        return $this->defaultcustomer;
-    }
-
-    /**
-     * Set defaultincomevat
-     *
-     * @param \AppBundle\Entity\Vatgroups $defaultincomevat
-     *
-     * @return Companies
-     */
-    public function setDefaultincomevat(\AppBundle\Entity\Vatgroups $defaultincomevat = null)
-    {
-        $this->defaultincomevat = $defaultincomevat;
-
-        return $this;
-    }
-
-    /**
-     * Get defaultincomevat
-     *
-     * @return \AppBundle\Entity\Vatgroups
-     */
-    public function getDefaultincomevat()
-    {
-        return $this->defaultincomevat;
-    }
-
-    /**
-     * Set defaultmanufacturer
-     *
-     * @param \AppBundle\Entity\CatalogManufacturer $defaultmanufacturer
-     *
-     * @return Companies
-     */
-    public function setDefaultmanufacturer(\AppBundle\Entity\CatalogManufacturer $defaultmanufacturer = null)
-    {
-        $this->defaultmanufacturer = $defaultmanufacturer;
-
-        return $this;
-    }
-
-    /**
-     * Get defaultmanufacturer
-     *
-     * @return \AppBundle\Entity\CatalogManufacturer
-     */
-    public function getDefaultmanufacturer()
-    {
-        return $this->defaultmanufacturer;
-    }
-
-    /**
-     * Set stampdevice
-     *
-     * @param \AppBundle\Entity\Devices $stampdevice
-     *
-     * @return Companies
-     */
-    public function setStampdevice(\AppBundle\Entity\Devices $stampdevice = null)
-    {
-        $this->stampdevice = $stampdevice;
-
-        return $this;
-    }
-
-    /**
-     * Get stampdevice
-     *
-     * @return \AppBundle\Entity\Devices
-     */
-    public function getStampdevice()
-    {
-        return $this->stampdevice;
-    }
 }
-

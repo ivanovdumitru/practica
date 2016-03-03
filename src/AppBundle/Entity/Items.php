@@ -2,160 +2,242 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Items
+ *
+ * @ORM\Table(name="items", indexes={@ORM\Index(name="Items_0316dde1", columns={"CompanyC"}), @ORM\Index(name="Items_ed4bcf2f", columns={"VatGroup"}), @ORM\Index(name="Items_5f412f9a", columns={"GroupC"}), @ORM\Index(name="Items_b9dcc52b", columns={"unit_id"}), @ORM\Index(name="Items_406ec824", columns={"StampDevice"}), @ORM\Index(name="Items_bc9dcfc6", columns={"importer_id"}), @ORM\Index(name="Items_399a0583", columns={"color_id"}), @ORM\Index(name="Items_16fe489b", columns={"item_model_id"}), @ORM\Index(name="Items_8222f9c0", columns={"size_id"}), @ORM\Index(name="Items_f16bb99f", columns={"item_material_id"}), @ORM\Index(name="Items_cc56b9d2", columns={"item_standard_id"}), @ORM\Index(name="Items_aadc4860", columns={"currency_buy_price_id"}), @ORM\Index(name="Items_47e70af5", columns={"currency_sale_price_id"})})
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ItemsRepository")
  */
 class Items
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="C", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $c;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CompanyC", type="integer", nullable=false)
+     */
+    private $companyc;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="Code", type="bigint", nullable=false)
      */
     private $code;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="Nm", type="string", length=100, nullable=true)
      */
     private $nm;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="Barcode", type="string", length=13, nullable=false)
      */
     private $barcode;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="BuyPrice", type="decimal", precision=18, scale=2, nullable=true)
      */
     private $buyprice;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="SalePrice", type="decimal", precision=18, scale=2, nullable=true)
      */
     private $saleprice;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="VatGroup", type="integer", nullable=true)
+     */
+    private $vatgroup;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="GroupC", type="integer", nullable=true)
+     */
+    private $groupc;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="unit_id", type="integer", nullable=true)
+     */
+    private $unitId;
+
+    /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="StamdDate", type="datetime", nullable=false)
      */
     private $stamddate;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="StampDevice", type="integer", nullable=true)
+     */
+    private $stampdevice;
+
+    /**
      * @var boolean
+     *
+     * @ORM\Column(name="SwDelete", type="boolean", nullable=false)
      */
     private $swdelete;
 
     /**
      * @var boolean
+     *
+     * @ORM\Column(name="SwNotActive", type="boolean", nullable=false)
      */
     private $swnotactive;
 
     /**
      * @var float
+     *
+     * @ORM\Column(name="Discount", type="float", precision=10, scale=0, nullable=true)
      */
     private $discount;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="Picture", type="string", length=100, nullable=true)
      */
     private $picture;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="quantity", type="integer", nullable=false)
      */
     private $quantity;
 
     /**
      * @var boolean
+     *
+     * @ORM\Column(name="exists_invoices", type="boolean", nullable=false)
      */
     private $existsInvoices;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="code_foreign", type="integer", nullable=true)
      */
     private $codeForeign;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="manufacturer_id", type="integer", nullable=true)
      */
     private $manufacturerId;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="importer_id", type="integer", nullable=true)
+     */
+    private $importerId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="barcode_numerator", type="integer", nullable=true)
      */
     private $barcodeNumerator;
 
     /**
-     * @var \AppBundle\Entity\Companies
+     * @var integer
+     *
+     * @ORM\Column(name="color_id", type="integer", nullable=true)
      */
-    private $companyc;
+    private $colorId;
 
     /**
-     * @var \AppBundle\Entity\ItemsGroups
+     * @var integer
+     *
+     * @ORM\Column(name="item_model_id", type="integer", nullable=true)
      */
-    private $groupc;
+    private $itemModelId;
 
     /**
-     * @var \AppBundle\Entity\CatalogItemmaterial
+     * @var integer
+     *
+     * @ORM\Column(name="size_id", type="integer", nullable=true)
      */
-    private $itemMaterial;
+    private $sizeId;
 
     /**
-     * @var \AppBundle\Entity\CatalogItemstandard
+     * @var integer
+     *
+     * @ORM\Column(name="item_material_id", type="integer", nullable=true)
      */
-    private $itemStandard;
+    private $itemMaterialId;
 
     /**
-     * @var \AppBundle\Entity\CatalogColor
+     * @var integer
+     *
+     * @ORM\Column(name="item_standard_id", type="integer", nullable=true)
      */
-    private $color;
+    private $itemStandardId;
 
     /**
-     * @var \AppBundle\Entity\Currencies
+     * @var integer
+     *
+     * @ORM\Column(name="currency_buy_price_id", type="integer", nullable=true)
      */
-    private $currencyBuyPrice;
+    private $currencyBuyPriceId;
 
     /**
-     * @var \AppBundle\Entity\Currencies
+     * @var integer
+     *
+     * @ORM\Column(name="currency_sale_price_id", type="integer", nullable=true)
      */
-    private $currencySalePrice;
+    private $currencySalePriceId;
 
     /**
-     * @var \AppBundle\Entity\CatalogImporter
+     * @var integer
+     *
+     * @ORM\Column(name="views", type="integer", nullable=true)
      */
-    private $importer;
+    private $views = '0';
 
     /**
-     * @var \AppBundle\Entity\CatalogItemmodel
+     * @var integer
+     *
+     * @ORM\Column(name="remote_id", type="integer", nullable=false)
      */
-    private $itemModel;
+    private $remoteId;
 
-    /**
-     * @var \AppBundle\Entity\CatalogSize
-     */
-    private $size;
-
-    /**
-     * @var \AppBundle\Entity\Devices
-     */
-    private $stampdevice;
-
-    /**
-     * @var \AppBundle\Entity\Vatgroups
-     */
-    private $vatgroup;
-
-    /**
-     * @var \AppBundle\Entity\CatalogItemsunits
-     */
-    private $unit;
 
 
     /**
@@ -166,6 +248,30 @@ class Items
     public function getC()
     {
         return $this->c;
+    }
+
+    /**
+     * Set companyc
+     *
+     * @param integer $companyc
+     *
+     * @return Items
+     */
+    public function setCompanyc($companyc)
+    {
+        $this->companyc = $companyc;
+
+        return $this;
+    }
+
+    /**
+     * Get companyc
+     *
+     * @return integer
+     */
+    public function getCompanyc()
+    {
+        return $this->companyc;
     }
 
     /**
@@ -289,6 +395,78 @@ class Items
     }
 
     /**
+     * Set vatgroup
+     *
+     * @param integer $vatgroup
+     *
+     * @return Items
+     */
+    public function setVatgroup($vatgroup)
+    {
+        $this->vatgroup = $vatgroup;
+
+        return $this;
+    }
+
+    /**
+     * Get vatgroup
+     *
+     * @return integer
+     */
+    public function getVatgroup()
+    {
+        return $this->vatgroup;
+    }
+
+    /**
+     * Set groupc
+     *
+     * @param integer $groupc
+     *
+     * @return Items
+     */
+    public function setGroupc($groupc)
+    {
+        $this->groupc = $groupc;
+
+        return $this;
+    }
+
+    /**
+     * Get groupc
+     *
+     * @return integer
+     */
+    public function getGroupc()
+    {
+        return $this->groupc;
+    }
+
+    /**
+     * Set unitId
+     *
+     * @param integer $unitId
+     *
+     * @return Items
+     */
+    public function setUnitId($unitId)
+    {
+        $this->unitId = $unitId;
+
+        return $this;
+    }
+
+    /**
+     * Get unitId
+     *
+     * @return integer
+     */
+    public function getUnitId()
+    {
+        return $this->unitId;
+    }
+
+    /**
      * Set stamddate
      *
      * @param \DateTime $stamddate
@@ -310,6 +488,30 @@ class Items
     public function getStamddate()
     {
         return $this->stamddate;
+    }
+
+    /**
+     * Set stampdevice
+     *
+     * @param integer $stampdevice
+     *
+     * @return Items
+     */
+    public function setStampdevice($stampdevice)
+    {
+        $this->stampdevice = $stampdevice;
+
+        return $this;
+    }
+
+    /**
+     * Get stampdevice
+     *
+     * @return integer
+     */
+    public function getStampdevice()
+    {
+        return $this->stampdevice;
     }
 
     /**
@@ -529,6 +731,30 @@ class Items
     }
 
     /**
+     * Set importerId
+     *
+     * @param integer $importerId
+     *
+     * @return Items
+     */
+    public function setImporterId($importerId)
+    {
+        $this->importerId = $importerId;
+
+        return $this;
+    }
+
+    /**
+     * Get importerId
+     *
+     * @return integer
+     */
+    public function getImporterId()
+    {
+        return $this->importerId;
+    }
+
+    /**
      * Set barcodeNumerator
      *
      * @param integer $barcodeNumerator
@@ -553,315 +779,218 @@ class Items
     }
 
     /**
-     * Set companyc
+     * Set colorId
      *
-     * @param \AppBundle\Entity\Companies $companyc
+     * @param integer $colorId
      *
      * @return Items
      */
-    public function setCompanyc(\AppBundle\Entity\Companies $companyc = null)
+    public function setColorId($colorId)
     {
-        $this->companyc = $companyc;
+        $this->colorId = $colorId;
 
         return $this;
     }
 
     /**
-     * Get companyc
+     * Get colorId
      *
-     * @return \AppBundle\Entity\Companies
+     * @return integer
      */
-    public function getCompanyc()
+    public function getColorId()
     {
-        return $this->companyc;
+        return $this->colorId;
     }
 
     /**
-     * Set groupc
+     * Set itemModelId
      *
-     * @param \AppBundle\Entity\ItemsGroups $groupc
+     * @param integer $itemModelId
      *
      * @return Items
      */
-    public function setGroupc(\AppBundle\Entity\ItemsGroups $groupc = null)
+    public function setItemModelId($itemModelId)
     {
-        $this->groupc = $groupc;
+        $this->itemModelId = $itemModelId;
 
         return $this;
     }
 
     /**
-     * Get groupc
+     * Get itemModelId
      *
-     * @return \AppBundle\Entity\ItemsGroups
+     * @return integer
      */
-    public function getGroupc()
+    public function getItemModelId()
     {
-        return $this->groupc;
+        return $this->itemModelId;
     }
 
     /**
-     * Set itemMaterial
+     * Set sizeId
      *
-     * @param \AppBundle\Entity\CatalogItemmaterial $itemMaterial
+     * @param integer $sizeId
      *
      * @return Items
      */
-    public function setItemMaterial(\AppBundle\Entity\CatalogItemmaterial $itemMaterial = null)
+    public function setSizeId($sizeId)
     {
-        $this->itemMaterial = $itemMaterial;
+        $this->sizeId = $sizeId;
 
         return $this;
     }
 
     /**
-     * Get itemMaterial
+     * Get sizeId
      *
-     * @return \AppBundle\Entity\CatalogItemmaterial
+     * @return integer
      */
-    public function getItemMaterial()
+    public function getSizeId()
     {
-        return $this->itemMaterial;
+        return $this->sizeId;
     }
 
     /**
-     * Set itemStandard
+     * Set itemMaterialId
      *
-     * @param \AppBundle\Entity\CatalogItemstandard $itemStandard
+     * @param integer $itemMaterialId
      *
      * @return Items
      */
-    public function setItemStandard(\AppBundle\Entity\CatalogItemstandard $itemStandard = null)
+    public function setItemMaterialId($itemMaterialId)
     {
-        $this->itemStandard = $itemStandard;
+        $this->itemMaterialId = $itemMaterialId;
 
         return $this;
     }
 
     /**
-     * Get itemStandard
+     * Get itemMaterialId
      *
-     * @return \AppBundle\Entity\CatalogItemstandard
+     * @return integer
      */
-    public function getItemStandard()
+    public function getItemMaterialId()
     {
-        return $this->itemStandard;
+        return $this->itemMaterialId;
     }
 
     /**
-     * Set color
+     * Set itemStandardId
      *
-     * @param \AppBundle\Entity\CatalogColor $color
+     * @param integer $itemStandardId
      *
      * @return Items
      */
-    public function setColor(\AppBundle\Entity\CatalogColor $color = null)
+    public function setItemStandardId($itemStandardId)
     {
-        $this->color = $color;
+        $this->itemStandardId = $itemStandardId;
 
         return $this;
     }
 
     /**
-     * Get color
+     * Get itemStandardId
      *
-     * @return \AppBundle\Entity\CatalogColor
+     * @return integer
      */
-    public function getColor()
+    public function getItemStandardId()
     {
-        return $this->color;
+        return $this->itemStandardId;
     }
 
     /**
-     * Set currencyBuyPrice
+     * Set currencyBuyPriceId
      *
-     * @param \AppBundle\Entity\Currencies $currencyBuyPrice
+     * @param integer $currencyBuyPriceId
      *
      * @return Items
      */
-    public function setCurrencyBuyPrice(\AppBundle\Entity\Currencies $currencyBuyPrice = null)
+    public function setCurrencyBuyPriceId($currencyBuyPriceId)
     {
-        $this->currencyBuyPrice = $currencyBuyPrice;
+        $this->currencyBuyPriceId = $currencyBuyPriceId;
 
         return $this;
     }
 
     /**
-     * Get currencyBuyPrice
+     * Get currencyBuyPriceId
      *
-     * @return \AppBundle\Entity\Currencies
+     * @return integer
      */
-    public function getCurrencyBuyPrice()
+    public function getCurrencyBuyPriceId()
     {
-        return $this->currencyBuyPrice;
+        return $this->currencyBuyPriceId;
     }
 
     /**
-     * Set currencySalePrice
+     * Set currencySalePriceId
      *
-     * @param \AppBundle\Entity\Currencies $currencySalePrice
+     * @param integer $currencySalePriceId
      *
      * @return Items
      */
-    public function setCurrencySalePrice(\AppBundle\Entity\Currencies $currencySalePrice = null)
+    public function setCurrencySalePriceId($currencySalePriceId)
     {
-        $this->currencySalePrice = $currencySalePrice;
+        $this->currencySalePriceId = $currencySalePriceId;
 
         return $this;
     }
 
     /**
-     * Get currencySalePrice
+     * Get currencySalePriceId
      *
-     * @return \AppBundle\Entity\Currencies
+     * @return integer
      */
-    public function getCurrencySalePrice()
+    public function getCurrencySalePriceId()
     {
-        return $this->currencySalePrice;
+        return $this->currencySalePriceId;
     }
 
     /**
-     * Set importer
+     * Set views
      *
-     * @param \AppBundle\Entity\CatalogImporter $importer
+     * @param integer $views
      *
      * @return Items
      */
-    public function setImporter(\AppBundle\Entity\CatalogImporter $importer = null)
+    public function setViews($views)
     {
-        $this->importer = $importer;
+        $this->views = $views;
 
         return $this;
     }
 
     /**
-     * Get importer
+     * Get views
      *
-     * @return \AppBundle\Entity\CatalogImporter
+     * @return integer
      */
-    public function getImporter()
+    public function getViews()
     {
-        return $this->importer;
+        return $this->views;
     }
 
     /**
-     * Set itemModel
+     * Set remoteId
      *
-     * @param \AppBundle\Entity\CatalogItemmodel $itemModel
+     * @param integer $remoteId
      *
      * @return Items
      */
-    public function setItemModel(\AppBundle\Entity\CatalogItemmodel $itemModel = null)
+    public function setRemoteId($remoteId)
     {
-        $this->itemModel = $itemModel;
+        $this->remoteId = $remoteId;
 
         return $this;
     }
 
     /**
-     * Get itemModel
+     * Get remoteId
      *
-     * @return \AppBundle\Entity\CatalogItemmodel
+     * @return integer
      */
-    public function getItemModel()
+    public function getRemoteId()
     {
-        return $this->itemModel;
-    }
-
-    /**
-     * Set size
-     *
-     * @param \AppBundle\Entity\CatalogSize $size
-     *
-     * @return Items
-     */
-    public function setSize(\AppBundle\Entity\CatalogSize $size = null)
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-
-    /**
-     * Get size
-     *
-     * @return \AppBundle\Entity\CatalogSize
-     */
-    public function getSize()
-    {
-        return $this->size;
-    }
-
-    /**
-     * Set stampdevice
-     *
-     * @param \AppBundle\Entity\Devices $stampdevice
-     *
-     * @return Items
-     */
-    public function setStampdevice(\AppBundle\Entity\Devices $stampdevice = null)
-    {
-        $this->stampdevice = $stampdevice;
-
-        return $this;
-    }
-
-    /**
-     * Get stampdevice
-     *
-     * @return \AppBundle\Entity\Devices
-     */
-    public function getStampdevice()
-    {
-        return $this->stampdevice;
-    }
-
-    /**
-     * Set vatgroup
-     *
-     * @param \AppBundle\Entity\Vatgroups $vatgroup
-     *
-     * @return Items
-     */
-    public function setVatgroup(\AppBundle\Entity\Vatgroups $vatgroup = null)
-    {
-        $this->vatgroup = $vatgroup;
-
-        return $this;
-    }
-
-    /**
-     * Get vatgroup
-     *
-     * @return \AppBundle\Entity\Vatgroups
-     */
-    public function getVatgroup()
-    {
-        return $this->vatgroup;
-    }
-
-    /**
-     * Set unit
-     *
-     * @param \AppBundle\Entity\CatalogItemsunits $unit
-     *
-     * @return Items
-     */
-    public function setUnit(\AppBundle\Entity\CatalogItemsunits $unit = null)
-    {
-        $this->unit = $unit;
-
-        return $this;
-    }
-
-    /**
-     * Get unit
-     *
-     * @return \AppBundle\Entity\CatalogItemsunits
-     */
-    public function getUnit()
-    {
-        return $this->unit;
+        return $this->remoteId;
     }
 }
-

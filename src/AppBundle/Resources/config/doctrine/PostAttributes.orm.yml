@@ -1,7 +1,7 @@
 AppBundle\Entity\PostAttributes:
+    repositoryClass: AppBundle\Entity\PostAttributesRepository
     type: entity
     table: post_attributes
-    repositoryClass: AppBundle\Entity\PostAttributesRepository
     id:
         id:
             type: integer

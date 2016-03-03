@@ -1,7 +1,7 @@
 AppBundle\Entity\Companies:
+    repositoryClass: AppBundle\Entity\CompaniesRepository
     type: entity
     table: companies
-    repositoryClass: AppBundle\Entity\CompaniesRepository
     indexes:
         Companies_d860be3c:
             columns:
@@ -69,6 +69,18 @@ AppBundle\Entity\Companies:
             type: datetime
             nullable: true
             column: DateClose
+        countryc:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: CountryC
+        cityc:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CityC
         address:
             type: string
             nullable: false
@@ -118,6 +130,12 @@ AppBundle\Entity\Companies:
             options:
                 fixed: false
             column: FaxNumber
+        companytype:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CompanyType
         companyid:
             type: string
             nullable: false
@@ -125,6 +143,24 @@ AppBundle\Entity\Companies:
             options:
                 fixed: false
             column: CompanyID
+        defaultcustomer:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: DefaultCustomer
+        defaultcashier:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: DefaultCashier
+        defaultincomevat:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: DefaultIncomeVAT
         defaultincome:
             type: integer
             nullable: true
@@ -156,6 +192,12 @@ AppBundle\Entity\Companies:
             type: datetime
             nullable: true
             column: StamdDate
+        stampdevice:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: StampDevice
         swdelete:
             type: boolean
             nullable: false
@@ -202,6 +244,12 @@ AppBundle\Entity\Companies:
             options:
                 fixed: false
             column: amo_crm_login
+        defaultitem:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: DefaultItem
         bankaccount:
             type: string
             nullable: true
@@ -235,6 +283,18 @@ AppBundle\Entity\Companies:
             options:
                 unsigned: false
             column: DefaultUnit
+        defaultimporter:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: DefaultImporter
+        defaultmanufacturer:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: DefaultManufacturer
         includeVat:
             type: boolean
             nullable: false
@@ -264,105 +324,4 @@ AppBundle\Entity\Companies:
             options:
                 unsigned: false
                 default: '0'
-    manyToOne:
-        cityc:
-            targetEntity: Cities
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                CityC:
-                    referencedColumnName: C
-            orphanRemoval: false
-        defaultimporter:
-            targetEntity: CatalogImporter
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                DefaultImporter:
-                    referencedColumnName: id
-            orphanRemoval: false
-        defaultitem:
-            targetEntity: Items
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                DefaultItem:
-                    referencedColumnName: C
-            orphanRemoval: false
-        companytype:
-            targetEntity: Countriescompanytypes
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                CompanyType:
-                    referencedColumnName: id
-            orphanRemoval: false
-        countryc:
-            targetEntity: Countries
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                CountryC:
-                    referencedColumnName: C
-            orphanRemoval: false
-        defaultcashier:
-            targetEntity: Users
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                DefaultCashier:
-                    referencedColumnName: C
-            orphanRemoval: false
-        defaultcustomer:
-            targetEntity: Accounts
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                DefaultCustomer:
-                    referencedColumnName: C
-            orphanRemoval: false
-        defaultincomevat:
-            targetEntity: Vatgroups
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                DefaultIncomeVAT:
-                    referencedColumnName: C
-            orphanRemoval: false
-        defaultmanufacturer:
-            targetEntity: CatalogManufacturer
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                DefaultManufacturer:
-                    referencedColumnName: id
-            orphanRemoval: false
-        stampdevice:
-            targetEntity: Devices
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                StampDevice:
-                    referencedColumnName: C
-            orphanRemoval: false
     lifecycleCallbacks: {  }

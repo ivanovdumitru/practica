@@ -2,80 +2,123 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Articles
+ *
+ * @ORM\Table(name="articles", indexes={@ORM\Index(name="Articles_0316dde1", columns={"company_id"}), @ORM\Index(name="Articles_80c06cbb", columns={"last_modified_user_id"}), @ORM\Index(name="Articles_406ec824", columns={"stampdevice_id"}), @ORM\Index(name="Articles_ffaba1d1", columns={"subject_id"})})
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ArticlesRepository")
  */
 class Articles
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="company_id", type="integer", nullable=false)
+     */
+    private $companyId;
+
+    /**
      * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="body", type="text", nullable=false)
      */
     private $body;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
      */
     private $created;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=400, nullable=false)
      */
     private $description;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="tags", type="string", length=200, nullable=true)
      */
     private $tags;
 
     /**
      * @var boolean
+     *
+     * @ORM\Column(name="published", type="boolean", nullable=false)
      */
     private $published;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="last_modified_user_id", type="integer", nullable=false)
+     */
+    private $lastModifiedUserId;
+
+    /**
      * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=100, nullable=true)
      */
     private $image;
 
     /**
      * @var boolean
+     *
+     * @ORM\Column(name="swdelete", type="boolean", nullable=false)
      */
     private $swdelete;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="stampdate", type="datetime", nullable=false)
      */
     private $stampdate;
 
     /**
-     * @var \AppBundle\Entity\OnlineArticlessubject
+     * @var integer
+     *
+     * @ORM\Column(name="stampdevice_id", type="integer", nullable=true)
      */
-    private $subject;
+    private $stampdeviceId;
 
     /**
-     * @var \AppBundle\Entity\Companies
+     * @var integer
+     *
+     * @ORM\Column(name="subject_id", type="integer", nullable=true)
      */
-    private $company;
+    private $subjectId;
 
     /**
-     * @var \AppBundle\Entity\Users
+     * @var integer
+     *
+     * @ORM\Column(name="views", type="integer", nullable=true)
      */
-    private $lastModifiedUser;
+    private $views = '0';
 
-    /**
-     * @var \AppBundle\Entity\Devices
-     */
-    private $stampdevice;
 
 
     /**
@@ -86,6 +129,30 @@ class Articles
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set companyId
+     *
+     * @param integer $companyId
+     *
+     * @return Articles
+     */
+    public function setCompanyId($companyId)
+    {
+        $this->companyId = $companyId;
+
+        return $this;
+    }
+
+    /**
+     * Get companyId
+     *
+     * @return integer
+     */
+    public function getCompanyId()
+    {
+        return $this->companyId;
     }
 
     /**
@@ -233,6 +300,30 @@ class Articles
     }
 
     /**
+     * Set lastModifiedUserId
+     *
+     * @param integer $lastModifiedUserId
+     *
+     * @return Articles
+     */
+    public function setLastModifiedUserId($lastModifiedUserId)
+    {
+        $this->lastModifiedUserId = $lastModifiedUserId;
+
+        return $this;
+    }
+
+    /**
+     * Get lastModifiedUserId
+     *
+     * @return integer
+     */
+    public function getLastModifiedUserId()
+    {
+        return $this->lastModifiedUserId;
+    }
+
+    /**
      * Set image
      *
      * @param string $image
@@ -305,97 +396,74 @@ class Articles
     }
 
     /**
-     * Set subject
+     * Set stampdeviceId
+     *
+     * @param integer $stampdeviceId
      *
      * @return Articles
      */
-    public function setSubject()
+    public function setStampdeviceId($stampdeviceId)
     {
-        $this->subject = $subject;
+        $this->stampdeviceId = $stampdeviceId;
 
         return $this;
     }
 
     /**
-     * Get subject
+     * Get stampdeviceId
      *
-     * @return \AppBundle\Entity\OnlineArticlessubject
+     * @return integer
      */
-    public function getSubject()
+    public function getStampdeviceId()
     {
-        return $this->subject;
+        return $this->stampdeviceId;
     }
 
     /**
-     * Set company
+     * Set subjectId
      *
-     * @param \AppBundle\Entity\Companies $company
+     * @param integer $subjectId
      *
      * @return Articles
      */
-    public function setCompany(\AppBundle\Entity\Companies $company = null)
+    public function setSubjectId($subjectId)
     {
-        $this->company = $company;
+        $this->subjectId = $subjectId;
 
         return $this;
     }
 
     /**
-     * Get company
+     * Get subjectId
      *
-     * @return \AppBundle\Entity\Companies
+     * @return integer
      */
-    public function getCompany()
+    public function getSubjectId()
     {
-        return $this->company;
+        return $this->subjectId;
     }
 
     /**
-     * Set lastModifiedUser
+     * Set views
      *
-     * @param \AppBundle\Entity\Users $lastModifiedUser
+     * @param integer $views
      *
      * @return Articles
      */
-    public function setLastModifiedUser(\AppBundle\Entity\Users $lastModifiedUser = null)
+    public function setViews($views)
     {
-        $this->lastModifiedUser = $lastModifiedUser;
+        $this->views = $views;
 
         return $this;
     }
 
     /**
-     * Get lastModifiedUser
+     * Get views
      *
-     * @return \AppBundle\Entity\Users
+     * @return integer
      */
-    public function getLastModifiedUser()
+    public function getViews()
     {
-        return $this->lastModifiedUser;
-    }
-
-    /**
-     * Set stampdevice
-     *
-     * @param \AppBundle\Entity\Devices $stampdevice
-     *
-     * @return Articles
-     */
-    public function setStampdevice(\AppBundle\Entity\Devices $stampdevice = null)
-    {
-        $this->stampdevice = $stampdevice;
-
-        return $this;
-    }
-
-    /**
-     * Get stampdevice
-     *
-     * @return \AppBundle\Entity\Devices
-     */
-    public function getStampdevice()
-    {
-        return $this->stampdevice;
+        return $this->views;
     }
 }
-
