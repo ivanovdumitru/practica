@@ -17,8 +17,8 @@ class CompaniesRepository extends \Doctrine\ORM\EntityRepository
         $qb="Select * From AppBundle:Companies";
         $query= $this->getEntityManager()->createQuery($qb);
         return $query->execute();*/
-        $connect = $this->get('database_connection');
-        $query= $connect->fetchAll("select * From companies");
-        return $query;
+        $db = $this->createQueryBuilder('Companies');
+        $query = $db->getQuery();
+        return $query->execute();
     }
 }

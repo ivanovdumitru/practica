@@ -6,7 +6,7 @@ var menuAction = {
             color: '#ef5350',
             callback: bi_online
         },
-        /*am adaugat eu*/
+        /*view menu*/
         view_menu:{
             id: 'view_menu',
             label: 'menu',
@@ -21,7 +21,7 @@ var menuAction = {
             color: '#66bb6a',
             callback: answers_by_date
         },
-        /*am adaugat eu*/
+        /*companies*/
         companies_view:{
             id: 'companies_view',
             label: 'companies',
@@ -29,7 +29,7 @@ var menuAction = {
             callback: companies_view
         },
         /*end */
-        /*am adaugat eu*/
+        /*items*/
         items_view:{
           id: 'items_view',
           label: 'items',
@@ -37,7 +37,7 @@ var menuAction = {
           callback: items_view
         },
         /*end*/
-         /*am adaugat eu*/
+         /*articles*/
         articles_view:{
           id: 'articles_view',
           label: 'articles',
@@ -1419,7 +1419,7 @@ function bi_careteam_not_answered() {
 
     return isAdmin ? table.renderActions().add(table.table) : table.table;
 }
-/*functia mea*/
+/*function view menu*/
  function view_menu(){       
      var columns = [
          [   {label: 'Visible', attrs: {colspan: 1, class: 'text-center', 'data-border': ''}},
@@ -1461,19 +1461,16 @@ function bi_careteam_not_answered() {
     table.getData();
     return table.renderActions().add(table.render());       
 }
- /*end functi0n*/
+ /*end function*/
  
- /*functia mea*/
+ /*function view companies*/
  function companies_view(){       
      var columns = [
-         [   {label: 'Visible', attrs: {colspan: 1, class: 'text-center', 'data-border': ''}},
-             {label: 'Id_menu', attrs: {colspan: 1, class: 'text-center', 'data-border': ''}},
-             {label: 'Den_menu', attrs: {colspan: 1, class: 'text-center', 'data-border': ''}},
-         ],
          [   
-             {name: 'visible', label: 'visible', order: true, filter: 'checkbox', attrs: {width: 100}},
-             {name: 'id_menu', label: 'id', order: true, filter: 'text', attrs: {width: 100}},
-             {name: 'den_menu', label: 'Denumirea menu', order: true, filter: 'email', attrs: {width: 100}},
+             {name: 'Id', label: 'id', order: true, filter: 'text', attrs: {width: 100}},
+             {name: 'Name', label: 'Name', order: true, filter: 'text', attrs: {width: 100}},
+             {name: 'Email', label: 'Email', order: true, filter: 'email', attrs: {width: 100}},
+             {name: 'Address', label: 'Address', order: true, filter: 'text', attrs: {width: 100}}
          ],
      ]
     
@@ -1488,13 +1485,14 @@ function bi_careteam_not_answered() {
                         cells: [
                             {value: response[i].C, attrs: {class: 'text-right'}},
                             {value: response[i].Nm, attrs: {class: 'text-right'}},
-                            {value: response[i].Email, attrs: {class: 'text-right'}}
+                            {value: response[i].Email, attrs: {class: 'text-right'}},
+                            {value: response[i].Address, attrs: {class: 'text-right'}}
                         ]
                     });
                   }
 
                   
-                  //response[i]["answers"].attrs = {class: "abcdeFR"}
+              
                  return rows;
              }
          });
@@ -1510,14 +1508,10 @@ function bi_careteam_not_answered() {
  /*functia mea*/
  function items_view(){       
      var columns = [
-         [   {label: 'Id_menu', attrs: {colspan: 1, class: 'text-center', 'data-border': ''}},
-             {label: 'Den_items', attrs: {colspan: 1, class: 'text-center', 'data-border': ''}},
-             {label: 'data', attrs: {colspan: 1, class: 'text-center', 'data-border': ''}},
-         ],
          [   
-             {name: 'Id_menu', label: 'visible', order: true, filter: 'text', attrs: {width: 100}},
-             {name: 'Den_items', label: 'id', order: true, filter: 'text', attrs: {width: 100}},
-             {name: 'data', label: 'Denumirea menu', order: true, filter: 'date', attrs: {width: 100}},
+             {name: 'Id', label: 'id', order: true, filter: 'text', attrs: {width: 100}},
+             {name: 'Name_Items', label: 'Name Items', order: true, filter: 'text', attrs: {width: 100}},
+             {name: 'Description', label: 'Description', order: true, filter: 'text', attrs: {width: 100}},
          ],
      ]
     
@@ -1532,7 +1526,7 @@ function bi_careteam_not_answered() {
                         cells: [
                             {value: response[i].Code, attrs: {class: 'text-right'}},
                             {value: response[i].Nm, attrs: {class: 'text-right'}},
-                            {value: response[i].StamdDate, attrs: {class: 'text-right'}}
+                            {value: response[i].Description, attrs: {class: 'text-right'}}
                         ]
                     });
                   }

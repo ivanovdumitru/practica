@@ -55,16 +55,19 @@ class AdminController extends Controller
    * @return Response
    */
   function companiviewAction(){
-       $connect = $this->get('database_connection');
-       $search1['result'] = $connect->fetchAll("select *  From companies");
-        $result=[];
-         foreach ($search1['result'] as $item){
+      $companiesRepository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Companies');
+      $companies['result'] = $companiesRepository->findAll();
+         foreach ($companies['result'] as $item){
              $result[] = [
-                    'C' => $item['C'],
-                    'Nm' => $item['Nm'],
-                    'Email'=> $item['Email']
+                    'C' => $item->getC(),
+                    'Nm'=> $item->getNm(),
+                    'Email'=> $item->getEmail(),
+                    'Address'=> $item->getAddress(),
              ];   
          }
+     
      return new Response(json_encode($result), 200, array('Content-Type' => 'application/json'));
   
   }
@@ -74,14 +77,15 @@ class AdminController extends Controller
    * @return Response
    */
   function itemsviewAction(){
-       $connect = $this->get('database_connection');
-       $search1['result'] = $connect->fetchAll("select *  From items");
-        $result=[];
-         foreach ($search1['result'] as $item){
+        $ItemsRepository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Items');
+      $items['result'] = $ItemsRepository->findAll();
+         foreach ($items['result'] as $item){
              $result[] = [
-                    'Code' => $item['Code'],
-                    'Nm' => $item['Nm'],
-                    'StamdDate'=> $item['StamdDate']
+                    'Code' => $item->getCode(),
+                    'Nm'=> $item->getNm(),
+                    'Description'=> $item->getDescription(),
              ];   
          }
      return new Response(json_encode($result), 200, array('Content-Type' => 'application/json'));

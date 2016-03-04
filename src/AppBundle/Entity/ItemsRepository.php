@@ -7,10 +7,8 @@ use Doctrine\ORM\QueryBuilder;
 
 class ItemsRepository extends \Doctrine\ORM\EntityRepository
 {
-    function showItems($i = null){
-        $db = $this->createQueryBuilder('Items')
-                ->setFirstResult($i)
-                ->setMaxResults(12);
+    function showItems(){
+        $db = $this->createQueryBuilder('Items');
         $query = $db->getQuery();
         return $query->execute();
                 
