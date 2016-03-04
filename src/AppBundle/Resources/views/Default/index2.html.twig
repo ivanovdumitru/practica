@@ -71,7 +71,7 @@
                   {% include 'AppBundle:partials:search.form.html.twig' %}
               </li>
           {% for Menu in data.menu %}
-            <li><a href="{{path('home',{subjectId:Menu.denMenu}) }}" style="color:#fff;">{{Menu.denMenu}}</a></li>
+            <li><a href="{{path('home',{subjectId:Menu.name}) }}" style="color:#fff;">{{Menu.name}}</a></li>
           {% endfor %}
           </ul>
             </div><!-- /.navbar-collapse -->
@@ -92,7 +92,7 @@
             </ul>
           <ul class="mmmenu">
           {% for Menu in data.menu %}
-            <li><a href="{{path('home',{subjectId:Menu.denMenu}) }}">{{Menu.denMenu}}</a></li>
+            <li><a href="{{path('home',{subjectId:Menu.name}) }}">{{Menu.name}}</a></li>
           {% endfor %}
           </ul>
 
@@ -107,7 +107,7 @@
                         <h4>Categories</h4>
                         <ul class="list-unstyled leftmenu">
           {% for Menu in data.menu %}
-              <li><a href="{{path('home',{subjectId:Menu.denMenu}) }}">{{Menu.denMenu|upper}}</a></li>
+              <li><a href="{{path('home',{subjectId:Menu.name}) }}">{{Menu.name|upper}}</a></li>
           {% endfor %}
           </ul>
                     </div>
