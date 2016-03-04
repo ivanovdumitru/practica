@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- *@ORM\Entity(repositoryClass="AppBunddle\Entity\CompaniesRepository")
+
  */
 class CompaniesRepository extends \Doctrine\ORM\EntityRepository
 {

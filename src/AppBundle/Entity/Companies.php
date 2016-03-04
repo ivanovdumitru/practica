@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Companies
  *
@@ -25,7 +27,7 @@ class Companies
      * @var string
      *
      * @ORM\Column(name="Email", type="string", length=50, nullable=false)
-     */
+     */  
     private $email;
 
     /**
@@ -332,12 +334,31 @@ class Companies
     /**
      * @var integer
      *
-     * @ORM\Column(name="views", type="integer", nullable=false)
+     * @ORM\Column(name="views", type="integer", options={"default" = 0})
      */
-    private $views = '0';
+    private $views;
+    
+    
+    
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Articles", mappedBy = "company")
+     */
+    private $articles;
+    
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Items", mappedBy = "company")
+     */
+    private $items;
 
 
-
+    public function __construct() {
+        $this->articles = new ArrayCollection();
+        $this->items = new ArrayCollection();
+    }
+    
+    
     /**
      * Get c
      *
@@ -1426,5 +1447,44 @@ class Companies
     public function getViews()
     {
         return $this->views;
+    }
+    
+    /**
+    * @return Articles[]
+    */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @param Articles $article
+     * @return $this
+     */
+    public function addArticle(Articles $article)
+    {
+        $this->articles[] = $article;
+
+        return $this;
+    }
+    
+    
+    /**
+    * @return Items[]
+    */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @param Items $item
+     * @return $this
+     */
+    public function addItem(Items $item)
+    {
+        $this->items[] = $item;
+
+        return $this;
     }
 }
