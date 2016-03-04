@@ -29,8 +29,16 @@ class Items
     private $companyc;
 
     /**
+     *
+     * @ORM\ManyToOne(targetEntity="Companies", inversedBy = "items")
+     * @ORM\JoinColumn(name="CompanyC", referencedColumnName="C")
+     */
+    private $company;
+    
+    /**
      * @var integer
      *
+     * @ORM\ManyToOne(targetEntity="Companies")
      * @ORM\Column(name="Code", type="bigint", nullable=false)
      */
     private $code;
@@ -227,9 +235,9 @@ class Items
     /**
      * @var integer
      *
-     * @ORM\Column(name="views", type="integer", nullable=true)
+     * @ORM\Column(name="views", type="integer", options={"default" = 0})
      */
-    private $views = '0';
+    private $views;
 
     /**
      * @var integer
@@ -992,5 +1000,24 @@ class Items
     public function getRemoteId()
     {
         return $this->remoteId;
+    }
+    
+    /**
+     * @return Company
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param Company $company
+     * @return $this
+     */
+    public function setCompany(Companies $company)
+    {
+        $this->company = $company;
+
+        return $this;
     }
 }

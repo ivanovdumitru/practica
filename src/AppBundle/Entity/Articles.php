@@ -27,6 +27,13 @@ class Articles
      * @ORM\Column(name="company_id", type="integer", nullable=false)
      */
     private $companyId;
+    
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Companies", inversedBy = "articles")
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="C")
+     */
+    private $company;
 
     /**
      * @var string
@@ -115,9 +122,9 @@ class Articles
     /**
      * @var integer
      *
-     * @ORM\Column(name="views", type="integer", nullable=true)
+     * @ORM\Column(name="views", type="integer", options={"default" = 0})
      */
-    private $views = '0';
+    private $views;
 
 
 
@@ -465,5 +472,24 @@ class Articles
     public function getViews()
     {
         return $this->views;
+    }
+    
+    /**
+     * @return Company
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param Company $company
+     * @return $this
+     */
+    public function setCompany(Companies $company)
+    {
+        $this->company = $company;
+
+        return $this;
     }
 }
