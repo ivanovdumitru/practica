@@ -1,0 +1,138 @@
+{% extends "MoodCountQuestionnaireBundle::Layout/base.html.twig" %}
+{% block title %}HealthyOps - Login{% endblock %}
+{% block head_content %}
+    <nav class="navbar navbar-default">
+        <div class="containber-fluid text-center">
+            <strong class="navbar-brand"><img src="/images/logo.png" alt="MoodCount"/></strong>
+        </div>
+    </nav>
+{% endblock %}
+{% block body_class %}{% endblock %}
+{% block body %}
+    <div class="form-container margin-top-40 {% if email_field is defined %}password-recovery{% endif %}">
+        <div class="block auth-block backround-blue">
+            {% if( recover is defined) %}
+                <h2 class="entry-title text-center">Success!</h2>
+                <p class="info text-center" >Password successfully sent on email.</p>
+
+                <script type="text/javascript">
+                    setTimeout(function(){
+                        window.location.href="{{ path('dashboard_login') }}";
+                    }, 1000);
+                </script>
+
+            {% else %}
+                <h2 class="entry-title text-center isLogin">Welcome back!</h2>
+                <h2 class="entry-title text-center forgot" >Forgot password?</h2>
+                <p class="forgot info" >Enter your email and we will send you the password.</p>
+                <form action="{% if errors is defined %}{{ path('recover_password') }}{% else %}{{ path('dashboard_login_check') }}{% endif %}" method="post" class="auth-form moodcount-form form" id="auth_form" data-redirect="{{ path('dashboard') }}">
+                <input type="text" style="display:none">
+                <input type="password" style="display:none">
+                <input type="text" name="forgot_password" style="display:none">
+
+                <div class="form-group">
+                    {% set save_email = app.request.cookies.has('_email') %}
+                    <input type="text" id="username" class="form-control text-field" name="_email" data-field="email" value="{% if save_email %}{{ app.request.cookies.get('_email') }}{% endif %}" placeholder="Email" />
+                    <span class="helper"></span>
+                </div>
+
+                <div class="form-group isLogin">
+                    <!-- <label for="password">Password:</label> -->
+                    <input type="password" class="form-control text-field" id="password" name="_password"  data-field="text" placeholder="Password" />
+                    <span class="helper"></span>
+                </div>
+                <div class="form-group isLogin">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input type="checkbox" name="remember_email" id="remember_email" data-field="checkbox" {% if save_email %}checked="checked"{% endif %} />
+                            <label for="remember_email">Remember email</label>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <a class="forgot-btn forgot-password" href="#">Forgot password?</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-submit-group">
+                    <button type="submit" class="btn btn-block btn-info isLogin">Login</button>
+                    <button type="submit" class="btn btn-block btn-info forgot">
+                        <span>Recover password</span>
+                        <span class="spinner">
+                            <span class="bounce1"></span>
+                            <span class="bounce2"></span>
+                            <span class="bounce3"></span>
+                        </span>
+                    </button>
+                </div>
+            </form>
+            {% endif %}
+        </div>
+        {% if( recover is defined) %}
+            <div class="block text-center"><a href="{{ path('dashboard_login') }}" class="btn back-btn">Back</a></div>
+        {% else %}
+            <div class="block text-center forgot" ><span class="btn forgot-btn back-btn">Back</span></div>
+        {% endif %}
+    </div>
+
+        <script type="text/javascript">
+            function focus($element) {
+                $element.focus();
+                $element.trigger('click');
+            }
+            function focusField(field){
+                field.focus();
+                field.trigger('click');
+            }
+            function focusFirstEmptyField(field){
+                if( field.val() && field.closest('div').next().length){
+                    focusFirstEmptyField( field.closest('div').next().find('input') );
+                } else {
+                    focus(field);
+                }
+            }
+            function validateEmail(email){
+                return email.match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+            }
+
+            $(function() {
+                $(':submit.forgot').click(function (evt) {
+                    var email = $('[name=_email]');
+                    if( email.val() && validateEmail( email.val() ) != null ){
+                        $(this).find('> span:visible').hide().addClass('hidden-span-from-submit-button');
+                        $(this).find('.spinner').show();
+                        $(this).find('.spinner').children().show();
+                    }
+                });
+                $('.forgot-btn').click(function (evt) {
+                    var form = $(evt.target).closest('main').find('form'),
+                        container = $(evt.target).closest('main').find('.form-container'),
+                        email_field = form.find('[name=_email]');
+
+                    $(evt.target).hasClass('btn') ? container.removeClass('password-recovery') : container.addClass('password-recovery');
+                    if( container.hasClass('password-recovery') ){
+                        focusField(email_field);
+
+                        // change action path and hide helpers
+                        form.attr({'action': '{{ path('recover_password') }}'});
+                        if( email_field.val() == '' ){
+                            email_field.next('.helper').hide();
+                        } else if( validateEmail( email_field.val() ) == null ){
+                            // email is not valid -> show helper
+                            email_field.next('.helper').show();
+                        } else {
+                            // email is valid -> hide helper
+                            email_field.next('.helper').hide();
+                        }
+                    } else {
+                        focusFirstEmptyField(email_field);
+
+                        // restore action path and helpers
+                        form.attr({'action': '{{ path('dashboard_login_check') }}'});
+                        validateEmail(email_field.val()) == null ? email_field.next('.helper').show() : email_field.next('.helper').hide();
+                    }
+                    return false;
+                });
+            });
+        </script>
+{% endblock %}
+{% block footer %}{% endblock %}

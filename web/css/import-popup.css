@@ -1,0 +1,107 @@
+    body {
+    overflow: hidden;
+    position: relative;
+    color: #696969;
+}
+
+header {
+    font-weight: bold
+}
+
+#close-import-window {
+    position: absolute;
+    right: 19px;
+    top: 18px;
+    font-family: monospace;
+    font-weight: bold;
+    background: #dcdcdc;
+    width: 28px;
+    height: 28px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="text"] {
+    width: 90%;
+    padding: 4px 10px;
+    border: solid 1px #dcdcdc;
+    border-radius: 4px;
+    cursor: pointer
+}
+
+label {
+    padding: 0;
+    font-weight: normal
+}
+
+input[type="checkbox"] {
+    position: relative;
+    top: 1px;
+}
+
+.import-file-popup {
+}
+
+.panel-body {
+    padding: 10px 25px 20px 45px;
+}
+
+.file-requirements {
+    padding: 5px 0 10px;
+    font-size: 12px;
+}
+
+.file-requirements p {
+    margin-bottom: 2px;
+}
+
+.result-list dd {
+    padding-left: 15px;
+}
+
+.overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 20;
+}
+
+.overlay .preloader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+
+.error-container {
+    margin-right: 20px;
+}
+
+.error-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    min-height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #d64435;
+    font-size: 16px;
+    color: #fff;
+}
+.error-container ul{
+    margin-top: 40px;
+    list-style-type: none;
+}

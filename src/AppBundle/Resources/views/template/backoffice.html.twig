@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HealthyOps - Backoffice</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/icon.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/c3.min.css" />
+    <!--[if IE]>
+    <link rel="stylesheet" href="css/ie-fix.css"><![endif]-->
+    <link rel="stylesheet" href="/table/build/css/table.min.css" />
+    <link rel="icon" type="image/x-icon" href="/moodcount.ico" />
+    <script type="application/javascript">
+        setInterval(function () {
+            $.ajax({
+                url: '{{ path('logout_check_backoffice') }}',
+                type: 'PUT',
+                error: function() {
+                   // window.location.href = "{{ path('backoffice_login') }}";
+                }
+            });
+        }, 300000);
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.5.4/jquery.nicescroll.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-sliderAccess.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/swig/1.4.2/swig.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.js"></script>
+    <script type="text/javascript" src="/table/build/js/TableTableForm.min.js"></script>
+    <script type="text/javascript" src="/js/d3.min.js"></script>
+    <script type="text/javascript" src="/js/c3.min.js"></script>
+    <script type="text/javascript" src="/js/base.js"></script>
+    <script type="text/javascript" src="/js/backoffice-router.js"></script>
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-44072053-8', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body class="{% block body_class %}inner{% endblock %}">
+<svg style="display: none;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <symbol id="icon_bi" class="icon-bi-online" viewBox="0 0 24 24">
+        <g>
+            <path clip-rule="evenodd" fill-rule="evenodd" d="M 22 20 v 2 H 2 V 8 h 2 v 12 H 22 Z" />
+            <path clip-rule="evenodd" fill-rule="evenodd" d="M 5 9 l 5 -5 l 2 2 l 4 -4 l 6 6 v 6 l -4 -4 l -2 2 l -4 -4 l -7 7 V 9 Z" />
+            <path clip-rule="evenodd" fill-rule="evenodd" d="M 22 19 H 5 v -2 l 7 -7 l 4 4 l 2 -2 l 4 4 V 19 Z" />
+        </g>
+    </symbol>
+    <symbol id="icon_by_site" class="icon-questions-by-site" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M21,22c1,0,1-1,1-1V7c0-1-1-1-1-1H9C8,6,8,7,8,7v14c0,1,1,1,1,1H21z M10,7
+		c0,0-1,0-1,1v12c0,0,0,1,1,1h10c0,0,1,0,1-1V8c0,0,0-1-1-1H10z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7,18c-2.2,0-4,0-4,0s-1,0-1-1V3c0,0,0-1,1-1h12c0,0,1,0,1,1c0,0,0,0.8,0,2h-1
+		c0-0.6,0-1,0-1s0-1-1-1H4c0,0-1,0-1,1v12c0,0,0,1,1,1c0,0,1.3,0,3,0V18z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,13h2v2H5V13z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,9h2v2H5V9z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,5v2h2V5H5z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11,9h8v2h-8V9z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11,13h8v2h-8V13z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11,17h8v2h-8V17z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_by_unit_type" class="icon-questions-by-unit-type" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M21,22c1,0,1-1,1-1V7c0-1-1-1-1-1H9C8,6,8,7,8,7v14c0,1,1,1,1,1H21z M10,7
+		c0,0-1,0-1,1v12c0,0,0,1,1,1h10c0,0,1,0,1-1V8c0,0,0-1-1-1H10z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16,9h3v2h-3V9z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7,18c-2.2,0-4,0-4,0s-1,0-1-1V3c0,0,0-1,1-1h12c0,0,1,0,1,1c0,0,0,0.8,0,2h-1
+		c0-0.6,0-1,0-1s0-1-1-1H4c0,0-1,0-1,1v12c0,0,0,1,1,1c0,0,1.3,0,3,0V18z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,13h2v2H5V13z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,9h2v2H5V9z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,5v2h2V5H5z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11,9h3v2h-3V9z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16,13h3v2h-3V13z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11,13h3v2h-3V13z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16,17h3v2h-3V17z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11,17h3v2h-3V17z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_data" class="icon-data" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10,2H4c0,0-2,0-2,2v16c0,0,0,2,2,2h6c0,0,2,0,2-2V4C12,4,12,2,10,2z M6,17H4v-3
+		h2V17z M6,12H4V9h2V12z M6,7H4V4h2V7z M10,17H8v-3h2V17z M10,12H8V9h2V12z M10,7H8V4h2V7z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M14,22c-1,0-1-1-1-1v-7c0-1,1-1,1-1h7c1,0,1,1,1,1v7c0,1-1,1-1,1h-2v-4h-3v4H14z"
+                    />
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13,12v-2h9v2H13z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_list" class="icon-list" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M21,22c1,0,1-1,1-1V7c0-1-1-1-1-1H9C8,6,8,7,8,7v14c0,1,1,1,1,1H21z M10,7
+		c0,0-1,0-1,1v12c0,0,0,1,1,1h10c0,0,1,0,1-1V8c0,0,0-1-1-1H10z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7,18c-2.2,0-4,0-4,0s-1,0-1-1V3c0,0,0-1,1-1h12c0,0,1,0,1,1c0,0,0,0.8,0,2h-1
+		c0-0.6,0-1,0-1s0-1-1-1H4c0,0-1,0-1,1v12c0,0,0,1,1,1c0,0,1.3,0,3,0V18z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,13h2v2H5V13z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,9h2v2H5V9z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,5v2h2V5H5z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11,9h8v2h-8V9z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11,13h8v2h-8V13z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11,17h8v2h-8V17z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_list" class="icon-list" viewBox="0 0 24 24">
+        <g>
+            <path d="M5.5,7.8c0,0,0.1,0,0.1,0c0.2,0,0.3-0.1,0.6-0.3c0.2-0.1,0.4-0.4,0.7-0.7L7,6.7c0.8-1.1,2.7-3.6,5.4-3.6c0.1,0,0.1,0,0.2,0
+		c2.3,0.2,4,1.9,4.8,5.1c0,0.1,0,0.2,0.1,0.2c0.2,0.8,0.4,1.3,0.7,1.5c0.1,0.1,0.2,0.1,0.3,0.1c0.2,0,0.3-0.1,0.5-0.2
+		c0.2-0.2,0.1-0.6-0.1-0.7c-0.1-0.1-0.2-0.5-0.3-0.9c0,0,0-0.1,0-0.1c0,0,0-0.1,0-0.1c-0.1-0.5-0.5-1.9-1.3-3.2
+		C16,3.1,14.5,2.1,12.7,2C9.3,1.8,7,4.8,6.1,6.1L6,6.2C5.7,6.6,5.4,6.7,5.4,6.7c0,0-0.1,0-0.1,0.1C5.1,7,5,7.2,5,7.4
+		C5.1,7.6,5.2,7.8,5.5,7.8z"/>
+            <path d="M16.2,9.3c0.3-0.8,0.3-1.7,0-2.4c-0.3-0.6-0.8-1-1.5-1.3c-1.1-0.3-2.3,0.3-3.5,1.6c0,0-1.6,1.7-3.2,2.7
+		c-0.1,0.1-1.3,0.7-2.5,1.1c-0.1,0-0.3,0.1-0.3,0.3C5,11.4,5,11.6,5,11.7c0.1,0.3,0.4,0.5,0.7,0.4c1.4-0.4,2.7-1.2,2.8-1.2
+		C10.3,9.8,12,8,12,8c0.5-0.6,1.4-1.3,2.1-1.3c0.1,0,0.2,0,0.3,0c0.4,0.1,0.7,0.4,0.9,0.7c0.2,0.4,0.2,0.9,0,1.5
+		c-0.4,1-1.7,2.3-3.7,3.6c-1,0.6-3.5,2.2-5.3,3c-0.3,0.1-0.4,0.4-0.3,0.7c0.1,0.2,0.3,0.3,0.5,0.3c0.1,0,0.1,0,0.2,0
+		c1.8-0.8,4.4-2.4,5.4-3.1C13.5,12.5,15.5,11,16.2,9.3z"/>
+            <path d="M9.1,6.1C9,6.2,8.9,6.3,8.8,6.5C8.7,6.5,8.7,6.6,8.6,6.7C8.4,7,8.1,7.2,7.8,7.5C7.6,7.7,7.3,7.9,7,8.1
+		C6.7,8.3,6.3,8.5,5.9,8.7C5.8,8.8,5.7,8.8,5.6,8.8C5.3,8.9,5.1,9.2,5.2,9.5c0.1,0.2,0.3,0.4,0.5,0.4c0.1,0,0.1,0,0.2,0
+		c0.4-0.1,0.8-0.4,1.2-0.6l0.2-0.1c0.3-0.1,0.5-0.3,0.8-0.5c0.5-0.4,1.1-0.9,1.6-1.6c0.2-0.2,0.4-0.4,0.6-0.7
+		c0.1-0.1,0.2-0.2,0.3-0.3c0.1-0.1,0.1-0.1,0.2-0.2L11,5.9c0.3-0.2,0.6-0.4,0.9-0.6c0.3-0.2,0.6-0.3,1-0.3c0.1,0,0.1,0,0.2,0
+		c0.3,0,0.5-0.3,0.5-0.6c0-0.3-0.3-0.6-0.6-0.6C11.7,3.9,10.4,4.7,9.1,6.1z"/>
+            <path d="M6,14.3c0.9-0.3,5.7-2.1,8.3-5.8c0.1-0.1,0.1-0.3,0.1-0.4c0-0.1-0.1-0.3-0.2-0.4c-0.2-0.2-0.6-0.1-0.8,0.1
+		C11,11.3,6.5,13,5.7,13.3l0,0c-0.1,0.1-0.2,0.2-0.3,0.3c-0.1,0.1-0.1,0.3,0,0.4c0.1,0.2,0.3,0.4,0.5,0.4C5.9,14.4,5.9,14.4,6,14.3z
+		"/>
+            <path d="M13,15.3c0.3,0,1.2,0.6,1.8,1c0.5,0.4,1.1,0.7,1.3,0.7c0.2,0,0.5-0.2,0.5-0.4c0.1-0.3-0.1-0.5-0.3-0.7
+		c-0.2-0.1-0.3-0.2-0.9-0.5c-1.2-0.6-1.9-1.4-2.7-1.2c-0.6,0.1-1.5,0.7-3,1.7c-1,0.7-2.2,1.5-2.7,1.6c-0.3,0.1-0.5,0.4-0.4,0.7
+		c0.1,0.2,0.3,0.4,0.5,0.4c0,0,0.1,0,0.1,0c0.7-0.2,1.8-0.9,3-1.7C11.4,16.2,12.7,15.3,13,15.3z"/>
+            <path d="M15,19c0.1,0,0.1,0,0.2,0c0.2,0,0.4-0.1,0.5-0.4c0.1-0.1,0-0.3,0-0.4c-0.1-0.1-0.2-0.2-0.3-0.3c-0.3-0.2-1.8-1.4-2.9-1.3
+		c-0.6,0.1-1.6,0.8-3.5,2.2l0,0c-0.2,0.2-0.4,0.3-0.5,0.4c-0.3,0.2-0.3,0.5-0.1,0.8c0.1,0.1,0.3,0.2,0.5,0.2c0.1,0,0.2,0,0.3-0.1
+		c0.1-0.1,0.3-0.2,0.4-0.3l0.1-0.1c1.8-1.3,2.8-1.9,3-2C13,17.8,14.6,18.8,15,19z"/>
+            <path d="M19,12.4c0-0.1-0.1-0.2-0.3-0.3c-0.3-0.1-0.7-0.3-1-0.5c-0.3-0.2-0.4-0.5-0.5-1c0-0.3-0.2-0.4-0.5-0.4
+		c-0.2,0-0.4,0.1-0.5,0.2c-0.1,0.1-0.2,0.3-0.1,0.5c0.2,1.3,1.3,1.9,2,2.2c0.1,0,0.2,0.1,0.3,0.1c0.2,0,0.4-0.1,0.5-0.3
+		C19,12.7,19,12.5,19,12.4z"/>
+            <path d="M18.5,14.9c-0.1-0.3-0.4-0.5-0.6-0.6c0,0,0,0-0.1,0c-0.3-0.1-0.5-0.3-0.9-0.5c-0.5-0.3-1.1-0.7-1.4-1.4
+		c-0.1-0.3-0.4-0.5-0.7-0.4c-0.1,0-0.3,0.2-0.4,0.3c-0.1,0.1-0.1,0.3,0,0.4c0.5,1.2,1.6,2.2,2.9,2.6c0,0,0,0,0,0.1
+		c0.1,0.3,0.2,1.5-2.8,5.2c-0.1-0.1-0.2-0.2-0.3-0.2l-0.1,0c-0.6-0.4-1.2-0.8-1.8-0.8c-0.1,0-0.2,0-0.2,0c-0.8,0.1-1.9,1.2-2.2,1.6
+		c-0.2,0.2-0.2,0.6,0,0.8c0.1,0.1,0.2,0.2,0.4,0.2c0.2,0,0.3-0.1,0.4-0.2c0.6-0.6,1.4-1.2,1.6-1.3c0.3,0,0.7,0.3,1.2,0.7
+		c0.2,0.1,0.4,0.3,0.7,0.5c0,0,0.3,0.2,0.5,0.2c0.2,0,0.4-0.3,0.4-0.3C18.1,18.2,19.1,16.1,18.5,14.9z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_online" class="icon-online" viewBox="0 0 24 24">
+        <g>
+            <path d="M10.9,16.9c-1.2-0.1-2.3-0.3-3.2-0.6c-0.9-0.3-1.8-0.7-2.5-1.1c-0.7-0.4-1.3-0.9-1.9-1.3c-0.5-0.5-1-0.9-1.3-1.4
+		c0-0.1,0-0.2,0-0.2V12v0c0.4,0,0.9-0.1,1.5-0.2c0.6-0.1,1.3-0.2,2-0.4c0.7-0.2,1.5-0.4,2.2-0.7s1.5-0.7,2.1-1.2
+		c0.1,0.1,0.3,0.1,0.4,0.1c0.1,0,0.3,0.1,0.5,0.1s0.3,0,0.5-0.1c0.2,0,0.3-0.1,0.5-0.2c0.5,0.5,1,0.9,1.6,1.4
+		c0.4,0.3,0.8,0.6,1.2,0.8c0.4,0.2,0.9,0.4,1.3,0.5c0.2,0.4,0.4,0.8,0.8,1c-0.4,1.1-1.1,2.1-1.9,2.9c-0.2-0.1-0.4-0.2-0.6-0.3
+		c-0.2-0.1-0.4-0.1-0.7-0.1c-0.5,0-0.9,0.1-1.2,0.4c-0.4,0.3-0.6,0.6-0.8,1h-0.4C11.2,16.9,11.1,16.9,10.9,16.9z M10.7,18.3
+		c0.1,0,0.3,0,0.4,0c0.1,0,0.3,0,0.4,0c-1.2,0.6-2.3,1-3.3,1.2c-1,0.2-1.9,0.2-2.6,0.2c-0.8-0.6-1.4-1.3-2-2.1
+		c-0.5-0.8-1-1.7-1.3-2.6c0.4,0.4,0.9,0.8,1.5,1.1c0.6,0.4,1.2,0.7,1.9,1c0.7,0.3,1.4,0.6,2.3,0.8C8.9,18.1,9.8,18.3,10.7,18.3z
+		 M13.6,19.9c0.5,0,1-0.2,1.4-0.5c0.4-0.3,0.6-0.7,0.7-1.2c1.3-0.3,2.4-0.6,3.3-1.1c0.9-0.5,1.7-1,2.3-1.5c-0.4,0.9-0.8,1.8-1.5,2.6
+		c-0.6,0.8-1.3,1.5-2.2,2.1c-0.8,0.6-1.7,1-2.7,1.3c-1,0.3-2,0.5-3.1,0.5c-0.7,0-1.5-0.1-2.2-0.2c-0.7-0.2-1.4-0.4-2-0.7
+		c0.7-0.1,1.4-0.3,2.2-0.5c0.8-0.2,1.6-0.6,2.4-1.1C12.8,19.7,13.2,19.9,13.6,19.9z M19.6,12.5c0.4,0,0.9-0.1,1.3-0.1
+		s0.8-0.1,1.1-0.1c0,0.1,0,0.2,0,0.3c0,0.1,0,0.2,0,0.3c-0.2,0.2-0.4,0.5-0.8,0.9c-0.3,0.3-0.7,0.7-1.2,1c-0.5,0.3-1,0.7-1.6,1
+		c-0.6,0.3-1.3,0.6-2.1,0.8c0.4-0.5,0.7-1,1-1.5c0.3-0.5,0.6-1.1,0.8-1.6c0.3,0,0.6-0.1,0.9-0.3C19.2,13,19.4,12.8,19.6,12.5z
+		 M20,11.1c0-0.3-0.1-0.6-0.3-0.9c-0.2-0.3-0.4-0.5-0.7-0.7c0.1-0.8,0.1-1.6,0.1-2.3c0-0.8,0-1.5-0.1-2.2c0.8,0.8,1.4,1.7,1.9,2.7
+		c0.5,1,0.8,2.1,0.9,3.2C21.4,10.9,20.7,11,20,11.1z M8.6,7.5c0,0.2,0,0.3,0.1,0.5c0,0.2,0.1,0.3,0.1,0.4C8.3,8.8,7.7,9.1,7.1,9.4
+		C6.5,9.6,5.8,9.8,5.2,10c-0.6,0.2-1.2,0.3-1.7,0.4c-0.5,0.1-1,0.1-1.4,0.2c0.1-0.9,0.4-1.8,0.8-2.6c0.4-0.8,0.8-1.6,1.4-2.3
+		C4.8,5,5.5,4.4,6.2,3.9s1.5-0.9,2.3-1.2c0,0.4,0.1,0.9,0.2,1.4C8.8,4.6,9,5.3,9.3,6C9.1,6.2,8.9,6.4,8.8,6.7
+		C8.7,6.9,8.6,7.2,8.6,7.5z M12.9,7.5c0-0.3,0-0.5-0.1-0.8c0.7-0.9,1.3-1.7,1.7-2.4c0.4-0.7,0.6-1.3,0.8-1.8
+		c0.9,0.3,1.6,0.7,2.3,1.1c0.1,0.8,0.2,1.6,0.2,2.6c0,0.9,0,1.9-0.1,2.9c-0.4,0-0.8,0.2-1.1,0.4c-0.3,0.3-0.5,0.6-0.7,0.9
+		c-0.3-0.1-0.6-0.2-0.8-0.4c-0.3-0.1-0.5-0.3-0.8-0.5c-0.3-0.2-0.6-0.4-0.8-0.6c-0.2-0.2-0.5-0.4-0.7-0.6
+		C12.9,8.1,12.9,7.8,12.9,7.5z M10.8,5.4c-0.1,0-0.1,0-0.1,0c-0.3-0.7-0.5-1.3-0.6-1.9C10,3,9.9,2.5,9.9,2.2c0.3-0.1,0.7-0.1,1-0.2
+		C11.3,2,11.6,2,12,2c0.6,0,1.2,0.1,1.8,0.2c-0.1,0.4-0.3,0.9-0.6,1.5c-0.3,0.6-0.7,1.3-1.3,2c-0.2-0.1-0.3-0.1-0.5-0.2
+		C11.1,5.4,11,5.4,10.8,5.4z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_parameters" class="icon-parameters" viewBox="0 0 24 24">
+        <g>
+            <path d="M14,16.9v-1.7h-1.6c-0.1-0.6-0.3-1.2-0.6-1.6l1.1-1.2l-1.1-1.2l-1.1,1.2c-0.5-0.3-1-0.6-1.6-0.7V10H7.5v1.6
+		c-0.6,0.1-1.1,0.3-1.6,0.7l-1.1-1.2l-1.1,1.2l1.1,1.2c-0.3,0.5-0.5,1-0.6,1.6H2.5v1.7h1.6c0.1,0.6,0.3,1.2,0.6,1.6l-1.1,1.2
+		l1.1,1.2l1.1-1.2c0.5,0.3,1,0.6,1.6,0.7V22h1.6v-1.6c0.6-0.1,1.1-0.3,1.6-0.7l1.1,1.2l1.1-1.2l-1.1-1.2c0.3-0.5,0.5-1,0.6-1.6
+		L14,16.9L14,16.9z M8.3,17.8c-1,0-1.8-0.8-1.8-1.8c0-1,0.8-1.8,1.8-1.8c1,0,1.8,0.8,1.8,1.8C10,17,9.2,17.8,8.3,17.8z"/>
+            <path d="M13.3,3.1L9.5,2L9.1,2.4l2,2.1l-2,2.1l-2-2.1L6.7,4.9l1,3.9l3.6,0l0,0l7.9,8.3l0,0c0.5,0.5,1.4,0.5,1.9,0
+		c0.5-0.5,0.5-1.4,0-2l0,0l-7.9-8.2L13.3,3.1z M20.6,16.6c-0.2,0.2-0.6,0.2-0.8,0c-0.2-0.2-0.2-0.6,0-0.9c0.2-0.2,0.6-0.2,0.8,0
+		C20.8,15.9,20.8,16.3,20.6,16.6z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_patients_answers" class="icon-patients-answers" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16,17v2c2.9,0,6,0,6,0v-2.6c0-1.8-4.4-1.8-4.4-3.5s1.8-2.6,1.8-4.4
+		C19.4,5,16.8,5,16.8,5h-0.9c0,0-2.6,0-2.6,3.5c0,1.8,1.8,2.6,1.8,4.4c0,0.5-2,1.1-2,1.1S16,14.5,16,17z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7,13c0,2-5,2-5,4v3h13v-3c0-2-5-2-5-4s2-3,2-5c0-4-3-4-3-4H8c0,0-3,0-3,4
+		C5,10,7,11,7,13z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_questions" class="icon-questions" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M13,19h-2v-2h2
+		V19z M15.1,11.3l-0.9,0.9C13.4,12.9,13,13.5,13,15h-2v-0.5c0-1.1,0.4-2.1,1.2-2.8l1.2-1.3C13.8,10.1,14,9.6,14,9c0-1.1-0.9-2-2-2
+		s-2,0.9-2,2H8c0-2.2,1.8-4,4-4s4,1.8,4,4C16,9.9,15.6,10.7,15.1,11.3z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_roles" class="icon-roles" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M18,2c1,0,1,1,1,1v2l1,1v2l-1,1v1l1,1v2l-1,1v1l1,1v2l-1,1v2c0,1-1,1-1,1H6
+		c-1,0-1-1-1-1v-2h2l1-1v-2l-1-1H5v-1h2l1-1v-2l-1-1H5V9h2l1-1V6L7,5H5V3c0-1,1-1,1-1H18z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7,6v2H4V6H7z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7,11v2H4v-2H7z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7,16v2H4v-2H7z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_sites" class="icon-sites" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12,2L2,6v12l10,4l10-4V6L12,2z M4,17.3V7c0,0,4.8,1.9,7,2.7L11,20
+		C8.9,19.2,4,17.3,4,17.3z M6,6l6-2l6,2l-6,2L6,6z M20,17c0,0-4.9,1.8-7,2.6l0-10C15.2,8.8,20,7,20,7V17z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_staff" class="icon-staff" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16,17v2c2.9,0,6,0,6,0v-2.6c0-1.8-4.4-1.8-4.4-3.5s1.8-2.6,1.8-4.4
+		C19.4,5,16.8,5,16.8,5h-0.9c0,0-2.6,0-2.6,3.5c0,1.8,1.8,2.6,1.8,4.4c0,0.5-2,1.1-2,1.1S16,14.5,16,17z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7,13c0,2-5,2-5,4v3h13v-3c0-2-5-2-5-4s2-3,2-5c0-4-3-4-3-4H8c0,0-3,0-3,4
+		C5,10,7,11,7,13z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_static_questions" class="icon-static-questions" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M13,19h-2v-2h2
+		V19z M15.1,11.3l-0.9,0.9C13.4,12.9,13,13.5,13,15h-2v-0.5c0-1.1,0.4-2.1,1.2-2.8l1.2-1.3C13.8,10.1,14,9.6,14,9c0-1.1-0.9-2-2-2
+		s-2,0.9-2,2H8c0-2.2,1.8-4,4-4s4,1.8,4,4C16,9.9,15.6,10.7,15.1,11.3z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_systems" class="icon-systems" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5,18.5v-6h5v6H15.5z M15.5,5.5h5v6h-5V5.5z M9.5,12.5h5v6h-5V12.5z M9.5,5.5
+		h5v6h-5V5.5z M3.5,12.5h5v6h-5V12.5z M3.5,5.5h5v6h-5V5.5z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_subjects" class="icon-subjects" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5,18.5v-6h5v6H15.5z M15.5,5.5h5v6h-5V5.5z M9.5,12.5h5v6h-5V12.5z M9.5,5.5
+		h5v6h-5V5.5z M3.5,12.5h5v6h-5V12.5z M3.5,5.5h5v6h-5V5.5z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_answer_types" class="icon-answer-types" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,17.5v2h14v-2H5z M9.5,13.3h5l0.9,2.2h2.1l-4.8-11h-1.5l-4.8,11h2.1L9.5,13.3z
+		 M12,6.5l1.9,5h-3.7L12,6.5z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_units" class="icon-units" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12,11l4-1.6V4.6L12,3L8,4.6v4.8L12,11z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6,21l4-1.6v-4.8L6,13l-4,1.6v4.8L6,21z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M18,21l4-1.6v-4.8L18,13l-4,1.6v4.8L18,21z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_unit_types" class="icon-unit-type-procedures" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M21,22c1,0,1-1,1-1V7c0-1-1-1-1-1H9C8,6,8,7,8,7v14c0,1,1,1,1,1H21z M10,7
+		c0,0-1,0-1,1v12c0,0,0,1,1,1h10c0,0,1,0,1-1V8c0,0,0-1-1-1H10z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16,9h3v2h-3V9z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7,18c-2.2,0-4,0-4,0s-1,0-1-1V3c0,0,0-1,1-1h12c0,0,1,0,1,1c0,0,0,0.8,0,2h-1
+		c0-0.6,0-1,0-1s0-1-1-1H4c0,0-1,0-1,1v12c0,0,0,1,1,1c0,0,1.3,0,3,0V18z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,13h2v2H5V13z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,9h2v2H5V9z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5,5v2h2V5H5z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11,9h3v2h-3V9z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16,13h3v2h-3V13z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11,13h3v2h-3V13z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16,17h3v2h-3V17z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11,17h3v2h-3V17z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_workers" class="icon-users" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12,2c1.7,0,3,1.3,3,3c0,1.7-1.3,3-3,3c-1.7,0-3-1.3-3-3C9,3.3,10.3,2,12,2z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7,10c0-1,1-1,1-1h8c1,0,1,1,1,1v5c0,1-1,1-1,1c-1,0-1,1-1,1v4c0,1-1,1-1,1h-4
+		c-1,0-1-1-1-1v-4c0-1-1-1-1-1c-1,0-1-1-1-1V10z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16,19v-1c0-1,1-1,1-1c1,0,1-1,1-1v-6h3c1,0,1,1,1,1v4c0,1-2,1-2,2s0,2,0,2
+		c0,1-1,1-1,1h-2C16,20,16,19,16,19z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8,19v-1c0-1-1-1-1-1c-1,0-1-1-1-1v-6H3c-1,0-1,1-1,1v4c0,1,2,1,2,2s0,2,0,2
+		c0,1,1,1,1,1h2C8,20,8,19,8,19z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6,5c1.1,0,2,0.9,2,2S7.1,9,6,9S4,8.1,4,7S4.9,5,6,5z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M18,5c1.1,0,2,0.9,2,2s-0.9,2-2,2s-2-0.9-2-2S16.9,5,18,5z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_workers" class="icon-workers" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12,2c1.7,0,3,1.3,3,3c0,1.7-1.3,3-3,3c-1.7,0-3-1.3-3-3C9,3.3,10.3,2,12,2z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7,10c0-1,1-1,1-1h8c1,0,1,1,1,1v5c0,1-1,1-1,1c-1,0-1,1-1,1v4c0,1-1,1-1,1h-4
+		c-1,0-1-1-1-1v-4c0-1-1-1-1-1c-1,0-1-1-1-1V10z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16,19v-1c0-1,1-1,1-1c1,0,1-1,1-1v-6h3c1,0,1,1,1,1v4c0,1-2,1-2,2s0,2,0,2
+		c0,1-1,1-1,1h-2C16,20,16,19,16,19z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8,19v-1c0-1-1-1-1-1c-1,0-1-1-1-1v-6H3c-1,0-1,1-1,1v4c0,1,2,1,2,2s0,2,0,2
+		c0,1,1,1,1,1h2C8,20,8,19,8,19z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6,5c1.1,0,2,0.9,2,2S7.1,9,6,9S4,8.1,4,7S4.9,5,6,5z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M18,5c1.1,0,2,0.9,2,2s-0.9,2-2,2s-2-0.9-2-2S16.9,5,18,5z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_worker_types" class="icon-worker-types" viewBox="0 0 24 24">
+        <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4,22c-2,0-2-2-2-2v-6c0-2,2-2,2-2h5c1,0,1,1,1,1c0,1,1,1,1,1h2c1,0,1-1,1-1
+		c0-1,1-1,1-1h5c2,0,2,2,2,2v6c0,2-2,2-2,2H4z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M21,6h-4c0,0-1,0-1-1V3c0,0,0-1-1-1H9c0,0-1,0-1,1v2c0,0,0,1-1,1H3c0,0-1,0-1,1v3
+		c0,0,0,1,1,1h18c0,0,1,0,1-1V7C22,7,22,6,21,6z M14,6h-4V4h4V6z"/>
+        </g>
+    </symbol>
+    <symbol id="icon_logs" class="icon-logs" viewBox="0 0 24 24">
+        <g>
+            <path d="M5.5,7.8c0,0,0.1,0,0.1,0c0.2,0,0.3-0.1,0.6-0.3c0.2-0.1,0.4-0.4,0.7-0.7L7,6.7c0.8-1.1,2.7-3.6,5.4-3.6c0.1,0,0.1,0,0.2,0
+		c2.3,0.2,4,1.9,4.8,5.1c0,0.1,0,0.2,0.1,0.2c0.2,0.8,0.4,1.3,0.7,1.5c0.1,0.1,0.2,0.1,0.3,0.1c0.2,0,0.3-0.1,0.5-0.2
+		c0.2-0.2,0.1-0.6-0.1-0.7c-0.1-0.1-0.2-0.5-0.3-0.9c0,0,0-0.1,0-0.1c0,0,0-0.1,0-0.1c-0.1-0.5-0.5-1.9-1.3-3.2
+		C16,3.1,14.5,2.1,12.7,2C9.3,1.8,7,4.8,6.1,6.1L6,6.2C5.7,6.6,5.4,6.7,5.4,6.7c0,0-0.1,0-0.1,0.1C5.1,7,5,7.2,5,7.4
+		C5.1,7.6,5.2,7.8,5.5,7.8z"/>
+            <path d="M16.2,9.3c0.3-0.8,0.3-1.7,0-2.4c-0.3-0.6-0.8-1-1.5-1.3c-1.1-0.3-2.3,0.3-3.5,1.6c0,0-1.6,1.7-3.2,2.7
+		c-0.1,0.1-1.3,0.7-2.5,1.1c-0.1,0-0.3,0.1-0.3,0.3C5,11.4,5,11.6,5,11.7c0.1,0.3,0.4,0.5,0.7,0.4c1.4-0.4,2.7-1.2,2.8-1.2
+		C10.3,9.8,12,8,12,8c0.5-0.6,1.4-1.3,2.1-1.3c0.1,0,0.2,0,0.3,0c0.4,0.1,0.7,0.4,0.9,0.7c0.2,0.4,0.2,0.9,0,1.5
+		c-0.4,1-1.7,2.3-3.7,3.6c-1,0.6-3.5,2.2-5.3,3c-0.3,0.1-0.4,0.4-0.3,0.7c0.1,0.2,0.3,0.3,0.5,0.3c0.1,0,0.1,0,0.2,0
+		c1.8-0.8,4.4-2.4,5.4-3.1C13.5,12.5,15.5,11,16.2,9.3z"/>
+            <path d="M9.1,6.1C9,6.2,8.9,6.3,8.8,6.5C8.7,6.5,8.7,6.6,8.6,6.7C8.4,7,8.1,7.2,7.8,7.5C7.6,7.7,7.3,7.9,7,8.1
+		C6.7,8.3,6.3,8.5,5.9,8.7C5.8,8.8,5.7,8.8,5.6,8.8C5.3,8.9,5.1,9.2,5.2,9.5c0.1,0.2,0.3,0.4,0.5,0.4c0.1,0,0.1,0,0.2,0
+		c0.4-0.1,0.8-0.4,1.2-0.6l0.2-0.1c0.3-0.1,0.5-0.3,0.8-0.5c0.5-0.4,1.1-0.9,1.6-1.6c0.2-0.2,0.4-0.4,0.6-0.7
+		c0.1-0.1,0.2-0.2,0.3-0.3c0.1-0.1,0.1-0.1,0.2-0.2L11,5.9c0.3-0.2,0.6-0.4,0.9-0.6c0.3-0.2,0.6-0.3,1-0.3c0.1,0,0.1,0,0.2,0
+		c0.3,0,0.5-0.3,0.5-0.6c0-0.3-0.3-0.6-0.6-0.6C11.7,3.9,10.4,4.7,9.1,6.1z"/>
+            <path d="M6,14.3c0.9-0.3,5.7-2.1,8.3-5.8c0.1-0.1,0.1-0.3,0.1-0.4c0-0.1-0.1-0.3-0.2-0.4c-0.2-0.2-0.6-0.1-0.8,0.1
+		C11,11.3,6.5,13,5.7,13.3l0,0c-0.1,0.1-0.2,0.2-0.3,0.3c-0.1,0.1-0.1,0.3,0,0.4c0.1,0.2,0.3,0.4,0.5,0.4C5.9,14.4,5.9,14.4,6,14.3z
+		"/>
+            <path d="M13,15.3c0.3,0,1.2,0.6,1.8,1c0.5,0.4,1.1,0.7,1.3,0.7c0.2,0,0.5-0.2,0.5-0.4c0.1-0.3-0.1-0.5-0.3-0.7
+		c-0.2-0.1-0.3-0.2-0.9-0.5c-1.2-0.6-1.9-1.4-2.7-1.2c-0.6,0.1-1.5,0.7-3,1.7c-1,0.7-2.2,1.5-2.7,1.6c-0.3,0.1-0.5,0.4-0.4,0.7
+		c0.1,0.2,0.3,0.4,0.5,0.4c0,0,0.1,0,0.1,0c0.7-0.2,1.8-0.9,3-1.7C11.4,16.2,12.7,15.3,13,15.3z"/>
+            <path d="M15,19c0.1,0,0.1,0,0.2,0c0.2,0,0.4-0.1,0.5-0.4c0.1-0.1,0-0.3,0-0.4c-0.1-0.1-0.2-0.2-0.3-0.3c-0.3-0.2-1.8-1.4-2.9-1.3
+		c-0.6,0.1-1.6,0.8-3.5,2.2l0,0c-0.2,0.2-0.4,0.3-0.5,0.4c-0.3,0.2-0.3,0.5-0.1,0.8c0.1,0.1,0.3,0.2,0.5,0.2c0.1,0,0.2,0,0.3-0.1
+		c0.1-0.1,0.3-0.2,0.4-0.3l0.1-0.1c1.8-1.3,2.8-1.9,3-2C13,17.8,14.6,18.8,15,19z"/>
+            <path d="M19,12.4c0-0.1-0.1-0.2-0.3-0.3c-0.3-0.1-0.7-0.3-1-0.5c-0.3-0.2-0.4-0.5-0.5-1c0-0.3-0.2-0.4-0.5-0.4
+		c-0.2,0-0.4,0.1-0.5,0.2c-0.1,0.1-0.2,0.3-0.1,0.5c0.2,1.3,1.3,1.9,2,2.2c0.1,0,0.2,0.1,0.3,0.1c0.2,0,0.4-0.1,0.5-0.3
+		C19,12.7,19,12.5,19,12.4z"/>
+            <path d="M18.5,14.9c-0.1-0.3-0.4-0.5-0.6-0.6c0,0,0,0-0.1,0c-0.3-0.1-0.5-0.3-0.9-0.5c-0.5-0.3-1.1-0.7-1.4-1.4
+		c-0.1-0.3-0.4-0.5-0.7-0.4c-0.1,0-0.3,0.2-0.4,0.3c-0.1,0.1-0.1,0.3,0,0.4c0.5,1.2,1.6,2.2,2.9,2.6c0,0,0,0,0,0.1
+		c0.1,0.3,0.2,1.5-2.8,5.2c-0.1-0.1-0.2-0.2-0.3-0.2l-0.1,0c-0.6-0.4-1.2-0.8-1.8-0.8c-0.1,0-0.2,0-0.2,0c-0.8,0.1-1.9,1.2-2.2,1.6
+		c-0.2,0.2-0.2,0.6,0,0.8c0.1,0.1,0.2,0.2,0.4,0.2c0.2,0,0.3-0.1,0.4-0.2c0.6-0.6,1.4-1.2,1.6-1.3c0.3,0,0.7,0.3,1.2,0.7
+		c0.2,0.1,0.4,0.3,0.7,0.5c0,0,0.3,0.2,0.5,0.2c0.2,0,0.4-0.3,0.4-0.3C18.1,18.2,19.1,16.1,18.5,14.9z"/>
+        </g>
+    </symbol>
+</svg>
+<div id="top-bar">
+    <a id="menu-icon" href="#">
+        <i class="sprite-icon-menu"></i>
+    </a>
+    <div id="user-bar">
+        <a id="logout" href="{{ path('backoffice_logout') }}"><i class="sprite-icon-logout" title="Logout"></i></a>
+        {% if app.user %}
+        <span id="user-name">{{ app.user.name }}</span>
+            <i class="sprite-icon-menu icon-logo"></i>
+            <strong class="company-name">Backoffice management</strong>
+        {% endif %}
+    </div>
+</div>
+<div id="menu">
+    <div id="view-port">
+        <ul id="menus" class="overview">
+            <li>
+                <span>
+                    <svg viewBox="0 0 24 24" class="fill-yellow"><use xlink:href="#icon_bi"/></svg>BI</span>
+                <ul>
+                    <li><a href="#bi_online"><svg viewBox="0 0 24 24" class="fill-coral"><use xlink:href="#icon_online"/></svg>Today Activity</a></li>
+                    <li><a href="#control_screen"><svg viewBox="0 0 24 24" class="fill-coral"><use xlink:href="#icon_systems"/></svg>Control screen</a></li>
+                </ul>
+            </li>
+            <li>
+                <span><svg viewBox="0 0 24 24" class="fill-blue"><use xlink:href="#icon_workers"/></svg>Customers</span>
+                <ul>
+                    <li><a href="#customers"><svg viewBox="0 0 24 24" class="fill-violet"><use xlink:href="#icon_list"/></svg>List</a></li>
+                </ul>
+            </li>
+            <li>
+                <span><svg viewBox="0 0 24 24" class="fill-violet"><use xlink:href="#icon_questions"/></svg></i>Questions</span>
+                <ul>
+                    <li><a href="#question_list_patients"><svg viewBox="0 0 24 24" class="fill-violet"><use xlink:href="#icon_staff"/></svg>To patients</a></li>
+                    <li><a href="#question_list_workers"><svg viewBox="0 0 24 24" class="fill-violet"><use xlink:href="#icon_workers"/></svg>To care team</a></li>
+                    <li><a href="#answer_types"><svg viewBox="0 0 24 24" class="fill-green"><use xlink:href="#icon_answer_types"/></svg>Answer types</a></li>
+                </ul>
+            </li>
+            <li>
+                <span><svg viewBox="0 0 24 24" class="fill-coral"><use xlink:href="#icon_data"/></svg></i>Data</span>
+                <ul>
+                    <li><a href="#subjects"><svg viewBox="0 0 24 24" class="fill-yellow"><use xlink:href="#icon_subjects"/></svg>Subjects</a></li>
+                    <li><a href="#reasons"><svg viewBox="0 0 24 24" class="fill-black"><use xlink:href="#icon_list"/></svg>Reasons</a></li>
+                    <li><a href="#unit_types"><svg viewBox="0 0 24 24" class="fill-blue"><use xlink:href="#icon_unit_types"/></svg>Unit types</a></li>
+                    <li><a href="#unit_type_procedures"><svg viewBox="0 0 24 24" class="fill-blue"><use xlink:href="#icon_units"/></svg>Unit type procedures</a></li>
+                    <li><a href="#roles"><svg viewBox="0 0 24 24" class="fill-orange"><use xlink:href="#icon_roles"/></svg></i>Roles</a></li>
+                </ul>
+            </li>
+            <li>
+                <span><svg viewBox="0 0 24 24" class="fill-blue"><use xlink:href="#icon_systems"/></svg>System</span>
+                <ul>
+                    {% if app.user.userType == 1 %}
+                    <li><a href="#users"><svg viewBox="0 0 24 24" class="fill-coral"><use xlink:href="#icon_staff"/></svg>Users</a></li>
+                    {% endif %}
+                    <li><a href="#login_logs"><svg viewBox="0 0 24 24"  class="fill-violet"><use xlink:href="#icon_logs"/></svg>Users logins</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div id="tabs">
+    <a id="next" href="#"><i class="sprite-icon-arrow-right"></i></a>
+    <a id="prev" href="#"><i class="sprite-icon-arrow-left"></i></a>
+    <ul id="tab" class="nav nav-tabs"></ul>
+</div>
+<ul id="content"></ul>
+<!--
+    {% block head_content %}<h1>Home Page</h1>{% endblock %}
+    {% block body %}{% endblock %}
+-->
+
+<div class="confirm">
+    <div class="overlay"></div>
+    <div class="dialog">
+        <div class="title">Logout dialog</div>
+        <p class="info">Are you sure you want to logout?</p>
+        <a href="{{ path('backoffice_logout') }}" class="btn btn-success">OK</a>
+        <button class="btn btn-secondary cancel">Cancel</button>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+

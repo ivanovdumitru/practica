@@ -1,0 +1,21 @@
+ {% if data.count > 1 %}
+       <div class="col-md-12">
+           <div style="margin-left:200px;">
+<ul class="list-unstyled list-inline pagination">   
+     {% if data.b >= 1%}
+           <li style="display:inline-block;"><a class="pag" href="{{path('page',{'i':data.b,'name':data.name,'tip':data.tip,'ts':data.ts})}}" style="list-style: none;"><<</a></li>
+       {% endif %}
+    {% if data.count > 9 %}    
+    {% for i in 1..9 %}
+      <li style="display:inline-block;"><a href="{{path('page',{'i':i,'name':data.name,'tip':data.tip,'ts':data.ts})}}" style="list-style: none;">{{ i }}</a></li>
+    {% endfor %}
+    <li style="display:inline-block;"><a href="{{path('page',{'i':data.a,'name':data.name,'tip':data.tip,'ts':data.ts})}}" style="list-style: none;">  >> </a></li>
+      {% else %}
+   {% for i in range(1, data.count) %}
+      <li style="display:inline-block;"><a href="{{path('page',{'i':i,'name':data.name,'tip':data.tip,'ts':data.ts})}}" style="list-style: none;">{{ i }}</a></li>
+    {% endfor %}
+    {% endif %}
+</ul>  
+   {% endif %} 
+       </div>
+   </div>   
